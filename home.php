@@ -11,8 +11,11 @@
 
 <body>
     <!-- START HERE -->
-    <div>
-
+    <div class="content">
+        <h1>PesoBuddy</h1>
+        <p>Your Reliable Partner for Financial Guidance</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante
+            dapibus diam. Sed nisi.</p>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
