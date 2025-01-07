@@ -14,8 +14,8 @@
 
 <body>
     <div class="p-1 mb-3 border-bottom bg-gray">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid px-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-3">
                 <!-- Logo -->
                 <a class="navbar-brand" href="index.php" style="margin-left: -25px;">
                     <img src="assets/images/pesobuddy_logo.png" width="230" height="50" alt="Logo">
