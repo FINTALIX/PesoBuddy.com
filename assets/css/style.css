@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
 :root {
     --primaryFont: 'Lexend Exa', sans-serif;
+    --primaryColor: #39914F;
+    --secondaryColor: #4AD66D;
 }
 
 .heading {
