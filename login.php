@@ -27,12 +27,21 @@
             LOGIN
           </div>
 
+          <!-- Alert for incorrect login -->
+          <!-- <div class="row justify-content-center mt-2">
+            <div class="col-12">
+              <div class="alert alert-warning" role="alert">
+                Invalid Email or Password.
+              </div>
+            </div>
+          </div> -->
+
           <!-- LOGIN FORM -->
           <form method="POST">
             <!-- Username or Email -->
-            <input class="form-control text-center my-4" type="text" name="" placeholder="Username or Email">
+            <input class="form-control text-center my-4" type="text" name="" placeholder="Username or Email" required>
             <!-- Password -->
-            <input class="form-control text-center my-4" type="password" name="password" placeholder="Password">
+            <input class="form-control text-center my-4" type="password" name="password" placeholder="Password" required>
             <!-- Remember Me -->
             <div class="d-flex justify-content-center">
               <div class="form-check my-4">
