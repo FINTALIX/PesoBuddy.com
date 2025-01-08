@@ -49,7 +49,7 @@
           <!-- REGISTRATION BUTTON -->
           <hr>
           <div class="h6 text-center fw-bold mt-4">
-          New here?
+            New here?
           </div>
           <a href="register.php" class="btn btn-outline-primary rounded-pill w-100 mb-4">REGISTER</a>
         </div>
