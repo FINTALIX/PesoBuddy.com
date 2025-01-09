@@ -135,7 +135,7 @@
 
     <!-- Report Section -->
     <div class="container">
-        <div class="row align-items-center mb-5 px-2">
+        <div class="row align-items-center px-2">
 
             <!-- Yearly Report -->
             <div class="col-12 col-lg-8">
