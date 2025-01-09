@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
 :root {
     --primaryFont: 'Lexend Exa', sans-serif;
 }
@@ -120,4 +122,23 @@ footer div {
         width: 18px;
         height: 18px;
     }
+    --primaryColor: #39914F;
+    --secondaryColor: #4AD66D;
+}
+
+.heading {
+    font-family: var(--primaryFont);
+    font-size: 3rem;
+    font-weight:bolder;
+}
+
+.subheading {
+    font-family: var(--primaryFont);
+    font-size: 1.7rem;
+    font-weight:bolder;
+}
+
+.paragraph {
+    font-family: var(--primaryFont);
+    font-size: 1.1rem;
 }
