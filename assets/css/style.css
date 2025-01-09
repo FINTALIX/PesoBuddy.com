@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap");
 
 :root {
   --primaryFont: "Lexend Exa", sans-serif;
@@ -7,10 +7,6 @@
   --tertiaryColor: #1a7431;
   --backgroundColor: #c9f1c2;
   --linkHoverColor: #e2f8e8;
-}
-
-body {
-  background-color: var(--backgroundColor) !important;
 }
 
 .heading {
