@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PesoBuddy</title>
     <link rel="icon" href="assets/images/pesobuddy_icon.png" />
-    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
+    <!-- Navbar -->
     <div class="p-1 mb-3 border-bottom bg-white">
         <div class="container-fluid px-0">
             <nav class="navbar navbar-expand-lg navbar-light px-3">
@@ -53,12 +55,12 @@
     </div>
 
     <!-- Greetings and Finance Tips -->
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-12 col-md-6 px-3 px-md-5 pt-3 pt-md-4 heading">
+    <div class="container">
+        <div class="row align-items-center px-2">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 heading">
                 Hello, <span style="color:#1A7431">Name!</span>
             </div>
-            <div class="col-12 col-md-6 text-md-end px-3 px-md-5 pt-3 pt-md-4 paragraph">
+            <div class="col-12 col-md-6 text-md-end pt-3 pt-md-4 paragraph">
                 <span class="subheading" style="color:#1A7431;">FINANCE TIP </span><br> Never invest
                 in things you don’t understand.
             </div>
@@ -66,10 +68,10 @@
     </div>
 
     <!-- Annual Report -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-8 ps-md-5 py-md-4 p-3">
-                <div class="card rounded-5">
+    <div class="container">
+        <div class="row px-2">
+            <div class="col-12 col-md-8 py-4">
+                <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
                             <div class="paragraph pt-3"><b>Annual Totals</b></div>
@@ -79,32 +81,32 @@
                         <!-- Total Income -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL INCOME</b></div>
-                            <p class="paragraph pt-3">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ 100,000.00</p>
                         </div>
                         <!-- Total Savings -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL SAVINGS</b></div>
-                            <p class="paragraph pt-3">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ 100,000.00</p>
                         </div>
                         <!-- Total Expense -->
                         <div class="col-12 col-md-4">
                             <div class="subheading"><b>TOTAL EXPENSE</b></div>
-                            <p class="paragraph pt-3">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ 100,000.00</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Remaining Balance Section -->
-            <div class="col-12 col-md-4 pe-md-5 ps-md-2 py-md-4">
-                <div class="card rounded-5">
+            <div class="col-12 col-md-4 py-4">
+                <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
                             <div class="paragraph pt-1"><b>Annual</b></div>
                         </div>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <div class="subheading text-center pb-3"><b>REMAINING BALANCE</b></div>
+                        <div class="subheading text-center pb-2"><b>REMAINING BALANCE</b></div>
                     </div>
                     <div class="text-center">
                         <p class="heading">₱ 100,000.00</p>
@@ -112,10 +114,12 @@
                 </div>
             </div>
 
+            <div class="col-12"><hr></div>
+
             <!-- Year Dropdown Button -->
-            <div class="w-25 ps-md-5 py-md-4 p-3">
+            <div class="w-25 pt-4">
                 <div class="subheading">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         YEAR
                     </button>
@@ -130,28 +134,28 @@
     </div>
 
     <!-- Report Section -->
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container">
+        <div class="row align-items-center mb-5 px-2">
 
             <!-- Yearly Report -->
-            <div class="col-12 col-lg-8 px-lg-5 py-3">
+            <div class="col-12 col-lg-8">
                 <div>
-                    <canvas id="yearlyChart"></canvas>
+                    <canvas id="yearlyChart" style="overflow: visible;"></canvas>
                 </div>
             </div>
 
             <!-- Biggest Transactions -->
             <div class="col-12 col-lg-4 px-lg-5 py-4">
-                <div class="card rounded-5">
+                <div class="card stat-card rounded-5">
                     <div class="d-flex flex-column align-items-end">
-                        <div class="heading pt-4 pb-4 pe-3 text-end">
+                        <div class="subheading pt-4 pb-4 pe-3 text-end">
                             <b>YOUR <span style="color: #1A7431;">BIGGEST TRANSACTIONS</span>, YET!</b>
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <p class="heading pt-5">EMERGENCY<br> FUND</p>
-                        <p class="heading pb-5">₱ 100,000.00</p>
+                        <p class="heading pt-3">EMERGENCY FUND</p>
+                        <p class="heading pb-3">₱ 100,000.00</p>
                         <p class="subheading ps-3 text-start">SAVINGS</p>
                     </div>
                 </div>
@@ -159,25 +163,23 @@
         </div>
     </div>
 
-
-    <div class="line-breaker mb-5"></div>
-
     <!-- User Budget Tracker Section -->
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div
-                class="col-12 col-md-10 ps-md-5 p-3 d-flex align-items-center justify-content-center justify-content-md-start">
-                <div class="me-3" style="width: 20px; background-color: #1A7431; height: 40px;"></div>
+    <div class="container">
+        <div class="row align-items-center mb-4 px-2">
+            <div class="col-12"><hr></div>
+            
+            <div class="col-12 col-md-11 d-flex align-items-center justify-content-center justify-content-md-start mb-2">
+                <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
                 <span class="heading">BUDGET TRACKER</span>
             </div>
 
-            <div class="col-12 col-md-2 p-3 d-flex justify-content-center justify-content-md-end">
-                <div class="btn-group subheading  mx-auto">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+            <div class="col-12 col-md-1 d-flex justify-content-center justify-content-sm-end mb-2">
+                <div class="btn-group subheading mx-auto">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         YEAR
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-sm-end">
                         <li><a class="dropdown-item" href="#">2025</a></li>
                         <li><a class="dropdown-item" href="#">2024</a></li>
                         <li><a class="dropdown-item" href="#">2023</a></li>
@@ -188,45 +190,45 @@
     </div>
 
     <!-- Monthly Buttons -->
-    <div class="container-fluid px-md-5">
-        <div class="row">
-            <div class="col-12 pt-md-5">
+    <div class="container">
+        <div class="row px-2">
+            <div class="col-12 pt-3">
                 <div class="row g-3 pb-3 justify-content-center">
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">JANUARY</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">JANUARY</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">FEBRUARY</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">FEBRUARY</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">MARCH</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">MARCH</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">APRIL</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">APRIL</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">MAY</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">MAY</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">JUNE</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">JUNE</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">JULY</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">JULY</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">AUGUST</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">AUGUST</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">SEPTEMBER</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">SEPTEMBER</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">OCTOBER</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">OCTOBER</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">NOVEMBER</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">NOVEMBER</button>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-success w-100 p-3">DECEMBER</button>
+                        <button type="button" class="btn btn-primary w-100 p-3">DECEMBER</button>
                     </div>
                 </div>
             </div>
@@ -234,10 +236,10 @@
     </div>
 
     <!-- Add New Tracker Section -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 ps-md-5 py-md-4 p-3 pe-md-5">
-                <div class="card rounded-5 border border-black border-4">
+    <div class="container">
+        <div class="row px-2">
+            <div class="col-12 py-md-4 p-3">
+                <div class="card card-container">
                     <div class="row align-items-center text-start p-4">
                         <div class="col-md-3 col-12 mb-3 mb-md-0">
                             <div class="subheading">Add New Tracker</div>
@@ -245,12 +247,12 @@
 
                         <!-- Year Input -->
                         <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <input type="text" class="form-control rounded-3 subheading" placeholder="YEAR">
+                            <input type="text" class="form-control rounded-3 paragraph" placeholder="YEAR">
                         </div>
 
                         <!-- Month Input -->
                         <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <select class="form-select rounded-3 subheading">
+                            <select class="form-select rounded-3 paragraph">
                                 <option selected disabled>MONTH</option>
                                 <option>January</option>
                                 <option>February</option>
@@ -261,8 +263,198 @@
 
                         <!-- Create Button -->
                         <div class="col-md-3 col-12 text-md-end text-center subheading">
-                            <button class="btn btn-success rounded-5 px-4 py-2">CREATE</button>
+                            <button class="btn btn-primary rounded-pill px-4 py-2">CREATE</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRANSACTION HISTORY SECTION -->
+    <div class="container">
+        <div class="row mb-4 px-2">
+            <!-- HEADING -->
+            <div class="col-12 mb-4">
+                <hr>
+                <div class="row align-items-center justify-content-center justify-content-lg-between">
+                    <!-- Heading -->
+                    <div class="col-auto d-flex flex-row align-items-center mb-2">
+                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                        <span class="heading">TRANSACTION HISTORY</span>
+                    </div>
+
+                    <!-- Add Transaction Button -->
+                    <div class="col-auto mb-2">
+                        <a class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#addTransaction">
+                            + ADD TRANSACTION
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRANSACTIONS CARD -->
+            <div class="col-12">
+                <div class="card card-container p-4">
+                    <!-- FILTER TRANSACTIONS -->
+                    <div class="row my-3">
+
+                        <form class="d-flex flex-row flex-wrap justify-content-center align-items-center" method="">
+                            <!-- Label -->
+                            <div class="col-12 col-md-auto text-center text-md-start mb-1">
+                                <div class="h6 mx-1">
+                                    Filter By:
+                                </div>
+                            </div>
+
+                            <!-- Filter Form -->
+                            <div class="col col-md-auto d-flex flex-row mb-2">
+                                <!-- Type -->
+                                <input class="form-control mx-1" type="text" name="" placeholder="Type">
+
+                                <!-- Category -->
+                                <input class="form-control mx-1" type="text" name="" placeholder="Category">
+                            </div>
+
+                            <!-- Search Button -->
+                            <div class="col-12 col-md-auto text-center text-md-end mb-2">
+                                <button class="btn btn-primary rounded-pill mx-1" name="">SEARCH</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- TRANSACTION TABLE -->
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-borderless m-0">
+
+                                <!-- Column Heading -->
+                                <thead class="align-middle">
+                                    <tr>
+                                        <th scope="col">NO.</th>
+                                        <th scope="col">TYPE</th>
+                                        <th scope="col">CATEGORY</th>
+                                        <th scope="col">AMOUNT</th>
+                                        <th scope="col">DATE</th>
+                                        <th scope="col">DESCRIPTION</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+
+                                <!-- Data -->
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td>Type</td>
+                                        <td>Category</td>
+                                        <td>Amount</td>
+                                        <td>Date</td>
+                                        <td>Description</td>
+
+                                        <!-- Options -->
+                                        <td>
+                                            <div class="dropdown dropstart">
+                                                <button class="btn options-btn p-1" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+
+                                                <ul class="dropdown-menu">
+                                                    <!-- Edit Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#editTransaction"
+                                                            style="text-decoration: none;">
+                                                            <i class="bi bi-pencil-square px-1"></i> Edit
+                                                        </a>
+                                                    </li>
+
+                                                    <!-- Delete Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteTransaction"
+                                                            style="color: red; text-decoration: none;">
+                                                            <i class="bi bi-trash3 px-1"></i> Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- SAMPLE Data ONLY -->
+                                    <tr>
+                                        <td scope="row">2</td>
+                                        <td>Income</td>
+                                        <td>Salary</td>
+                                        <td>1000</td>
+                                        <td>02 January 2024</td>
+                                        <td>Income from the salary</td>
+                                        <td>
+                                            <div class="dropdown dropstart">
+                                                <button class="btn options-btn p-1" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+
+                                                <ul class="dropdown-menu">
+                                                    <!-- Edit Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#editTransaction"
+                                                            style="text-decoration: none;">
+                                                            <i class="bi bi-pencil-square px-1"></i> Edit
+                                                        </a>
+                                                    </li>
+
+                                                    <!-- Delete Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteTransaction"
+                                                            style="color: red; text-decoration: none;">
+                                                            <i class="bi bi-trash3 px-1"></i> Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="container">
+        <div class="row my-4 px-2">
+            <!-- HEADING -->
+            <div class="col-12">
+                <hr>
+                <div class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
+                    <div class="me-3" style="width: 15px; background-color: #dc3545; height: 40px;"></div>
+                    <span class="heading" style="color: #dc3545;">DANGER ZONE</span>
+                </div>
+
+                <div class="row justify-content-between">
+                    <!-- Warning -->
+                    <div class="col-12 col-md-10">
+                        <p>
+                            Deleting this month will permanently erase all tracked data, insights, and linked records,
+                            and this action cannot be undone.
+                        </p>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <div class="col-12 col-md-2 text-start text-md-end">
+                        <button class="btn btn-danger rounded-pill">
+                            DELETE
+                        </button>
                     </div>
                 </div>
             </div>
