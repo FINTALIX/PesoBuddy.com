@@ -1,24 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap");
 
 :root {
-    --primaryFont: 'Lexend Exa', sans-serif;
-    --primaryColor: #39914F;
-    --secondaryColor: #4AD66D;
+  --primaryFont: "Lexend Exa", sans-serif;
+  --primaryColor: #39914f;
+  --secondaryColor: #4ad66d;
+  --tertiaryColor: #1a7431;
+  --backgroundColor: #c9f1c2;
+  --linkHoverColor: #e2f8e8;
+}
+
+body {
+  background-color: var(--backgroundColor) !important;
 }
 
 .heading {
-    font-family: var(--primaryFont);
-    font-size: 3rem;
-    font-weight:bolder;
+  font-family: var(--primaryFont);
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 .subheading {
-    font-family: var(--primaryFont);
-    font-size: 1.7rem;
-    font-weight:bolder;
+  font-family: var(--primaryFont);
+  font-size: 1.4rem;
+  font-weight: bolder;
 }
 
 .paragraph {
-    font-family: var(--primaryFont);
+  font-family: var(--primaryFont);
+  font-size: 1rem;
+}
+
+.card {
+  background-color: var(--linkHoverColor) !important;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-hover-bg: var(--linkHoverColor) !important;
+  --bs-dropdown-link-active-bg: var(--tertiaryColor) !important;
+}
+
+.line-breaker {
+  height: 7px;
+  background: #1a7431;
+  margin: 40px 40px;
+}
+
+/* FORM */
+.form-control {
+  border: 3px solid var(--primaryColor) !important;
+}
+.form-control:focus {
+  border: 3px solid var(--secondaryColor) !important;
+  box-shadow: 0 0 0 0.25rem var(--linkHoverColor) !important;
+}
+
+.form-select {
+  border: 3px solid var(--primaryColor) !important;
+}
+
+.form-select:focus {
+  border: 3px solid var(--secondaryColor) !important;
+  box-shadow: 0 0 0 0.25rem var(--linkHoverColor) !important;
+}
+
+.form-select option:checked {
+  background-color: var(--tertiaryColor);
+  color: #ffffff;
+}
+
+/* MEDIA QUERY */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 1.4rem;
+  }
+
+  .subheading {
     font-size: 1.1rem;
+  }
+
+  .paragraph {
+    font-size: 0.9rem;
+  }
 }
