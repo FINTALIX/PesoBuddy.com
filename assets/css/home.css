@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap");
+
+body {
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.category-section {
+    margin-top: 20px;
+}
+
+.category-section h5,
+.category-section h6 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.chart-container {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.divider {
+    border-top: 1px solid #000;
+    margin: 10px 0;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 35px;
+}
+
+.manage-categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-right {
+    float: right;
+}
+
+.list-divider,
+.header-divider {
+    border-bottom: 1px solid #000;
+    margin-top: 10px;
+}
+
+.color-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.list-unstyled li {
+    margin-bottom: 10px;
+}
+
+button,
+.btn {
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
+    color: #fff;
+    font-family: var(--primaryFont);
+}
+
+button:hover,
+.btn:hover {
+    background-color: var(--secondaryColor) !important;
+    border-color: var(--secondaryColor) !important;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container button {
+    min-width: 100px;
+    margin-left: 10px;
+}
+
+.card form {
+    margin-bottom: 0;
+}

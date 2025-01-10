@@ -10,6 +10,9 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+
+
 </head>
 
 <body>
@@ -45,10 +48,11 @@
                         <div class="px-2 ms-lg-3">
                             <!-- Show profile picture on screens wider than lg and hide on screens smaller than lg -->
                             <a href="#" class="d-none d-lg-block">
-                                <img src="assets/images/pesobuddy_icon.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                                <img src="assets/images/pesobuddy_icon.png" alt="mdo" width="32" height="32"
+                                    class="rounded-circle">
                             </a>
                             <!-- Show profile as text on on screens smaller than lg and hide on screens wider than lg -->
-                            <a href="#"  class="nav-link d-block d-lg-none">Profile</a>
+                            <a href="#" class="nav-link d-block d-lg-none">Profile</a>
                         </div>
                     </li>
                 </ul>
@@ -62,7 +66,8 @@
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading order-2 order-md-1">
                 Hello, <span style="color:#1A7431">Name!</span>
             </div>
-            <div class="col-12 col-md-auto paragraph d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
+            <div
+                class="col-12 col-md-auto paragraph d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
                 <!-- Date -->
                 <div class="col-auto text-md-end">
                     <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>January 10, 2024
@@ -122,7 +127,9 @@
                 </div>
             </div>
 
-            <div class="col-12"><hr></div>
+            <div class="col-12">
+                <hr>
+            </div>
 
             <!-- Year Dropdown Button -->
             <div class="w-25 pt-4">
@@ -174,9 +181,12 @@
     <!-- User Budget Tracker Section -->
     <div class="container">
         <div class="row align-items-center mb-4 px-2">
-            <div class="col-12"><hr></div>
-            
-            <div class="col-12 col-md-11 d-flex align-items-center justify-content-center justify-content-md-start mb-2">
+            <div class="col-12">
+                <hr>
+            </div>
+
+            <div
+                class="col-12 col-md-11 d-flex align-items-center justify-content-center justify-content-md-start mb-2">
                 <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
                 <span class="heading">BUDGET TRACKER</span>
             </div>
@@ -279,6 +289,121 @@
         </div>
     </div>
 
+    <!-- FOR THE MONTH OF -->
+    <div class="container mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <div class="divider"></div>
+                <h4>For the month of XXXXXXX</h4>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="row text-center mt-4">
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Income</p>
+            </div>
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Savings</p>
+            </div>
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Expense</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="chart-container">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 style="text-align: center;">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row category-section">
+            <div class="col-12">
+                <div class="divider"></div>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto d-flex flex-row align-items-center mb-2">
+                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                        <span class="heading">Manage Your Categories</span>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <button class="btn btn-primary">+ ADD CATEGORY</button>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h6 class="mt-4">Category List</h6>
+                        <div class="header-divider"></div>
+                        <ul class="list-group">
+                            <li class="list-group-item">Salary</li>
+                            <li class="list-group-item">Part-Time Job</li>
+                            <li class="list-group-item">Freelance</li>
+                            <li class="list-group-item">Groceries</li>
+                            <li class="list-group-item">Transpo</li>
+                            <li class="list-group-item">Rent</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <h6>Edit Category</h6>
+                            <form>
+                                <div class="form-group">
+                                    <label for="categoryType">Category Type</label>
+                                    <input type="text" class="form-control" id="categoryType" placeholder="Enter type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoryName">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                                </div>
+                            </form>
+                            <div class="button-container d-flex justify-content-end mt-3">
+                                <button type="button" class="btn btn-danger me-2">Delete</button>
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Transaction History Heading -->
     <div class="container">
         <div class="row mb-4 px-2">
@@ -294,8 +419,7 @@
 
                     <!-- Add Transaction Button -->
                     <div class="col-auto mb-2">
-                        <a class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#addTransaction">
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
                             + ADD TRANSACTION
                         </a>
                     </div>
@@ -303,7 +427,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Transaction History Table -->
     <div class="container">
         <div class="row mb-4 px-2">
@@ -448,7 +572,8 @@
             <div class="col-12">
                 <!-- HEADING -->
                 <hr>
-                <div class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
+                <div
+                    class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
                     <div class="me-3" style="width: 15px; background-color: #dc3545; height: 40px;"></div>
                     <span class="heading" style="color: #dc3545;">DANGER ZONE</span>
                 </div>
@@ -472,6 +597,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -574,6 +700,26 @@
         };
         new Chart(ctx, config);
 
+
+    </script>
+
+    <script>
+
+        const ctx2 = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Salary', 'Part-time', 'Freelance', 'Allowance', 'Stipend', 'Others'],
+                datasets: [{
+                    data: [30, 20, 15, 10, 15, 10],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0', '#9966FF']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
     </script>
 </body>
 
