@@ -9,11 +9,6 @@
 </head>
 <body>
 
- <!-- BACKGROUND -->
-    <div>
-      <img src="assets/images/background.png" class="bg-image">
-    </div>
-
 <div class="content">
     <h2>ACCOUNT INFORMATION</h2>
     <form>
@@ -21,7 +16,7 @@
         <input type="text" name="username" placeholder="Enter your username" required>
         <label>Email</label>
         <input type="email" name="email" placeholder="Enter your email" required>
-        <button type="button" class="btn btn-primary rounded-pill w-100 my-3">Save</button>
+        <button type="button" class="btn btn-primary rounded-pill w-100 my-3">SAVE</button>
     </form>
 
     <h2>CHANGE YOUR PASSWORD</h2>
@@ -32,13 +27,13 @@
         <input type="password" name="new_password" placeholder="Enter new password" required>
         <label>Confirm Password</label>
         <input type="password" name="confirm_password" placeholder="Confirm new password" required>
-        <button type="button" class="btn btn-primary rounded-pill w-100 my-3">Save</button>
+        <button type="button" class="btn btn-primary rounded-pill w-100 my-3">SAVE</button>
     </form>
 
     <h2>DELETE YOUR ACCOUNT</h2>
     <form>
         <p>Once deleted, your account cannot be recovered.</p>
-        <button type="button" class="btn btn-outline-primary rounded-pill w-100 my-3">Delete</button>
+        <button type="button" class="btn btn-outline-primary rounded-pill w-100 my-3 delete-btn">DELETE</button>
     </form>
 </div>
 
