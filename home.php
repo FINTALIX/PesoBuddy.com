@@ -14,55 +14,63 @@
 
 <body>
     <!-- Navbar -->
-    <div class="p-1 mb-3 border-bottom bg-white">
-        <div class="container-fluid px-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-3">
-                <!-- Logo -->
-                <a class="navbar-brand" href="index.php" style="margin-left: -25px;">
-                    <img src="assets/images/pesobuddy_logo.png" width="230" height="50" alt="Logo">
-                </a>
+    <div class="container-fluid px-0">
+        <nav class="navbar navbar-expand-lg px-3">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.php">
+                <img src="assets/images/pesobuddy_logoW.png" width="230" height="50" alt="Logo">
+            </a>
 
-                <!-- Toggler Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <!-- Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <!-- Collapsible Menu -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link px-2 link-body-emphasis subheading" href="#">Overview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-2 link-body-emphasis subheading" href="#">Tracker</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-2 link-body-emphasis subheading" href="#">Transaction</a>
-                        </li>
-                    </ul>
+            <!-- Collapsible Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#">Transaction</a>
+                    </li>
 
                     <!-- User Profile Image -->
-                    <div class="px-2 ms-lg-3">
-                        <a href="#">
-                            <img src="assets/images/pesobuddy_icon.png" alt="mdo" width="32" height="32"
-                                class="rounded-circle">
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+                    <li class="nav-item">
+                        <div class="px-2 ms-lg-3">
+                            <!-- Show profile picture on screens wider than lg and hide on screens smaller than lg -->
+                            <a href="#" class="d-none d-lg-block">
+                                <img src="assets/images/pesobuddy_icon.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            </a>
+                            <!-- Show profile as text on on screens smaller than lg and hide on screens wider than lg -->
+                            <a href="#"  class="nav-link d-block d-lg-none">Profile</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 
-    <!-- Greetings and Finance Tips -->
+    <!-- Greetings and Date -->
     <div class="container">
-        <div class="row align-items-center px-2">
-            <div class="col-12 col-md-6 pt-3 pt-md-4 heading">
+        <div class="row align-items-center justify-content-between px-2">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 heading order-2 order-md-1">
                 Hello, <span style="color:#1A7431">Name!</span>
             </div>
-            <div class="col-12 col-md-6 text-md-end pt-3 pt-md-4 paragraph">
-                <span class="subheading" style="color:#1A7431;">FINANCE TIP </span><br> Never invest
-                in things you don’t understand.
+            <div class="col-12 col-md-auto paragraph d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
+                <!-- Date -->
+                <div class="col-auto text-md-end">
+                    <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>January 10, 2024
+                </div>
+                <!-- Vertical Line -->
+                <div class="col-auto px-3 d-none d-md-block">
+                    <div style="width: 1px; background-color: black; height: 40px;"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -271,7 +279,7 @@
         </div>
     </div>
 
-    <!-- TRANSACTION HISTORY SECTION -->
+    <!-- Transaction History Heading -->
     <div class="container">
         <div class="row mb-4 px-2">
             <!-- HEADING -->
@@ -293,8 +301,12 @@
                     </div>
                 </div>
             </div>
-
-            <!-- TRANSACTIONS CARD -->
+        </div>
+    </div>
+    
+    <!-- Transaction History Table -->
+    <div class="container">
+        <div class="row mb-4 px-2">
             <div class="col-12">
                 <div class="card card-container p-4">
                     <!-- FILTER TRANSACTIONS -->
@@ -430,11 +442,11 @@
         </div>
     </div>
 
-    <!-- DANGER ZONE -->
+    <!-- Danger Zone -->
     <div class="container">
         <div class="row my-4 px-2">
-            <!-- HEADING -->
             <div class="col-12">
+                <!-- HEADING -->
                 <hr>
                 <div class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
                     <div class="me-3" style="width: 15px; background-color: #dc3545; height: 40px;"></div>
