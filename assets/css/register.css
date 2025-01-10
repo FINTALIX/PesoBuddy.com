@@ -13,26 +13,6 @@ body {
   z-index: -1000;
 }
 
-.form-control {
-  border: 3px solid #747373;
-  border-radius: 10px;
-}
-
-.form-control:focus{
-  border: 3px solid var(--secondaryColor);
-  box-shadow:0 0 0 .25rem #E2F8E8;
-}
-
-/* BUTTON */
-.btn-primary {
-  --bs-btn-bg:var(--primaryColor);
-  --bs-btn-border-color:var(--primaryColor);
-  --bs-btn-hover-bg:var(--secondaryColor);
-  --bs-btn-hover-border-color:var(--secondaryColor);
-  --bs-btn-active-bg:var(--secondaryColor);
-  --bs-btn-active-border-color:var(--secondaryColor);
-}
-
 /* MEDIA QUERY */
 @media (max-width: 540px) {
   .h4 {
