@@ -9,15 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 
 </head>
 
 <body>
     <!-- Navbar -->
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-0 fixed-top">
         <nav class="navbar navbar-expand-lg px-3">
             <!-- Logo -->
             <a class="navbar-brand" href="index.php">
@@ -289,120 +289,119 @@
         </div>
     </div>
 
-    <!-- FOR THE MONTH OF -->
-    <div class="container mt-5">
-        <div class="row text-center">
-            <div class="col-12">
-                <div class="divider"></div>
-                <h4>For the month of XXXXXXX</h4>
-                <div class="divider"></div>
+   <!-- FOR THE MONTH OF -->
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="divider"></div>
+            <h4>For the month of XXXXXXX</h4>
+            <div class="divider"></div>
+        </div>
+    </div>
+
+    <div class="row text-center mt-4">
+        <div class="col-md-4">
+            <h5>₱ 100,000.00</h5>
+            <p>Total Income</p>
+        </div>
+        <div class="col-md-4">
+            <h5>₱ 100,000.00</h5>
+            <p>Total Savings</p>
+        </div>
+        <div class="col-md-4">
+            <h5>₱ 100,000.00</h5>
+            <p>Total Expense</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6 d-flex align-items-center">
+            <div class="chart-container">
+                <canvas id="doughnutChart"></canvas>
             </div>
         </div>
-
-        <div class="row text-center mt-4">
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <p>Total Income</p>
-            </div>
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <p>Total Savings</p>
-            </div>
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <p>Total Expense</p>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-md-6 d-flex align-items-center">
-                <div class="chart-container">
-                    <canvas id="doughnutChart"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <h5 style="text-align: center;">Categories</h5>
-                    <ul class="list-unstyled">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                    </ul>
-                </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h5 style="text-align: center;">Categories</h5>
+                <ul class="list-unstyled">
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
+                        <span>₱XX,XXX.XX</span>
+                    </li>
+                </ul>
             </div>
         </div>
+    </div>
 
-        <div class="row category-section">
-            <div class="col-12">
-                <div class="divider"></div>
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto d-flex flex-row align-items-center mb-2">
-                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
-                        <span class="heading">Manage Your Categories</span>
-                    </div>
-                    <div class="col-auto mb-2">
-                        <button class="btn btn-primary">+ ADD CATEGORY</button>
+    <div class="row category-section mt-5">
+        <div class="col-12">
+            <div class="divider"></div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto d-flex flex-row align-items-center mb-2">
+                    <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                    <span class="heading">MANAGE YOUR CATEGORIES</span>
+                </div>
+                <div class="col-auto mb-2">
+                    <button class="btn btn-primary">+ ADD CATEGORY</button>
+                </div>
+            </div>
+
+            <div class="row mt-4 my-5">
+                <div class="col-md-6">
+                    <h6 class="mt-4">Category List</h6>
+                    <div class="header-divider"></div>
+                    <div id="category-list">
+                        <button class="btn text-start w-100 my-1">Salary</button>
+                        <button class="btn text-start w-100 my-1">Part-Time Job</button>
+                        <button class="btn text-start w-100 my-1">Freelance</button>
+                        <button class="btn text-start w-100 my-1">Groceries</button>
+                        <button class="btn text-start w-100 my-1">Transpo</button>
+                        <button class="btn text-start w-100 my-1">Rent</button>
                     </div>
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h6 class="mt-4">Category List</h6>
-                        <div class="header-divider"></div>
-                        <ul class="list-group">
-                            <li class="list-group-item">Salary</li>
-                            <li class="list-group-item">Part-Time Job</li>
-                            <li class="list-group-item">Freelance</li>
-                            <li class="list-group-item">Groceries</li>
-                            <li class="list-group-item">Transpo</li>
-                            <li class="list-group-item">Rent</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <h6>Edit Category</h6>
-                            <form>
-                                <div class="form-group">
-                                    <label for="categoryType">Category Type</label>
-                                    <input type="text" class="form-control" id="categoryType" placeholder="Enter type">
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoryName">Category Name</label>
-                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
-                                </div>
-                            </form>
-                            <div class="button-container d-flex justify-content-end mt-3">
-                                <button type="button" class="btn btn-danger me-2">Delete</button>
-                                <button type="submit" class="btn btn-success">Save</button>
+                <div class="col-md-6">
+                    <div class="card card-container">
+                        <h6>Edit Category</h6>
+                        <form id="edit-category-form">
+                            <div class="form-group my-3">
+                                <label for="categoryType">Category Type</label>
+                                <input type="text" class="form-control" id="categoryType" placeholder="Enter type">
                             </div>
+                            <div class="form-group my-3">
+                                <label for="categoryName">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                            </div>
+                        </form>
+                        <div class="button-container d-flex justify-content-end mt-3">
+                            <button type="button" class="btn btn-success me-2">DELETE</button>
+                            <button type="submit" class="btn btn-success">SAVE</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Transaction History Heading -->
     <div class="container">
