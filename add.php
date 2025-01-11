@@ -13,11 +13,15 @@
         <form id="transactionForm">
             <div class="form-inline">
                 <select id="transaction-type" name="transaction-type" class="form-control placeholder-dropdown">
+        <form>
+            <div class="form-inline">
+                <select id="transaction-type" name="transaction-type" class="placeholder-dropdown">
                     <option value="" disabled selected>Transaction Type</option>
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
                 </select>
                 <select id="category" name="category" class="form-control placeholder-dropdown">
+                <select id="category" name="category" class="placeholder-dropdown">
                     <option value="" disabled selected>Category</option>
                     <option value="food">Food</option>
                     <option value="transport">Transport</option>
@@ -51,5 +55,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <input type="date" id="date" name="date" placeholder="Date">
+            <textarea id="description" name="description" rows="2" placeholder="Description"></textarea>
+            <input type="number" id="amount" name="amount" step="0.01" placeholder="Amount">
+            <button type="submit" class="add-button">ADD</button>
+        </form>
+    </div>
 </body>
 </html>
