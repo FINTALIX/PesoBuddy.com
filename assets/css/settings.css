@@ -1,95 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
-
 :root {
-    --primaryFont: 'Lexend Exa', sans-serif;
+    --primaryFont: "Lexend Exa", sans-serif;
+    --primaryColor: #39914f;
+    --secondaryColor: #4ad66d;
+    --tertiaryColor: #1a7431;
+    --backgroundColor: #c9f1c2;
+    --linkHoverColor: #e2f8e8;
 }
 
 body {
     font-family: var(--primaryFont);
-    margin: 0;
-    padding: 0;
-    background-color: rgba(240, 240, 240, 1);
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center; 
-    height: 100vh; 
 }
 
-.content {
-    max-width: 600px;
-    width: 100%; 
-    padding: 20px;
-    border-radius: 10px;
-    margin-right: 20px; 
+.heading {
+    font-family: var(--primaryFont);
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
-form {
-    max-width: 600px; 
-    margin-bottom: 15px; 
+.subheading {
+    font-family: var(--primaryFont);
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+
+.paragraph {
+    font-family: var(--primaryFont);
+    font-size: 1rem;
+}
+
+.card {
+    background-color: var(--linkHoverColor) !important;
+}
+
+.section-divider {
+    height: 2px;
+    background: #000000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.form-control {
+    border: 3px solid var(--primaryColor) !important;
+}
+
+.form-control:focus {
+    border: 3px solid var(--secondaryColor) !important;
+    box-shadow: 0 0 0 0.25rem var(--linkHoverColor) !important;
+}
+
+.btn-primary {
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondaryColor) !important;
+    border-color: var(--secondaryColor) !important;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem var(--linkHoverColor) !important;
+}
+
+.row.align-items-stretch .card {
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .heading {
+        font-size: 1.4rem;
+    }
+
+    .subheading {
+        font-size: 1.1rem;
+    }
+
+    .paragraph {
+        font-size: 0.9rem;
+    }
+}
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 2rem;
+}
+
+.profile-buttons {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
 }
 
-label {
-    font-family: var(--primaryFont);
-    font-size: 12px; 
-    display: block;
-    margin-bottom: -10px; 
-    position: relative;
-    top: 20px; 
-    margin-left: 6%; 
+.profile-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    border-radius: 0.25rem;
 }
 
-h2 {
-    font-family: var(--primaryFont);
-    font-size: 18px; 
-    border-bottom: 2px solid #000000; 
-    padding-bottom: 6px; 
-    margin-bottom: 10px; 
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0 2rem;
+    width: 100%;
 }
 
-p {
-    font-family: var(--primaryFont);
-    font-size: 14px; 
+.card.card-transparent {
+    background-color: transparent !important;
+    border: none !important;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 70%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: var(--primaryFont);
-    display: block;
-    margin-left: 30%;
-}
+@media (max-width: 768px) {
+    .profile-picture {
+        width: 200px;
+        height: 200px;
+    }
 
-button {
-    width: 100px; 
-    height: 40px; 
-    padding: 0; 
-    border: none;
-    background-color: #1A7431; 
-    color: white;
-    border-radius: 50px; 
-    cursor: pointer;
-    font-family: var(--primaryFont);
-    font-size: 14px; 
-    text-align: center; 
-    line-height: 40px; 
-    transition: background-color 0.3s ease; 
-    margin-left: 80%; 
-}
+    .profile-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
 
-button.delete-btn {
-    margin-top: -45px; 
-}
-
-button:hover {
-    background-color: #4AD66D; 
-}
-
-label, h2, p {
-    font-family: var(--primaryFont);
+    .profile-buttons .btn {
+        width: 100%;
+    }
 }
