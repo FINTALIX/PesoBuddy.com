@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/settings.css">
 </head>
+
 <body class="bg-light">
     <div class="container py-5">
         <!-- Header Navigation -->
@@ -15,9 +17,15 @@
             <div class="col-md-6">
                 <h1 class="heading">SETTINGS</h1>
             </div>
-            <div class="col-md-6 text-md-end">
-                <p class="paragraph mb-0">JANUARY XX</p>
-                <p class="paragraph">FRIDAY</p>
+            <div class="col-md-6 d-flex flex-row justify-content-md-end align-items-center">
+                <div class="text-md-end">
+                    <p class="paragraph mb-0" style="color: #1A7431; font-weight: bold; text-transform: uppercase;">
+                        Friday</p>
+                    <p class="paragraph mb-0" style="color: black;">January XX, 2024</p>
+                </div>
+                <div class="col-auto px-3 d-none d-md-block">
+                    <div style="width: 1px; background-color: black; height: 40px;"></div>
+                </div>
             </div>
         </div>
         <!-- Header Divider -->
@@ -30,8 +38,8 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="profile-picture-container">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0iI2VlZSIvPjxwYXRoIGQ9Ik01MCAzNmExNCAxNCAwIDEgMCAwIDI4IDE0IDE0IDAgMCAwIDAtMjh6bTAgNDBjLTE2IDAtMzAgOC0zMCAyNGg2MGMwLTE2LTE0LTI0LTMwLTI0eiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" 
-                                 alt="Profile Picture" class="rounded-circle profile-picture">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0iI2VlZSIvPjxwYXRoIGQ9Ik01MCAzNmExNCAxNCAwIDEgMCAwIDI4IDE0IDE0IDAgMCAwIDAtMjh6bTAgNDBjLTE2IDAtMzAgOC0zMCAyNGg2MGMwLTE2LTE0LTI0LTMwLTI0eiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg=="
+                                alt="Profile Picture" class="rounded-circle profile-picture">
                         </div>
                         <div class="profile-buttons">
                             <button class="btn btn-primary">Upload Profile Picture</button>
@@ -61,7 +69,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <!-- Right Column - Account Settings -->
             <div class="col-md-7 mb-4">
                 <div class="card card-transparent h-100">
@@ -82,7 +90,7 @@
                                 <button class="btn btn-primary float-end rounded-pill">SAVE</button>
                             </form>
                         </div>
-        
+
                         <!-- Change Password -->
                         <div class="mb-4">
                             <h5 class="subheading mb-2">CHANGE YOUR PASSWORD</h5>
@@ -103,7 +111,7 @@
                                 <button class="btn btn-primary float-end rounded-pill">SAVE</button>
                             </form>
                         </div>
-        
+
                         <!-- Delete Account -->
                         <div class="mt-auto">
                             <h5 class="subheading mb-2">DELETE YOUR ACCOUNT</h5>
@@ -123,7 +131,8 @@
             <div class="col-12">
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT US</a>
+                    <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
+                        US</a>
                     <span class="paragraph">FINTALIX ©2025</span>
                 </div>
             </div>
@@ -132,4 +141,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
