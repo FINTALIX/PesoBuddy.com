@@ -17,90 +17,102 @@ body {
 
 .transaction-form {
     background-color: #ffffff;
-    border-radius: 12px; 
-    padding: 30px; 
-    width: 420px; 
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+    border-radius: 12px;
+    padding: 30px;
+    width: 420px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    gap: 15px; 
-    transition: transform 0.3s ease; 
+    gap: 15px;
     font-family: var(--primaryFont);
 }
 
 .transaction-form:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
 .transaction-form h1 {
-    font-size: 25px; 
+    font-size: 25px;
     margin-bottom: 15px;
     color: #333;
-    align-items: flex-start;
+    text-align: left; 
+    font-weight: bold; 
 }
 
-.placeholder-dropdown, 
-input, 
+.placeholder-dropdown,
+input,
 textarea {
-    width: 95%; 
-    padding: 8px; 
-    font-size: 0.75rem; 
+    width: 95%;
+    padding: 8px;
+    font-size: 0.75rem;
     border: 1px solid #ccc;
-    border-radius: 6px; 
+    border-radius: 6px;
     box-sizing: border-box;
     font-family: var(--primaryFont);
+    margin-bottom: 15px;
 }
 
-input#amount {
-    width: 65%;
-    padding: 6px; 
-    font-size: 0.7rem; 
-    margin: 0 auto; 
-}
-
-input#date {
-    width: 100%; 
-}
-
-textarea {
-    width: 100%; 
-    resize: none;
-    height: 60px; 
-    margin-top: 20px; 
-    margin-bottom: 15px; 
-}
-
-.form-inline {
+.input-inline {
     display: flex;
     justify-content: space-between;
     gap: 12px;
 }
 
-.form-inline .placeholder-dropdown {
+.amount-input {
     flex: 1;
+    padding: 4px;  
+    font-size: 0.75rem; 
+    width: 60%;
+    margin-right: 10px; 
 }
 
 .add-button {
-    width: 20%;
-    padding: 4px 8px; 
-    font-size: 1rem;
+    width: 35%; 
+    padding: 6px 10px; 
+    font-size: 0.9rem; 
     color: #fff;
     background-color: #1A7431;
     border: none;
-    border-radius: 50px; 
+    border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    font-family: var(--primaryFont); 
+    font-family: var(--primaryFont);
     text-align: center;
-    margin-left: 55px; 
+    margin-top: -15px; 
+    margin-left: auto; 
 }
 
 .add-button:hover {
-    background-color: #4AD66D; 
+    background-color: #4AD66D;
     transform: translateY(-2px);
 }
 
-textarea, .placeholder-dropdown {
+#date {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: var(--primaryFont);
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+textarea {
+    margin-top: 10px; 
     margin-bottom: 15px; 
 }
+
+.placeholder-dropdown {
+    flex-grow: 1;
+    max-width: 100%; 
+    padding: 6px; 
+    margin-right: 3px;
+}
+
+.transaction-form .placeholder-dropdown:last-of-type {
+    margin-right: 3px; 
+}
+
