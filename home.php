@@ -61,7 +61,7 @@
     </div>
 
     <!-- Greetings and Date -->
-    <div class="container">
+    <div class="container" style="padding-top: 5rem;">
         <div class="row align-items-center justify-content-between px-2">
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading order-2 order-md-1">
                 Hello, <span style="color:#1A7431">Name!</span>
@@ -321,7 +321,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card card-container">
                 <h5 style="text-align: center;">Categories</h5>
                 <ul class="list-unstyled">
                     <li class="d-flex justify-content-between align-items-center">
@@ -393,8 +393,8 @@
                             </div>
                         </form>
                         <div class="button-container d-flex justify-content-end mt-3">
-                            <button type="button" class="btn btn-success me-2">DELETE</button>
-                            <button type="submit" class="btn btn-success">SAVE</button>
+                            <button type="button" class="btn btn-primary me-2">DELETE</button>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
                         </div>
                     </div>
                 </div>
