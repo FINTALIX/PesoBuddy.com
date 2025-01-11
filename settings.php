@@ -19,9 +19,10 @@
             </div>
             <div class="col-md-6 d-flex flex-row justify-content-md-end align-items-center">
                 <div class="text-md-end">
+                    <p class="paragraph mb-0" style="color: black;">JANUARY XX</p>
                     <p class="paragraph mb-0" style="color: #1A7431; font-weight: bold; text-transform: uppercase;">
-                        Friday</p>
-                    <p class="paragraph mb-0" style="color: black;">January XX, 2024</p>
+                        FRIDAY</p>
+
                 </div>
                 <div class="col-auto px-3 d-none d-md-block">
                     <div style="width: 1px; background-color: black; height: 40px;"></div>
