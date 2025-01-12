@@ -422,10 +422,61 @@
                             + ADD TRANSACTION
                         </a>
                     </div>
-                </div>
+
+                    <!-- Add Transaction Modal -->
+                    <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-md"> 
+                            <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addTransactionLabel">Add New Transaction</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body with compact box-like design -->
+                    <div class="modal-body p-4 border rounded-3 shadow-sm" style="background-color: #f9f9f9;">
+                        <form id="addTransactionForm">
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <select id="transactionType" class="form-select form-select-sm" required>
+                                        <option value="" disabled selected>Transaction Type</option>
+                                        <option value="income">Income</option>
+                                        <option value="expense">Expense</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="transactionCategory" class="form-select form-select-sm" required>
+                                        <option value="" disabled selected>Category</option>
+                                        <option value="salary">Salary</option>
+                                        <option value="part-time">Part-Time</option>
+                                        <option value="allowance">Allowance</option>
+                                     </select>
+                                </div>
+                            </div>
+
+                    <div class="mb-3">
+                        <input type="date" id="transactionDate" class="form-control form-control-sm" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea id="transactionDescription" class="form-control form-control-sm" rows="2" placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <input type="number" id="transactionAmount" class="form-control form-control-sm" placeholder="Amount" required>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary btn-rounded" form="addTransactionForm">ADD</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
+</div>
 
     <!-- Transaction History Table -->
     <div class="container">
