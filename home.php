@@ -8,9 +8,10 @@
     <link rel="icon" href="assets/images/pesobuddy_icon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css">
 
 
 </head>
@@ -289,119 +290,241 @@
         </div>
     </div>
 
-   <!-- FOR THE MONTH OF -->
-<div class="container mt-5">
-    <div class="row text-center">
-        <div class="col-12">
-            <div class="divider"></div>
-            <h4>For the month of XXXXXXX</h4>
-            <div class="divider"></div>
-        </div>
-    </div>
-
-    <div class="row text-center mt-4">
-        <div class="col-md-4">
-            <h5>₱ 100,000.00</h5>
-            <p>Total Income</p>
-        </div>
-        <div class="col-md-4">
-            <h5>₱ 100,000.00</h5>
-            <p>Total Savings</p>
-        </div>
-        <div class="col-md-4">
-            <h5>₱ 100,000.00</h5>
-            <p>Total Expense</p>
-        </div>
-    </div>
-
-    <div class="row mt-5">
-        <div class="col-md-6 d-flex align-items-center">
-            <div class="chart-container">
-                <canvas id="doughnutChart"></canvas>
+    <!-- FOR THE MONTH OF -->
+    <div class="container mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <div class="divider"></div>
+                <h4>For the month of XXXXXXX</h4>
+                <div class="divider"></div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card card-container">
-                <h5 style="text-align: center;">Categories</h5>
-                <ul class="list-unstyled">
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center">
-                        <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
-                        <span>₱XX,XXX.XX</span>
-                    </li>
-                </ul>
+
+        <div class="row text-center mt-4">
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Income</p>
+            </div>
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Savings</p>
+            </div>
+            <div class="col-md-4">
+                <h5>₱ 100,000.00</h5>
+                <p>Total Expense</p>
             </div>
         </div>
-    </div>
 
-    <div class="row category-section mt-5">
-        <div class="col-12">
-            <div class="divider"></div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-auto d-flex flex-row align-items-center mb-2">
-                    <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
-                    <span class="heading">MANAGE YOUR CATEGORIES</span>
-                </div>
-                <div class="col-auto mb-2">
-                    <button class="btn btn-primary">+ ADD CATEGORY</button>
+        <div class="row mt-5">
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="chart-container">
+                    <canvas id="doughnutChart"></canvas>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card card-container">
+                    <h5 style="text-align: center;">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
+                            <span>₱XX,XXX.XX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <div class="row mt-4 my-5">
-                <div class="col-md-6">
-                    <h6 class="mt-4">Category List</h6>
-                    <div class="header-divider"></div>
-                    <div id="category-list">
-                        <button class="btn text-start w-100 my-1">Salary</button>
-                        <button class="btn text-start w-100 my-1">Part-Time Job</button>
-                        <button class="btn text-start w-100 my-1">Freelance</button>
-                        <button class="btn text-start w-100 my-1">Groceries</button>
-                        <button class="btn text-start w-100 my-1">Transpo</button>
-                        <button class="btn text-start w-100 my-1">Rent</button>
+        <div class="row category-section mt-5">
+            <div class="col-12">
+                <div class="divider"></div>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto d-flex flex-row align-items-center mb-2">
+                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                        <span class="heading">MANAGE YOUR CATEGORIES</span>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <button button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#addCategoryModal">+ ADD CATEGORY</button>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card card-container">
-                        <h6>Edit Category</h6>
-                        <form id="edit-category-form">
-                            <div class="form-group my-3">
-                                <label for="categoryType">Category Type</label>
-                                <input type="text" class="form-control" id="categoryType" placeholder="Enter type">
+
+                <!-- Add Category Modal -->
+                <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content p-4"
+                            style="border-radius: 15px; background-color: white; border: none;">
+                            <div class="modal-body">
+                                <h1 class="text-center mb-4 heading">Add New Category</h1>
+                                <div class="mb-3">
+                                    <label for="categoryType" class="form-label paragraph">
+                                        Category Type
+                                    </label>
+                                    <select class="form-select" id="categoryType">
+                                        <option selected>Choose type...</option>
+                                        <option value="1">Type 1</option>
+                                        <option value="2">Type 2</option>
+                                        <option value="3">Type 3</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoryName" class="form-label paragraph">
+                                        Category Name
+                                    </label>
+                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-success"
+                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                        data-bs-target="#successModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                                        SAVE
+                                    </button>
+                                </div>
                             </div>
-                            <div class="form-group my-3">
-                                <label for="categoryName">Category Name</label>
-                                <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Modal -->
+                <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content"
+                            style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                            <div class="modal-body p-4">
+                                <h5>Category successfully added!</h5>
+                                <button type="button" class="btn mt-3"
+                                    style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
-                        </form>
-                        <div class="button-container d-flex justify-content-end mt-3">
-                            <button type="button" class="btn btn-primary me-2">DELETE</button>
-                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- category-list -->
+                <div class="row mt-4 my-5">
+                    <div class="col-md-6">
+                        <h6 class="mt-4">Category List</h6>
+                        <div class="header-divider"></div>
+                        <div id="category-list">
+                            <button class="btn text-start w-100 my-1">Salary</button>
+                            <button class="btn text-start w-100 my-1">Part-Time Job</button>
+                            <button class="btn text-start w-100 my-1">Freelance</button>
+                            <button class="btn text-start w-100 my-1">Groceries</button>
+                            <button class="btn text-start w-100 my-1">Transpo</button>
+                            <button class="btn text-start w-100 my-1">Rent</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-container">
+                            <h6>Edit Category</h6>
+                            <form id="edit-category-form">
+                                <div class="form-group my-3">
+                                    <label for="categoryType">Category Type</label>
+                                    <input type="text" class="form-control" id="categoryType" placeholder="Enter type">
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="categoryName">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                                </div>
+                            </form>
+                            <div class="button-container d-flex justify-content-end mt-3">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteCategoryModal">DELETE</button>
+
+                                <!-- Delete Category Modal -->
+                                <div class="modal fade" id="deleteCategoryModal" tabindex="-1"
+                                    aria-labelledby="deleteCategoryModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content"
+                                            style="border-radius: 15px; border: 2px solid var(--primaryColor); background-color: var(--primaryColor);">
+                                            <div class="modal-header" style="border: none; padding-bottom: 0.5rem;">
+                                                <h4 class="modal-title heading flex-start w-100"
+                                                    id="deleteCategoryModalLabel" style="margin: 0;">
+                                                    Delete Category
+                                                </h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" style="padding-top: 0.5rem;">
+                                                <div class="card"
+                                                    style="border: 1px solid var(--borderColor); border-radius: 10px; padding: 1rem;">
+                                                    <p class="paragraph">Are you sure you want to delete this category?
+                                                    </p>
+                                                    <p class="paragraph" style="color: var(--borderColor);">
+                                                        Once deleted, it cannot be retrieved anymore.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-end" style="border: none;">
+                                                <button type="button" class="btn paragraph" data-bs-dismiss="modal"
+                                                    style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
+                                                    Cancel
+                                                </button>
+                                                <button type="button" class="btn btn-danger paragraph"
+                                                    data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                                    style="color: white; margin-left: 0.5rem;">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Confirm the deletion -->
+                                <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+                                    aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content"
+                                            style="border-radius: 15px; background-color: #aa202e; color: white; border: none;">
+                                            <div class="modal-header" style="border: none;">
+                                                <h4 class="modal-title heading flex-start w-100"
+                                                    id="confirmDeleteModalLabel" style="margin: 0;">Category
+                                                    Deleted</h4>
+                                                <button type="button" class="btn-close btn-close-white"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                The category has been successfully deleted.
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center"
+                                                style="border: none;">
+                                                <button type="button" class="btn btn-light paragraph"
+                                                    data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">SAVE</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Transaction History Heading -->
     <div class="container">
