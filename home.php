@@ -38,10 +38,10 @@
                         <a class="nav-link px-2" href="#">Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Tracker</a>
+                        <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Transaction</a>
+                        <a class="nav-link px-2" href="#transaction-history">Transaction</a>
                     </li>
 
                     <!-- User Profile Image -->
@@ -180,7 +180,7 @@
     </div>
 
     <!-- User Budget Tracker Section -->
-    <div class="container">
+    <div class="container" id="budget-tracker">
         <div class="row align-items-center mb-4 px-2">
             <div class="col-12">
                 <hr>
@@ -529,7 +529,7 @@
     </div>
 
     <!-- Transaction History Heading -->
-    <div class="container">
+    <div class="container" id="transaction-history">
         <div class="row mb-4 px-2">
             <!-- HEADING -->
             <div class="col-12 mb-4">
