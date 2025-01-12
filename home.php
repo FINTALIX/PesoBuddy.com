@@ -363,47 +363,49 @@
                         <span class="heading">MANAGE YOUR CATEGORIES</span>
                     </div>
                     <div class="col-auto mb-2">
-                        <button button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        <button button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#addCategoryModal">+ ADD CATEGORY</button>
                     </div>
                 </div>
 
                 <!-- Add Category Modal -->
                 <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content p-4"
-                            style="border-radius: 15px; background-color: white; border: none;">
-                            <div class="modal-body">
-                                <h1 class="text-center mb-4 heading">Add New Category</h1>
-                                <div class="mb-3">
-                                    <label for="categoryType" class="form-label paragraph">
-                                        Category Type
-                                    </label>
-                                    <select class="form-select" id="categoryType">
-                                        <option selected>Choose type...</option>
-                                        <option value="1">Type 1</option>
-                                        <option value="2">Type 2</option>
-                                        <option value="3">Type 3</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="categoryName" class="form-label paragraph">
-                                        Category Name
-                                    </label>
-                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-success"
-                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                        data-bs-target="#successModal" data-bs-toggle="modal" data-bs-dismiss="modal">
-                                        SAVE
-                                    </button>
-                                </div>
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h1 class="heading" style="margin: 0;">Add New Category</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryType" class="form-label paragraph">
+                                    Category Type
+                                </label>
+                                <select class="form-select" id="categoryType">
+                                    <option selected>Choose type...</option>
+                                    <option value="1">Type 1</option>
+                                    <option value="2">Type 2</option>
+                                    <option value="3">Type 3</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryName" class="form-label paragraph">
+                                    Category Name
+                                </label>
+                                <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary"
+                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                    data-bs-target="#successModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                                    SAVE
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <!-- Success Modal -->
                 <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
@@ -458,7 +460,7 @@
                                         <div class="modal-content"
                                             style="border-radius: 15px; border: 2px solid var(--primaryColor); background-color: var(--primaryColor);">
                                             <div class="modal-header" style="border: none; padding-bottom: 0.5rem;">
-                                                <h4 class="modal-title heading flex-start w-100"
+                                                <h4 class="modal-title heading text-white flex-start w-100"
                                                     id="deleteCategoryModalLabel" style="margin: 0;">
                                                     Delete Category
                                                 </h4>
