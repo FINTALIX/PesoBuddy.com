@@ -53,7 +53,7 @@ textarea {
     margin-bottom: 15px;
 }
 
-.form-inline {
+.input-inline {
     display: flex;
     justify-content: space-between;
     gap: 12px;
@@ -67,7 +67,7 @@ textarea {
     margin-right: 10px; 
 }
 
-.add-button {
+.save-button {
     width: 35%; 
     padding: 6px 10px; 
     font-size: 0.9rem; 
@@ -83,7 +83,7 @@ textarea {
     margin-left: auto; 
 }
 
-.add-button:hover {
+.save-button:hover {
     background-color: #4AD66D;
     transform: translateY(-2px);
 }
