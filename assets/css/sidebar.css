@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap");
+
+:root {
+    --primaryFont: "Lexend Exa", sans-serif;
+    --primaryColor: #39914f;
+    --secondaryColor: #4ad66d;
+    --darkColor: #1a7431;
+    --lightColor: #c9f1c2;
+    --linkHoverColor: #e2f8e8;
+    --borderColor: #747373;
+}
+
+* {
+    font-family: var(--primaryFont) !important;
+}
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    font-family: var(--primaryFont);
+}
+
+.wrapper {
+    display: flex;
+}
+
+.main {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color: #fafbfe;
+}
+
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all .25s ease-in-out;
+    background-color: #007200;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+}
+
+#sidebar.expand {
+    width: 260px;
+    min-width: 260px;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+    padding: 1.15rem 1.15rem 1.15rem 0;
+}
+
+.sidebar-logo a {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: var(--primaryFont) !important;
+}
+
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .825rem 1.625rem;
+    color: #ffffff;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+.sidebar-link i {
+    font-size: 1.2rem;
+    margin-right: .75rem;
+    width: 20px;
+    text-align: center;
+}
+
+a.sidebar-link:hover {
+    background-color: black;
+    border-left: 3px solid black;
+    color: white;
+}
+
+a.sidebar-link:active,
+a.sidebar-link.active {
+    background-color: black;
+    color: white;
+}
+
+.sidebar-item:target a.sidebar-link {
+    background-color: black;
+    border-left: 3px solid black;
+    color: white;
+}
+
+.toggle-logo {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin: 1rem 0.5rem 1rem 1rem;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-item.mt-auto {
+    position: relative;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.sidebar-item.mt-auto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: white;
+}
+
+.sidebar-item {
+    margin-bottom: 0.5rem;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+    .sidebar-link {
+        font-size: 0.9rem;
+    }
+
+    .sidebar-logo a {
+        font-size: 1rem;
+    }
+}
