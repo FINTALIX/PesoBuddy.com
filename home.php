@@ -254,42 +254,6 @@
         </div>
     </div>
 
-    <!-- Add New Tracker Section -->
-    <div class="container">
-        <div class="row px-2">
-            <div class="col-12 py-md-4 p-3">
-                <div class="card card-container">
-                    <div class="row align-items-center text-start p-4">
-                        <div class="col-md-3 col-12 mb-3 mb-md-0">
-                            <div class="subheading">Add New Tracker</div>
-                        </div>
-
-                        <!-- Year Input -->
-                        <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <input type="text" class="form-control rounded-3 paragraph" placeholder="YEAR">
-                        </div>
-
-                        <!-- Month Input -->
-                        <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <select class="form-select rounded-3 paragraph">
-                                <option selected disabled>MONTH</option>
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>...</option>
-                            </select>
-                        </div>
-
-                        <!-- Create Button -->
-                        <div class="col-md-3 col-12 text-md-end text-center subheading">
-                            <button class="btn btn-primary rounded-pill px-4 py-2">CREATE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- FOR THE MONTH OF -->
     <div class="container mt-5">
         <div class="row text-center">
