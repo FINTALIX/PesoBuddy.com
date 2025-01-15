@@ -1,5 +1,6 @@
-
-.carousel { min-height: 100vh; }
+.carousel { 
+    min-height: 100vh;
+}
         
 .carousel-item {
     min-height: 100vh;
@@ -30,8 +31,9 @@
     padding: 48px 0 48px 96px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    padding-top: 15vh;
 }
 
 .brand-title {
@@ -40,6 +42,7 @@
     text-align: left;
     padding-left: 0;
     position: relative;
+    margin-top: -100px;
 }
 
 .brand-title img {
@@ -57,7 +60,7 @@
     text-align: left;
     white-space: nowrap;
     padding-left: 0;
-    margin-top: -10px;
+    margin-top: -38px;
     margin-bottom: 48px;
 }
 
@@ -71,11 +74,9 @@
     margin-bottom: 56px;
 }
 
-.button-wrapper {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    padding-left: 5px;
+.button-row {
+    max-width: 800px;
+    margin-left: 5px;
 }
 
 .btn-login {
@@ -114,60 +115,78 @@
 .carousel-control-prev, .carousel-control-next { z-index: 3; }
 
 @media (max-width: 1050px) {
-    .content-wrapper { padding: 48px 0 48px 64px; }
+    .content-wrapper {
+        padding: 48px 0 48px 64px;
+        padding-top: 10vh;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .brand-title, .brand-tagline, .description, .button-row {
+        text-align: center;
+        margin: 0 auto;
+    }
     
     .brand-title img {
         max-width: 1000px;
-        margin-left: -120px;
+        margin: 0 auto;
     }
     
     .brand-tagline {
-        font-size: 30.4px;
-        margin-top: -8px;
+        font-size: clamp(20px, 5vw, 30.4px);
+        margin-top: -30px;
+        margin-bottom: 54px;
+    }
+    
+    .description {
+        font-size: 20.8px;
+        line-height: 1.6;
+        margin-bottom: 32px;
     }
 }
 
 @media (max-width: 768px) {
     .content-wrapper {
         padding: 32px;
+        padding-top: 8vh;
         text-align: center;
+        justify-content: center;
         align-items: center;
     }
     
-    .brand-title {
+    .brand-title, .brand-tagline, .description, .button-row {
         text-align: center;
-        margin-bottom: 0;
+        margin: 0 auto;
     }
     
     .brand-title img {
         max-width: 500px;
-        margin-left: 0;
-        margin-top: -50px;
-        margin-bottom: 0;
+        margin: 0 auto;
     }
     
     .brand-tagline {
-        font-size: 20.8px;
-        text-align: center;
-        white-space: normal;
-        margin-top: -5px;
-        padding-left: 0;
+        font-size: clamp(16px, 4vw, 20.8px);
+        font-weight: 600;
+        margin-top: -10px;
+        margin-bottom: 24px;
     }
     
     .description {
         font-size: 17.6px;
-        text-align: center;
-    }
-    
-    .button-wrapper {
-        flex-direction: row;
-        gap: 16px;
-        align-items: center;
-        justify-content: center;
+        line-height: 1.6;
+        margin-bottom: 32px;
     }
     
     .btn-login, .btn-register {
         padding: 12.8px 32px;
         font-size: 17.6px;
+        margin: 10px auto;
+    }
+    
+    .button-row {
+        width: 100%;
+        text-align: center;
     }
 }
+
