@@ -8,17 +8,24 @@
     --lightColor: #c9f1c2;
     --linkHoverColor: #e2f8e8;
     --borderColor: #747373;
+    --sidebarBg: #007200;
+    --hoverBg: black;
 }
 
-* {
-    font-family: var(--primaryFont) !important;
-}
-
+*,
 ::after,
 ::before {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: var(--primaryFont) !important;
+}
+
+body {
+    font-family: var(--primaryFont);
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 a {
@@ -29,32 +36,43 @@ li {
     list-style: none;
 }
 
-body {
-    font-family: var(--primaryFont);
-}
-
 .wrapper {
     display: flex;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: none;
 }
 
 .main {
     min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
+    width: calc(100% - 70px);
     transition: all 0.35s ease-in-out;
     background-color: #fafbfe;
+    margin-left: 70px;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+#sidebar.expand ~ .main {
+    margin-left: 260px;
 }
 
 #sidebar {
     width: 70px;
     min-width: 70px;
-    z-index: 1000;
-    transition: all .25s ease-in-out;
-    background-color: #007200;
+    height: 100vh;
+    background-color: var(--sidebarBg);
+    position: fixed;
     display: flex;
     flex-direction: column;
-    position: fixed;
-    height: 100vh;
+    transition: all .25s ease-in-out;
+    z-index: 1000;
+    left: 0;
+    top: 0;
 }
 
 #sidebar.expand {
@@ -68,56 +86,15 @@ body {
 }
 
 .sidebar-logo a {
-    color: #ffffff;
+    color: white;
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    font-family: var(--primaryFont) !important;
 }
 
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;
-}
-
-.sidebar-nav {
-    padding: 1rem 0;
-    flex: 1 1 auto;
-}
-
-a.sidebar-link {
-    padding: .825rem 1.625rem;
-    color: #ffffff;
-    display: block;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    border-left: 3px solid transparent;
-    transition: all 0.25s ease-in-out;
-}
-
-.sidebar-link i {
-    font-size: 1.2rem;
-    margin-right: .75rem;
-    width: 20px;
-    text-align: center;
-}
-
-a.sidebar-link:hover {
-    background-color: black;
-    border-left: 3px solid black;
-    color: white;
-}
-
-a.sidebar-link:active,
-a.sidebar-link.active {
-    background-color: black;
-    color: white;
-}
-
-.sidebar-item:target a.sidebar-link {
-    background-color: black;
-    border-left: 3px solid black;
-    color: white;
 }
 
 .toggle-logo {
@@ -128,9 +105,15 @@ a.sidebar-link.active {
 }
 
 .sidebar-nav {
+    padding: 1rem 0;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.sidebar-item {
+    margin-bottom: 0.5rem;
 }
 
 .sidebar-item.mt-auto {
@@ -149,11 +132,87 @@ a.sidebar-link.active {
     background-color: white;
 }
 
-.sidebar-item {
-    margin-bottom: 0.5rem;
+a.sidebar-link {
+    padding: .825rem 1.625rem;
+    color: white;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    transition: all 0.25s ease-in-out;
 }
 
-/* Media Query */
+.sidebar-link i {
+    font-size: 1.2rem;
+    margin-right: .75rem;
+    width: 20px;
+    text-align: center;
+}
+
+a.sidebar-link:hover,
+a.sidebar-link:active,
+a.sidebar-link.active,
+.sidebar-item:target a.sidebar-link {
+    background-color: var(--hoverBg);
+    border-left: 3px solid var(--hoverBg);
+    color: white;
+}
+
+.offcanvas {
+    max-width: 260px;
+    background-color: var(--sidebarBg) !important;
+}
+
+.offcanvas-header,
+.offcanvas-title {
+    color: white;
+}
+
+.btn-close {
+    background-color: white;
+}
+
+.offcanvas .list-unstyled a {
+    color: white;
+    padding: .825rem 1.625rem;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+.offcanvas .list-unstyled a:hover {
+    background-color: var(--hoverBg);
+    border-left: 3px solid var(--hoverBg);
+    color: white;
+}
+
+@media (max-width: 1050px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        border-bottom: 1px solid #ddd;
+        padding: 0.5rem 1rem;
+
+    }
+
+    #sidebar {
+        display: none !important;
+    }
+    
+    .main {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    #h2 {
+        font-size: 10px;
+    }
+}
+
 @media (max-width: 768px) {
     .sidebar-link {
         font-size: 0.9rem;

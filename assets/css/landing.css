@@ -1,7 +1,7 @@
-.carousel { 
+.carousel {
     min-height: 100vh;
 }
-        
+
 .carousel-item {
     min-height: 100vh;
     background-size: cover;
@@ -20,9 +20,17 @@
     z-index: 1;
 }
 
-.bg1 { background-image: url('../images/bg1.png'); }
-.bg2 { background-image: url('../images/bg2.png'); }
-.bg3 { background-image: url('../images/bg3.png'); }
+.bg1 {
+    background-image: url('../images/bg1.png');
+}
+
+.bg2 {
+    background-image: url('../images/bg2.png');
+}
+
+.bg3 {
+    background-image: url('../images/bg3.png');
+}
 
 .content-wrapper {
     position: relative;
@@ -111,8 +119,14 @@
     color: white;
 }
 
-.carousel-indicators { z-index: 3; }
-.carousel-control-prev, .carousel-control-next { z-index: 3; }
+.carousel-indicators {
+    z-index: 3;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 3;
+}
 
 @media (max-width: 1050px) {
     .content-wrapper {
@@ -122,23 +136,26 @@
         justify-content: center;
         align-items: center;
     }
-    
-    .brand-title, .brand-tagline, .description, .button-row {
+
+    .brand-title,
+    .brand-tagline,
+    .description,
+    .button-row {
         text-align: center;
         margin: 0 auto;
     }
-    
+
     .brand-title img {
         max-width: 1000px;
         margin: 0 auto;
     }
-    
+
     .brand-tagline {
         font-size: clamp(20px, 5vw, 30.4px);
         margin-top: -30px;
         margin-bottom: 54px;
     }
-    
+
     .description {
         font-size: 20.8px;
         line-height: 1.6;
@@ -154,39 +171,42 @@
         justify-content: center;
         align-items: center;
     }
-    
-    .brand-title, .brand-tagline, .description, .button-row {
+
+    .brand-title,
+    .brand-tagline,
+    .description,
+    .button-row {
         text-align: center;
         margin: 0 auto;
     }
-    
+
     .brand-title img {
         max-width: 500px;
         margin: 0 auto;
     }
-    
+
     .brand-tagline {
         font-size: clamp(16px, 4vw, 20.8px);
         font-weight: 600;
         margin-top: -10px;
         margin-bottom: 24px;
     }
-    
+
     .description {
         font-size: 17.6px;
         line-height: 1.6;
         margin-bottom: 32px;
     }
-    
-    .btn-login, .btn-register {
+
+    .btn-login,
+    .btn-register {
         padding: 12.8px 32px;
         font-size: 17.6px;
         margin: 10px auto;
     }
-    
+
     .button-row {
         width: 100%;
         text-align: center;
     }
 }
-

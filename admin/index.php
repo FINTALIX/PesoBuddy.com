@@ -11,10 +11,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="../assets/css/sidebar.css">
-        <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
+
+        <!-- Navbar for phone size -->
+        <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/images/pesobuddy_icon.png" alt="Logo" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
+                aria-controls="sidebarOffcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
     <!-- sidebar -->
     <div class="wrapper">
         <aside id="sidebar">
@@ -57,6 +70,23 @@
                 </li>
             </ul>
         </aside>
+
+        <!-- Offcanvas for phone size -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Sidebar</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li><a href="#dashboard"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
+                <li><a href="#profile"><i class="bi bi-person"></i> Profile</a></li>
+                <li><a href="#categories"><i class="bi bi-list"></i> Categories</a></li>
+                <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
 
         <!-- Main Content -->
         <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">

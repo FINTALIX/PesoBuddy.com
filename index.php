@@ -35,8 +35,8 @@
                                     manage your money smarter, save better, and achieve your financial goals faster.
                                 </p>
                                 <div class="button-wrapper">
-                                    <button class="btn btn-login">LOGIN</button>
-                                    <button class="btn btn-register">REGISTER</button>
+                                <a href="login.php" class="btn btn-login">LOGIN</a>
+                                <a href="register.php" class="btn btn-register">REGISTER</a>
                                 </div>
                             </div>
                         </div>
@@ -58,8 +58,8 @@
                                     quicker.
                                 </p>
                                 <div class="button-wrapper">
-                                    <button class="btn btn-login">LOGIN</button>
-                                    <button class="btn btn-register">REGISTER</button>
+                                <a href="login.php" class="btn btn-login">LOGIN</a>
+                                <a href="register.php" class="btn btn-register">REGISTER</a>
                                 </div>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                                     less time.
                                 </p>
                                 <div class="button-wrapper">
-                                    <button class="btn btn-login">LOGIN</button>
-                                    <button class="btn btn-register">REGISTER</button>
+                                <a href="login.php" class="btn btn-login">LOGIN</a>
+                                <a href="register.php" class="btn btn-register">REGISTER</a>
                                 </div>
                             </div>
                         </div>
