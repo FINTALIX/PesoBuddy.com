@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
+:root {
+    --primaryFont: 'Lexend Exa', Arial, sans-serif;
+    --heading-font-size: 20px;
+    --subheading-font-size: 16px;
+    --label-font-size: 14px;
+    --input-font-size: 14px;
+    --button-font-size: 14px;
+    --border-radius: 8px;
+    --border-width: 3px;
+    --border-color: #ccc;
+    --outline-width: 2px;
+}
+
+body {
+    font-family: var(--primaryFont);
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    font-size: var(--heading-font-size);
+    text-align: left;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: var(--subheading-font-size);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.section-inner {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: var(--label-font-size);
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 8px 10px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    font-size: var(--input-font-size);
+    outline: none;
+    width: 50%;  
+}
+
+button {
+    padding: 12px;
+    background-color: #1A7431;
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 10px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 15%;
+    box-sizing: border-box;
+    outline: var(--outline-width) solid var(--outline-color);
+    font-family: var(--primaryFont);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4AD66D !important;
+    transform: translateY(-4px);
+}
+
+.thin-line {
+    border-top: var(--border-width) solid black;
+    margin: 15px 0;
+}
+
+.username-input {
+    display: flex;
+    align-items: center;
+}
+
+.username-input label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.outer-label {
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.password-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.password-row > div {
+    width: 48%;
+}
+
+.password-row > div input {
+    width: 100%;
+}
+
+.password-row .w-100 {
+    width: 100%; 
+}
