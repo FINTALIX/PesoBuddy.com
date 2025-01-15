@@ -543,7 +543,7 @@
 
                     <!-- Add Transaction Button -->
                     <div class="col-auto mb-2">
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
                             + ADD TRANSACTION
                         </a>
                     </div>
