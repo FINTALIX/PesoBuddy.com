@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item mt-auto">
-                    <a href="setting.php" class="sidebar-link">
+                    <a href="settings.php" class="sidebar-link">
                         <i class="bi bi-gear"></i>
                         <span>Settings</span>
                     </a>
