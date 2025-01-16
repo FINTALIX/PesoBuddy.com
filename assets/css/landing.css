@@ -151,7 +151,7 @@
     }
 
     .brand-tagline {
-        font-size: clamp(20px, 5vw, 30.4px);
+        font-size: 20px;
         margin-top: -30px;
         margin-bottom: 54px;
     }
@@ -186,8 +186,8 @@
     }
 
     .brand-tagline {
-        font-size: clamp(16px, 4vw, 20.8px);
-        font-weight: 600;
+        font-size: 15px;
+        font-weight: 500;
         margin-top: -10px;
         margin-bottom: 24px;
     }
