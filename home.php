@@ -49,12 +49,12 @@
                     <li class="nav-item dropdown ms-lg-3 px-2">
                         <!-- Profile Image -->
                         <a class="d-none d-lg-block" id="profileDropdown" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                            aria-expanded="false" style="cursor: pointer;">
                             <img src="assets/images/pesobuddy_icon.png" alt="Profile" width="32" height="32"
                                 class="rounded-circle">
                         </a>
                         <a class="nav-link d-block d-lg-none" id="profileDropdown" data-bs-toggle="dropdown"
-                            aria-expanded="false">Profile</a>
+                            aria-expanded="false" style="cursor: pointer;">Profile</a>
 
                         <!-- Dropdown Menu -->
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
