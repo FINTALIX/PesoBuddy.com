@@ -84,7 +84,7 @@
                 <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
                 <li><a href="#profile"><i class="bi bi-person"></i> Profile</a></li>
                 <li><a href="#categories"><i class="bi bi-list"></i> Categories</a></li>
-                <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><a href="settings.php"><i class="bi bi-gear"></i> Settings</a></li>
                 <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
             </ul>
         </div>
