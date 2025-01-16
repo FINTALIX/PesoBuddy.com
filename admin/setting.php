@@ -41,7 +41,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="#dashboard" class="sidebar-link active">
+                    <a href="index.php" class="sidebar-link">
                         <i class="bi bi-bar-chart-line"></i>
                         <span>Dashboard</span>
                     </a>
@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item mt-auto">
-                    <a href="setting.php" class="sidebar-link">
+                    <a href="#settings" class="sidebar-link active">
                         <i class="bi bi-gear"></i>
                         <span>Settings</span>
                     </a>
@@ -81,7 +81,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-unstyled">
-                <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
+                <li><a href="#dashboard"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
                 <li><a href="#profile"><i class="bi bi-person"></i> Profile</a></li>
                 <li><a href="#categories"><i class="bi bi-list"></i> Categories</a></li>
                 <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
@@ -92,108 +92,80 @@
 
         <!-- Main Content -->
         <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
-            <!-- Dashboard -->
-            <div id="dashboard" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">WEBSITE ENGAGEMENT</h2>
-                        <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: left;">Monthly
-                            User Signups</h3>
-                        <div
-                            style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; padding: 24px;">
-                            <div style="height: 400px; position: relative;">
-                                <canvas id="userSignupsChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Settings -->
+            <div id="settings" class="container-fluid py-4 px-4">
+            <div class="row">
+                <div class="col-12">
+                    <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">WEBSITE SETTINGS</h2>
+                    <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: left;">Monthly
-                            Login Activity</h3>
-                        <div
-                            style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; padding: 24px;">
-                            <div style="height: 400px; position: relative;">
-                                <canvas id="loginActivityChart"></canvas>
-                            </div>
+            <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="website-logo">
+                            <img src="../assets/images/pesobuddy_icon.png" alt="Website Logo"
+                                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                         </div>
+                        <h3 style="margin-bottom: 0;">Website Logo</h3>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 p-2">
+                        <button class="btn btn-primary">Change</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadLogoModal">Upload
+                            New</button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #666666; border-radius: 20px;">
+                    <div class="modal-header border-0 d-flex flex-column align-items-center">
+                        <h5 class="modal-title text-white text-uppercase" id="uploadLogoModalLabel">Upload Logo</h5>
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="d-flex gap-3">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden"
+                                        style="width: 120px; height: 120px; background-color: #000;">
+                                        <img id="previewImage" src="../assets/images/pesobuddy_icon.png" alt="Current Photo"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <p class="text-white mt-2 mb-0" style="font-size: 12px;">Current Photo</p>
+                                </div>
+
+                                <div class="flex-grow-1 mt-5">
+                                    <div class="input-group">
+                                        <input type="text" id="fileNameDisplay"
+                                            class="form-control text-white bg-transparent" value="newimage.png"
+                                            readonly style="border-radius: 10px;">
+                                        <label class="btn btn-primary" for="fileInput" style="border-radius: 10px;">Browse<i
+                                                class="bi-upload m-1" style="font-size: 14px;"></i></label>
+                                        <input type="file" class="d-none" id="fileInput" accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-
-        // Sidebar JS
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebar = document.getElementById("sidebar");
-            const mainContent = document.querySelector(".main");
-            sidebar.classList.toggle("expand");
-
-            if (sidebar.classList.contains("expand")) {
-                mainContent.style.marginLeft = "260px";
-            } else {
-                mainContent.style.marginLeft = "70px";
-            }
-        });
-
-        // Chart.js
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        const signupData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'Signups',
-                data: [65, 9, 100, 81, 56, 55, 70],
-                backgroundColor: '#FFAEBC',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
-
-        const loginData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'Logins',
-                data: [45, 52, 60, 89, 40, 55, 80],
-                backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
-
-        // Render Charts
-        new Chart(document.getElementById('userSignupsChart').getContext('2d'), {
-            type: 'bar',
-            data: signupData,
-            options: chartOptions
-        });
-
-        new Chart(document.getElementById('loginActivityChart').getContext('2d'), {
-            type: 'bar',
-            data: loginData,
-            options: chartOptions
-        });
-    </script>
 </body>
 
 </html>
