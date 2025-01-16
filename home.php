@@ -38,10 +38,10 @@
                         <a class="nav-link px-2" href="#">Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Tracker</a>
+                        <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Transaction</a>
+                        <a class="nav-link px-2" href="#transaction-history">Transaction</a>
                     </li>
 
                     <!-- User Profile Image -->
@@ -180,7 +180,7 @@
     </div>
 
     <!-- User Budget Tracker Section -->
-    <div class="container">
+    <div class="container" id="budget-tracker">
         <div class="row align-items-center mb-4 px-2">
             <div class="col-12">
                 <hr>
@@ -248,42 +248,6 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
                         <button type="button" class="btn btn-primary w-100 p-3">DECEMBER</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add New Tracker Section -->
-    <div class="container">
-        <div class="row px-2">
-            <div class="col-12 py-md-4 p-3">
-                <div class="card card-container">
-                    <div class="row align-items-center text-start p-4">
-                        <div class="col-md-3 col-12 mb-3 mb-md-0">
-                            <div class="subheading">Add New Tracker</div>
-                        </div>
-
-                        <!-- Year Input -->
-                        <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <input type="text" class="form-control rounded-3 paragraph" placeholder="YEAR">
-                        </div>
-
-                        <!-- Month Input -->
-                        <div class="col-md-3 col-6 mb-3 mb-md-0">
-                            <select class="form-select rounded-3 paragraph">
-                                <option selected disabled>MONTH</option>
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>...</option>
-                            </select>
-                        </div>
-
-                        <!-- Create Button -->
-                        <div class="col-md-3 col-12 text-md-end text-center subheading">
-                            <button class="btn btn-primary rounded-pill px-4 py-2">CREATE</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -529,7 +493,7 @@
     </div>
 
     <!-- Transaction History Heading -->
-    <div class="container">
+    <div class="container" id="transaction-history">
         <div class="row mb-4 px-2">
             <!-- HEADING -->
             <div class="col-12 mb-4">
