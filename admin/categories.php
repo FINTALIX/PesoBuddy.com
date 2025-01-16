@@ -124,7 +124,7 @@
                             <div class="row">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-borderless m-0">
-                                        <thead class="align-middle">
+                                        <thead class="text-center align-middle">
                                             <tr>
                                                 <th scope="col">ID</th>
                                                 <th scope="col">CATEGORY</th>
@@ -134,7 +134,7 @@
                                         </thead>
                                         <tbody>
                                             <!-- Category Row -->
-                                            <tr>
+                                            <tr class="text-center align-middle">
                                                 <td scope="row">1</td>
                                                 <td>Income</td>
                                                 <td>Salary</td>
@@ -168,7 +168,7 @@
                                             </tr>
 
                                             <!-- Category Row -->
-                                            <tr>
+                                            <tr class="text-center align-middle">
                                                 <td scope="row">2</td>
                                                 <td>Expense</td>
                                                 <td>Rent</td>
