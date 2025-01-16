@@ -19,7 +19,7 @@
 <body>
     <!-- Navbar -->
     <div class="container-fluid px-0 fixed-top">
-        <nav class="navbar navbar-expand-lg px-3">
+        <div class="navbar navbar-expand-lg px-3">
             <!-- Logo -->
             <a class="navbar-brand" href="index.php">
                 <img src="assets/images/pesobuddy_logoW.png" width="230" height="50" alt="Logo">
@@ -44,21 +44,35 @@
                         <a class="nav-link px-2" href="#transaction-history">Transaction</a>
                     </li>
 
-                    <!-- User Profile Image -->
-                    <li class="nav-item">
-                        <div class="px-2 ms-lg-3">
-                            <!-- Show profile picture on screens wider than lg and hide on screens smaller than lg -->
-                            <a href="#" class="d-none d-lg-block">
-                                <img src="assets/images/pesobuddy_icon.png" alt="mdo" width="32" height="32"
-                                    class="rounded-circle">
-                            </a>
-                            <!-- Show profile as text on on screens smaller than lg and hide on screens wider than lg -->
-                            <a href="#" class="nav-link d-block d-lg-none">Profile</a>
-                        </div>
+
+                    <!-- User Profile Dropdown -->
+                    <li class="nav-item dropdown ms-lg-3 px-2">
+                        <!-- Profile Image -->
+                        <a class="d-none d-lg-block" id="profileDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="cursor: pointer;">
+                            <img src="assets/images/pesobuddy_icon.png" alt="Profile" width="32" height="32"
+                                class="rounded-circle">
+                        </a>
+                        <a class="nav-link d-block d-lg-none" id="profileDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="cursor: pointer;">Profile</a>
+
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li>
+                                <a class="dropdown-item" href="settings.php">
+                                    <i class="bi bi-gear px-1"></i> Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="login.php" style="color: red;">
+                                    <i class="bi bi-box-arrow-right px-1"></i> Log Out
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </div>
     </div>
 
     <!-- Greetings and Date -->
