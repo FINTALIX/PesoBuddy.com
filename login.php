@@ -1,3 +1,48 @@
+<?php
+include("connect.php");
+
+session_start();
+session_destroy();
+session_start();
+
+$error = ""; 
+
+if (isset($_POST['btnLogin'])) {
+
+  $username = $_POST['userName'];
+  $password = $_POST['password'];
+
+  $loginQuery = "SELECT * FROM users WHERE (userName = '$username' OR email = '$username') AND password = '$password'";
+  $loginResult = executeQuery($loginQuery);
+
+  $_SESSION['userID'] = "";
+  $_SESSION['username'] = "";
+  $_SESSION['firstName'] = "";
+  $_SESSION['lastName'] = "";
+  $_SESSION['email'] = "";
+  $_SESSION['birthday'] = "";
+  $_SESSION['profilePicture'] = "";
+  $_SESSION['role'] = "";
+
+
+  if (mysqli_num_rows($loginResult) > 0) {
+    while ($user = mysqli_fetch_assoc($loginResult)) {
+      $_SESSION['userID'] = $user['userID'];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['firstName'] = $user['firstName'];
+      $_SESSION['lastName'] = $user['lastName'];
+      $_SESSION['email'] = $user['email'];
+      $_SESSION['birthday'] = $user['birthday'];
+      $_SESSION['profilePicture'] = $user['profilePicture'];
+      $_SESSION['role'] = $user['role'];
+      header("Location: home.php");
+    }
+  } else {
+    $error = "INVALID USER";
+  }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -5,7 +50,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PesoBuddy | Login</title>
-  <link rel="icon" href="assets/images/pesobuddy_icon.png"/>
+  <link rel="icon" href="assets/images/pesobuddy_icon.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="assets/css/style.css" rel="stylesheet">
@@ -28,20 +73,24 @@
           </div>
 
           <!-- Alert for incorrect login -->
-          <!-- <div class="row justify-content-center mt-2">
-            <div class="col-12">
-              <div class="alert alert-warning" role="alert">
-                Invalid Email or Password.
+          <?php if ($error == "INVALID USER") { ?>
+            <div class="row justify-content-center mt-2">
+              <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                  Invalid Email or Password.
+                </div>
               </div>
             </div>
-          </div> -->
+          <?php } ?>
 
           <!-- LOGIN FORM -->
           <form method="POST">
             <!-- Username or Email -->
-            <input class="form-control text-center my-4" type="text" name="" placeholder="Username or Email" required>
+            <input class="form-control text-center my-4" type="text" name="userName" placeholder="Username or Email"
+              required>
             <!-- Password -->
-            <input class="form-control text-center my-4" type="password" name="password" placeholder="Password" required>
+            <input class="form-control text-center my-4" type="password" name="password" placeholder="Password"
+              required>
             <!-- Remember Me -->
             <div class="d-flex justify-content-center">
               <div class="form-check my-4">
