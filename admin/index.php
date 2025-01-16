@@ -90,6 +90,108 @@
 
         <!-- Main Content -->
         <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+
+            <!-- Hello Admin Section -->
+            <div class="container">
+                <h1>Hello, Admin!</h1>
+                <p>USER STATISTICS</p>
+                <div class="line"></div>
+                <div class="statistics-card">
+                    <div class="stat">
+                        <h2>100</h2>
+                        <h3>Total Users</h3>
+                    </div>
+                    <div class="stat">
+                        <h2>80</h2>
+                        <h3>Active Users</h3>
+                    </div>
+                    <div class="stat">
+                        <h2>20</h2>
+                        <h3>Inactive Users</h3>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
+                :root {
+                    --primaryFont: 'Lexend Exa', Arial, sans-serif;
+                }
+
+                body {
+                    font-family: var(--primaryFont);
+                    margin: 0;
+                    padding: 20px;
+                    background-color: #f9f9f9;
+                }
+
+                .container {
+                    max-width: 800px;
+                    margin: auto;
+                }
+
+                h1 {
+                    font-size: 24px;
+                    margin-bottom: 10px;
+                    margin-left: -35%;
+                }
+
+                .line {
+                    height: 2px;
+                    background-color: black;
+                    margin: 10px 0 20px;
+                    width: 172%; /* Increased the width here */
+                    margin-left: -35%;
+                }
+
+                .statistics-card {
+                    display: flex;
+                    justify-content: flex-start;
+                    background-color: #f0f0f0;
+                    border-radius: 8px;
+                    padding: 40px;
+                    width: 165%;
+                    margin-left: -33%;
+                }
+
+                .stat {
+                    text-align: center;
+                    margin-right: 180px;
+                    position: relative;
+                }
+
+                .stat h2 {
+                    font-size: 24px;
+                    margin: 0;
+                }
+
+                .stat h3 {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    color: gray;
+                    letter-spacing: 4px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .stat:nth-child(2) {
+                    margin-left: 140px;
+                }
+
+                .stat:nth-child(3) {
+                    margin-left: 180px;
+                }
+
+                p {
+                    margin-top: 30px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    margin-left: -35%;
+                }
+            </style>
+
             <!-- Dashboard -->
             <div id="dashboard" class="container-fluid py-4 px-4">
                 <div class="row">
@@ -151,10 +253,184 @@
                 <div class="row">
                     <div class="col-12">
                         <h2>Settings</h2>
-                        <p>This is the settings section.</p>
+            <!-- Account Settings Section -->
+            <div class="section mb-4">
+                <h2>ACCOUNT SETTINGS</h2>
+                <div class="thin-line"></div>
+                <label class="outer-label">Change Username</label>
+                <div class="section-inner">
+                    <div class="username-input">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control">
+                    </div>
+                    <button class="btn btn-success d-block mx-auto">Save Username</button>
+                </div>
+            </div>
+
+            <!-- Change Password Section -->
+            <div class="section mb-4">
+                <h2>CHANGE PASSWORD</h2>
+                <div class="section-inner">
+                    <div class="password-section">
+                        <div class="w-100">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" class="form-control">
+                        </div>
+                        <div class="password-row">
+                            <div class="w-100">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" class="form-control">
+                            </div>
+                            <div class="w-100 ms-2">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" id="confirm-password" class="form-control">
+                            </div>
+                        </div>
+                        <button class="btn btn-success d-block mx-auto">Save Password</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
+    :root {
+        --primaryFont: 'Lexend Exa', Arial, sans-serif;
+        --heading-font-size: 20px;
+        --subheading-font-size: 16px;
+        --label-font-size: 14px;
+        --input-font-size: 14px;
+        --button-font-size: 14px;
+        --border-radius: 8px;
+        --border-width: 3px;
+        --border-color: #ccc;
+        --outline-width: 2px;
+    }
+
+    body {
+        font-family: var(--primaryFont);
+        margin: 0;
+        background-color: #f5f5f5;
+    }
+
+    h1 {
+        font-size: var(--heading-font-size);
+        text-align: left;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: var(--subheading-font-size);
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .section-inner {
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: var(--border-radius);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+        font-size: var(--label-font-size);
+        font-weight: bold;
+    }
+
+    input[type="text"], input[type="password"] {
+        padding: 8px 10px;
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-sizing: border-box;
+        font-size: var(--input-font-size);
+        outline: none;
+        width: 50%;
+    }
+
+    #username {
+        width: 100%;
+    }
+
+    button {
+        padding: 12px;
+        background-color: #1A7431;
+        color: #fff;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: var(--button-font-size);
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 15%;
+        box-sizing: border-box;
+        outline: var(--outline-width) solid var(--outline-color);
+        font-family: var(--primaryFont);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #4AD66D !important;
+        transform: translateY(-4px);
+    }
+
+    .thin-line {
+        border-top: var(--border-width) solid black;
+        margin: 15px 0;
+    }
+
+    .username-input {
+        display: flex;
+        align-items: center;
+    }
+
+    .username-input label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .outer-label {
+        margin-bottom: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .password-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .password-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .password-row > div {
+        width: 48%;
+    }
+
+    .password-row > div input {
+        width: 100%;
+    }
+
+    .password-row .w-100 {
+        width: 100%; 
+    }
+</style>
 
             <!-- Logout -->
             <div id="logout" class="container-fluid py-4 px-4">
