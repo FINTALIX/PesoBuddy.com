@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="../assets/css/sidebar.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
@@ -39,7 +41,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="#dashboard" class="sidebar-link">
+                    <a href="#dashboard" class="sidebar-link active">
                         <i class="bi bi-bar-chart-line"></i>
                         <span>Dashboard</span>
                     </a>
@@ -57,7 +59,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item mt-auto">
-                    <a href="#settings" class="sidebar-link">
+                    <a href="settings.php" class="sidebar-link">
                         <i class="bi bi-gear"></i>
                         <span>Settings</span>
                     </a>
@@ -79,10 +81,10 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-unstyled">
-                <li><a href="#dashboard"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
+                <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
                 <li><a href="#profile"><i class="bi bi-person"></i> Profile</a></li>
                 <li><a href="#categories"><i class="bi bi-list"></i> Categories</a></li>
-                <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><a href="settings.php"><i class="bi bi-gear"></i> Settings</a></li>
                 <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
             </ul>
         </div>
@@ -126,48 +128,7 @@
                 </div>
             </div>
 
-            <!-- Profile -->
-            <div id="profile" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Profile</h2>
-                        <p>This is the profile section.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Categories -->
-            <div id="categories" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Categories</h2>
-                        <p>This is the categories section.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings -->
-            <div id="settings" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Settings</h2>
-                        <p>This is the settings section.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Logout -->
-            <div id="logout" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Logout</h2>
-                        <p>This is the logout section.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
