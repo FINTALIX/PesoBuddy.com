@@ -18,7 +18,7 @@
         <!-- Navbar for phone size -->
         <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.php">
                 <img src="../assets/images/pesobuddy_icon.png" alt="Logo" style="height: 40px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
@@ -73,9 +73,9 @@
 
         <!-- Offcanvas for phone size -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Sidebar</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas-header" >
+        <img src="../assets/images/pesobuddy_logoW.png" alt="PESOBUDDY" class="img-fluid" id="sidebarOffcanvasLabel" style="max-height: 94px; max-width: 200px">
+        <button type="button" class="btn-close text-reset m-0" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: transparent;"></button>
         </div>
         <div class="offcanvas-body">
             <ul class="list-unstyled">
