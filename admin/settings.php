@@ -48,9 +48,9 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#profile" class="sidebar-link">
+                    <a href="users.php" class="sidebar-link">
                         <i class="bi bi-person"></i>
-                        <span>Profile</span>
+                        <span>Users</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -86,7 +86,7 @@
             <div class="offcanvas-body">
                 <ul class="list-unstyled">
                     <li><a href="index.php"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
-                    <li><a href="#profile"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="users.php"><i class="bi bi-person"></i> Users</a></li>
                     <li><a href="#categories"><i class="bi bi-list"></i> Categories</a></li>
                     <li><a href="#settings" class="sidebar-link active"><i class="bi bi-gear"></i> Settings</a></li>
                     <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
@@ -122,6 +122,47 @@
                     </div>
                 </div>
             </div>
+        
+        <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white rounded-4">
+            <div class="modal-header border-0 d-flex flex-column align-items-center">
+                <h5 class="modal-title text-black text-uppercase" id="uploadLogoModalLabel">Upload Logo</h5>
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent" 
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="d-flex gap-3">
+                        <div class="text-center">
+                            <div class="rounded-circle overflow-hidden bg-black" style="width: 120px; height: 120px;">
+                                <img id="previewImage" src="../assets/images/pesobuddy_icon.png" alt="Current Photo" 
+                                    class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <p class="text-black mt-2 mb-0 small text-nowrap">Current Photo</p>
+                        </div>
+
+                        <div class="flex-grow-1 mt-5">
+                            <div class="d-flex flex-column flex-md-row gap-1 gap-md-0">
+                                <input type="text" id="fileNameDisplay" 
+                                    class="form-control text-black bg-transparent rounded-2" 
+                                    value="newimage.png" readonly>
+                                <label class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center" for="fileInput">
+                                    Browse<i class="bi-upload ms-2"></i>
+                                </label>
+                                <input type="file" class="d-none" id="fileInput" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
                     
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

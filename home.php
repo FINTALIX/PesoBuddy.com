@@ -12,68 +12,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
-
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div class="container-fluid px-0 fixed-top">
-        <div class="navbar navbar-expand-lg px-3">
-            <!-- Logo -->
-            <a class="navbar-brand" href="index.php">
-                <img src="assets/images/pesobuddy_logoW.png" width="230" height="50" alt="Logo">
-            </a>
 
-            <!-- Toggler Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Collapsible Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2" href="#transaction-history">Transaction</a>
-                    </li>
-
-
-                    <!-- User Profile Dropdown -->
-                    <li class="nav-item dropdown ms-lg-3 px-2">
-                        <!-- Profile Image -->
-                        <a class="d-none d-lg-block" id="profileDropdown" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="cursor: pointer;">
-                            <img src="assets/images/pesobuddy_icon.png" alt="Profile" width="32" height="32"
-                                class="rounded-circle">
-                        </a>
-                        <a class="nav-link d-block d-lg-none" id="profileDropdown" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="cursor: pointer;">Profile</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li>
-                                <a class="dropdown-item" href="settings.php">
-                                    <i class="bi bi-gear px-1"></i> Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="login.php" style="color: red;">
-                                    <i class="bi bi-box-arrow-right px-1"></i> Log Out
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <?php include('assets/shared/navbar.php'); ?>
 
     <!-- Greetings and Date -->
     <div class="container" style="padding-top: 5rem;">
@@ -97,15 +40,15 @@
 
     <!-- Annual Report -->
     <div class="container">
-        <div class="row px-2">
-            <div class="col-12 col-md-8 py-4">
+        <div class="row align-items-center px-2">
+            <div class="col-12 col-md-8 py-md-4">
                 <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
                             <div class="paragraph pt-3"><b>Annual Totals</b></div>
                         </div>
                     </div>
-                    <div class="row text-center m-2">
+                    <div class="row text-center align-items-center m-2">
                         <!-- Total Income -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL INCOME</b></div>
@@ -126,7 +69,7 @@
             </div>
 
             <!-- Remaining Balance Section -->
-            <div class="col-12 col-md-4 py-4">
+            <div class="col-12 col-md-4 py-md-4">
                 <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
@@ -142,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 pt-4">
                 <hr>
             </div>
 
@@ -165,17 +108,17 @@
 
     <!-- Report Section -->
     <div class="container">
-        <div class="row align-items-center px-2">
+        <div class="row justify-content-center align-items-center px-2">
 
             <!-- Yearly Report -->
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-10 col-xl-8">
                 <div>
                     <canvas id="yearlyChart" style="overflow: visible;"></canvas>
                 </div>
             </div>
 
             <!-- Biggest Transactions -->
-            <div class="col-12 col-lg-4 px-lg-5 py-4">
+            <div class="col-12 col-lg-10 col-xl-4 px-lg-5 py-4">
                 <div class="card stat-card rounded-5">
                     <div class="d-flex flex-column align-items-end">
                         <div class="subheading pt-4 pb-4 pe-3 text-end">
@@ -198,25 +141,26 @@
         <div class="row align-items-center mb-4 px-2">
             <div class="col-12">
                 <hr>
-            </div>
+                <div class="row justify-content-md-between align-items-center">
 
-            <div
-                class="col-12 col-md-11 d-flex align-items-center justify-content-center justify-content-md-start mb-2">
-                <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
-                <span class="heading">BUDGET TRACKER</span>
-            </div>
+                    <div class="col-12 col-md-auto d-flex flex-row align-items-center mb-2">
+                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                        <span class="heading">BUDGET TRACKER</span>
+                    </div>
 
-            <div class="col-12 col-md-1 d-flex justify-content-center justify-content-sm-end mb-2">
-                <div class="btn-group subheading mx-auto">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        YEAR
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-sm-end">
-                        <li><a class="dropdown-item" href="#">2025</a></li>
-                        <li><a class="dropdown-item" href="#">2024</a></li>
-                        <li><a class="dropdown-item" href="#">2023</a></li>
-                    </ul>
+                    <div class="col-12 col-md-auto d-flex mb-2">
+                        <div class="subheading">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                YEAR
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-sm-end">
+                                <li><a class="dropdown-item" href="#">2025</a></li>
+                                <li><a class="dropdown-item" href="#">2024</a></li>
+                                <li><a class="dropdown-item" href="#">2023</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -520,7 +464,7 @@
             <!-- HEADING -->
             <div class="col-12 mb-4">
                 <hr>
-                <div class="row align-items-center justify-content-center justify-content-lg-between">
+                <div class="row align-items-center justify-content-lg-between">
                     <!-- Heading -->
                     <div class="col-auto d-flex flex-row align-items-center mb-2">
                         <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
@@ -529,10 +473,88 @@
 
                     <!-- Add Transaction Button -->
                     <div class="col-auto mb-2">
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
                             + ADD TRANSACTION
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="heading" style="margin: 0; font-size: 1.8rem;">Add New Transaction
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <select class="form-select" id="addtransactionType">
+                                    <option selected>Transaction Type</option>
+                                    <option value="1">Transaction 1</option>
+                                    <option value="2">Transaction 2</option>
+                                    <option value="3">Transaction 3</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
+                                <select class="form-select" id="addcategoryType">
+                                    <option selected>Category</option>
+                                    <option value="1">Category 1</option>
+                                    <option value="2">Category 2</option>
+                                    <option value="3">Category 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="date" placeholder="Date"
+                            onfocus="(this.type='date')" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" id="descriptionMesssage" placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-12 col-md-9">
+                                <input type="text" class="form-control" id="Amount" placeholder="Amount">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <button type="button" class="btn btn-primary"
+                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.9rem;"
+                                    data-bs-target="#transactionSuccessModal" data-bs-toggle="modal"
+                                    data-bs-dismiss="modal">
+                                    ADD
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Transaction Success Modal -->
+    <div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"
+                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                <div class="modal-body p-4">
+                    <h5>Transaction successfully added!</h5>
+                    <button type="button" class="btn mt-3"
+                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -630,6 +652,113 @@
                                         </td>
                                     </tr>
 
+                                      <!-- Edit Transaction Modal -->
+                                      <div class="modal fade" id="editTransaction" tabindex="-1"
+                                                        aria-labelledby="editTransactionModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content p-4"
+                                                                style="border-radius: 15px; background-color: white; border: none;">
+                                                                <div class="modal-body">
+                                                                    <div
+                                                                        class="d-flex justify-content-between align-items-center mb-4">
+                                                                        <h5 class="heading"
+                                                                            style="margin: 0; font-size: 1.8rem;">
+                                                                            Edit Transaction
+                                                                        </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <div class="row g-3">
+                                                                            <div class="col-md-7">
+                                                                                <select class="form-select"
+                                                                                    id="editTransactionType">
+                                                                                    <option selected>Transaction
+                                                                                        Type
+                                                                                    </option>
+                                                                                    <option value="1">
+                                                                                        Transaction 1
+                                                                                    </option>
+                                                                                    <option value="2">
+                                                                                        Transaction 2
+                                                                                    </option>
+                                                                                    <option value="3">
+                                                                                        Transaction 3
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="col-md-5">
+                                                                                <select class="form-select"
+                                                                                    id="editCategoryType">
+                                                                                    <option selected>Category
+                                                                                    </option>
+                                                                                    <option value="1">Category 1
+                                                                                    </option>
+                                                                                    <option value="2">Category 2
+                                                                                    </option>
+                                                                                    <option value="3">Category 3
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <input class="form-control" type="text"
+                                                                            name="date" placeholder="Date"
+                                                                            onfocus="(this.type='date')" required>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <textarea class="form-control"
+                                                                            id="editDescriptionMesssage"
+                                                                            placeholder="Description"></textarea>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <div class="row g-3 align-items-center">
+                                                                            <div class="col-12 col-md-9">
+                                                                                <input type="text" class="form-control"
+                                                                                    id="editAmount"
+                                                                                    placeholder="Amount">
+                                                                            </div>
+
+                                                                            <div class="col-12 col-md-3">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                                                                    data-bs-target="#transactionEditSuccessModal"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-dismiss="modal"
+                                                                                    aria-label="Save changes and open success modal">
+                                                                                    SAVE
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Edit Transaction Success Modal -->
+                                                    <div class="modal fade" id="transactionEditSuccessModal"
+                                                        tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content"
+                                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                                                                <div class="modal-body p-4">
+                                                                    <h5>Transaction successfully edited!</h5>
+                                                                    <button type="button" class="btn mt-3"
+                                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                     <!-- SAMPLE Data ONLY -->
                                     <tr>
                                         <td scope="row">2</td>
@@ -682,8 +811,7 @@
             <div class="col-12">
                 <!-- HEADING -->
                 <hr>
-                <div
-                    class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
+                <div class="col-auto d-flex flex-row align-items-center mb-4">
                     <div class="me-3" style="width: 15px; background-color: #dc3545; height: 40px;"></div>
                     <span class="heading" style="color: #dc3545;">DANGER ZONE</span>
                 </div>
