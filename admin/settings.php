@@ -122,48 +122,47 @@
                     </div>
                 </div>
             </div>
-
-            <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="background-color: #666666; border-radius: 20px;">
-                    <div class="modal-header border-0 d-flex flex-column align-items-center">
-                        <h5 class="modal-title text-white text-uppercase" id="uploadLogoModalLabel">Upload Logo</h5>
-                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="uploadForm" enctype="multipart/form-data">
-                            <div class="d-flex gap-3">
-                                <div class="text-center">
-                                    <div class="rounded-circle overflow-hidden"
-                                        style="width: 120px; height: 120px; background-color: #000;">
-                                        <img id="previewImage" src="../assets/images/pesobuddy_icon.png" alt="Current Photo"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                    </div>
-                                    <p class="text-white mt-2 mb-0" style="font-size: 12px;">Current Photo</p>
-                                </div>
-
-                                <div class="flex-grow-1 mt-5">
-                                    <div class="input-group">
-                                        <input type="text" id="fileNameDisplay"
-                                            class="form-control text-white bg-transparent" value="newimage.png"
-                                            readonly style="border-radius: 10px;">
-                                        <label class="btn btn-primary" for="fileInput" style="border-radius: 10px;">Browse<i
-                                                class="bi-upload m-1" style="font-size: 14px;"></i></label>
-                                        <input type="file" class="d-none" id="fileInput" accept="image/*">
-                                    </div>
-                                </div>
+        
+        <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white rounded-4">
+            <div class="modal-header border-0 d-flex flex-column align-items-center">
+                <h5 class="modal-title text-black text-uppercase" id="uploadLogoModalLabel">Upload Logo</h5>
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent" 
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="d-flex gap-3">
+                        <div class="text-center">
+                            <div class="rounded-circle overflow-hidden bg-black" style="width: 120px; height: 120px;">
+                                <img id="previewImage" src="../assets/images/pesobuddy_icon.png" alt="Current Photo" 
+                                    class="w-100 h-100" style="object-fit: cover;">
                             </div>
-                        </form>
+                            <p class="text-black mt-2 mb-0 small text-nowrap">Current Photo</p>
+                        </div>
+
+                        <div class="flex-grow-1 mt-5">
+                            <div class="d-flex flex-column flex-md-row gap-1 gap-md-0">
+                                <input type="text" id="fileNameDisplay" 
+                                    class="form-control text-black bg-transparent rounded-2" 
+                                    value="newimage.png" readonly>
+                                <label class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center" for="fileInput">
+                                    Browse<i class="bi-upload ms-2"></i>
+                                </label>
+                                <input type="file" class="d-none" id="fileInput" accept="image/*">
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer border-0 justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
             </div>
         </div>
+    </div>
+</div>
                     
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
