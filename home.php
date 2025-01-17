@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
-
 </head>
 
 <body>
@@ -42,15 +40,15 @@
 
     <!-- Annual Report -->
     <div class="container">
-        <div class="row px-2">
-            <div class="col-12 col-md-8 py-4">
+        <div class="row align-items-center px-2">
+            <div class="col-12 col-md-8 py-md-4">
                 <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
                             <div class="paragraph pt-3"><b>Annual Totals</b></div>
                         </div>
                     </div>
-                    <div class="row text-center m-2">
+                    <div class="row text-center align-items-center m-2">
                         <!-- Total Income -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL INCOME</b></div>
@@ -71,7 +69,7 @@
             </div>
 
             <!-- Remaining Balance Section -->
-            <div class="col-12 col-md-4 py-4">
+            <div class="col-12 col-md-4 py-md-4">
                 <div class="card stat-card rounded-5">
                     <div class="row text-center">
                         <div class="col-12 col-md-12 mb-3 mb-md-0">
@@ -87,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 pt-4">
                 <hr>
             </div>
 
@@ -110,17 +108,17 @@
 
     <!-- Report Section -->
     <div class="container">
-        <div class="row align-items-center px-2">
+        <div class="row justify-content-center align-items-center px-2">
 
             <!-- Yearly Report -->
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-10 col-xl-8">
                 <div>
                     <canvas id="yearlyChart" style="overflow: visible;"></canvas>
                 </div>
             </div>
 
             <!-- Biggest Transactions -->
-            <div class="col-12 col-lg-4 px-lg-5 py-4">
+            <div class="col-12 col-lg-10 col-xl-4 px-lg-5 py-4">
                 <div class="card stat-card rounded-5">
                     <div class="d-flex flex-column align-items-end">
                         <div class="subheading pt-4 pb-4 pe-3 text-end">
@@ -143,25 +141,26 @@
         <div class="row align-items-center mb-4 px-2">
             <div class="col-12">
                 <hr>
-            </div>
+                <div class="row justify-content-md-between align-items-center">
 
-            <div
-                class="col-12 col-md-11 d-flex align-items-center justify-content-center justify-content-md-start mb-2">
-                <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
-                <span class="heading">BUDGET TRACKER</span>
-            </div>
+                    <div class="col-12 col-md-auto d-flex flex-row align-items-center mb-2">
+                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
+                        <span class="heading">BUDGET TRACKER</span>
+                    </div>
 
-            <div class="col-12 col-md-1 d-flex justify-content-center justify-content-sm-end mb-2">
-                <div class="btn-group subheading mx-auto">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        YEAR
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-sm-end">
-                        <li><a class="dropdown-item" href="#">2025</a></li>
-                        <li><a class="dropdown-item" href="#">2024</a></li>
-                        <li><a class="dropdown-item" href="#">2023</a></li>
-                    </ul>
+                    <div class="col-12 col-md-auto d-flex mb-2">
+                        <div class="subheading">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                YEAR
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-sm-end">
+                                <li><a class="dropdown-item" href="#">2025</a></li>
+                                <li><a class="dropdown-item" href="#">2024</a></li>
+                                <li><a class="dropdown-item" href="#">2023</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -465,7 +464,7 @@
             <!-- HEADING -->
             <div class="col-12 mb-4">
                 <hr>
-                <div class="row align-items-center justify-content-center justify-content-lg-between">
+                <div class="row align-items-center justify-content-lg-between">
                     <!-- Heading -->
                     <div class="col-auto d-flex flex-row align-items-center mb-2">
                         <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
@@ -705,8 +704,7 @@
             <div class="col-12">
                 <!-- HEADING -->
                 <hr>
-                <div
-                    class="col-auto d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-4">
+                <div class="col-auto d-flex flex-row align-items-center mb-4">
                     <div class="me-3" style="width: 15px; background-color: #dc3545; height: 40px;"></div>
                     <span class="heading" style="color: #dc3545;">DANGER ZONE</span>
                 </div>
