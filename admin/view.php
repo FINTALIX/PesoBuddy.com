@@ -101,6 +101,16 @@
             <div class="container-fluid">
                 <div class="row pt-5 p-md-4">
 
+                    <!-- Back to user's page -->
+                    <div class="col-12">
+                        <a href="users.php">
+                            <div class="text-center text-sm-start pb-3"
+                                style="color:#616161; text-decoration:underline;"><i class="bi bi-arrow-left"></i>
+                                <b>Go back to users page</b>
+                            </div>
+                        </a>
+                    </div>
+
                     <!-- Heading -->
                     <div class="col-12 my-3">
                         <div class="heading text-center text-sm-start"><span style="color: #1A7431;">USER ID:</span> 001
