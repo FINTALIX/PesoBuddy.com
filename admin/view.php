@@ -48,9 +48,9 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#profile" class="sidebar-link active">
+                    <a href="users.php" class="sidebar-link active">
                         <i class="bi bi-person"></i>
-                        <span>Profile</span>
+                        <span>Users</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -86,7 +86,7 @@
             <div class="offcanvas-body">
                 <ul class="list-unstyled">
                     <li><a href="index.php"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
-                    <li><a href="#profile" class="sidebar-link active"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="users.php" class="sidebar-link active"><i class="bi bi-person"></i> Users</a></li>
                     <li><a href="categories.php"><i class="bi bi-list"></i> Categories</a></li>
                     <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
                     <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
