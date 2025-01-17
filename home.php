@@ -529,10 +529,88 @@
 
                     <!-- Add Transaction Button -->
                     <div class="col-auto mb-2">
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
                             + ADD TRANSACTION
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="heading" style="margin: 0; font-size: 1.8rem;">Add New Transaction
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <select class="form-select" id="addtransactionType">
+                                    <option selected>Transaction Type</option>
+                                    <option value="1">Transaction 1</option>
+                                    <option value="2">Transaction 2</option>
+                                    <option value="3">Transaction 3</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
+                                <select class="form-select" id="addcategoryType">
+                                    <option selected>Category</option>
+                                    <option value="1">Category 1</option>
+                                    <option value="2">Category 2</option>
+                                    <option value="3">Category 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="date" placeholder="Date"
+                            onfocus="(this.type='date')" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" id="descriptionMesssage" placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-12 col-md-9">
+                                <input type="text" class="form-control" id="Amount" placeholder="Amount">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <button type="button" class="btn btn-primary"
+                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.9rem;"
+                                    data-bs-target="#transactionSuccessModal" data-bs-toggle="modal"
+                                    data-bs-dismiss="modal">
+                                    ADD
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Transaction Success Modal -->
+    <div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"
+                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                <div class="modal-body p-4">
+                    <h5>Transaction successfully added!</h5>
+                    <button type="button" class="btn mt-3"
+                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
