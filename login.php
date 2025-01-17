@@ -5,7 +5,7 @@ session_start();
 session_destroy();
 session_start();
 
-$error = ""; 
+$error = "";
 
 if (isset($_POST['btnLogin'])) {
 
@@ -35,7 +35,13 @@ if (isset($_POST['btnLogin'])) {
       $_SESSION['birthday'] = $user['birthday'];
       $_SESSION['profilePicture'] = $user['profilePicture'];
       $_SESSION['role'] = $user['role'];
-      header("Location: home.php");
+
+      if ($user['role'] == 'admin') {
+        header("Location: admin/index.php");
+      } else {
+        header("Location: home.php");
+      }
+      exit();
     }
   } else {
     $error = "INVALID USER";

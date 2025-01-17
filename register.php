@@ -33,7 +33,7 @@ if (isset($_POST['btnRegister'])) {
   } elseif ($password == $cpassword) {
     $lastInsertedId = mysqli_insert_id($conn);
 
-    $userQuery = "INSERT INTO users(username, email, password, firstName, lastName, birthday, role)  VALUES ('$username', '$email', '$password', '$firstName', '$lastName', '$birthday', 'user')";
+    $userQuery = "INSERT INTO users(username, email, password, firstName, lastName, birthday)  VALUES ('$username', '$email', '$password', '$firstName', '$lastName', '$birthday')";
     executeQuery($userQuery);
 
     $lastInsertedId = mysqli_insert_id($conn);
