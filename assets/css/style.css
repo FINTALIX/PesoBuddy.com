@@ -31,10 +31,10 @@ body {
 .btn-primary {
   --bs-btn-bg: var(--primaryColor);
   --bs-btn-border-color: var(--primaryColor);
-  --bs-btn-hover-bg: var(--secondaryColor);
-  --bs-btn-hover-border-color: var(--secondaryColor);
-  --bs-btn-active-bg: var(--secondaryColor);
-  --bs-btn-active-border-color: var(--secondaryColor);
+  --bs-btn-hover-bg: var(--darkColor);
+  --bs-btn-hover-border-color: var(--darkColor);
+  --bs-btn-active-bg: var(--darkColor);
+  --bs-btn-active-border-color: var(--darkColor);
 }
 
 hr {
@@ -126,7 +126,7 @@ th {
 }
 
 /* MEDIA QUERY */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .heading {
     font-size: 1.4rem;
   }
