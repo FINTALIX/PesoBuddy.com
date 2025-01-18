@@ -902,7 +902,7 @@
 
                     <!-- Delete Button -->
                     <div class="col-12 col-md-2 text-start text-md-end">
-                        <button class="btn btn-danger rounded-pill">
+                        <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteData">
                             DELETE
                         </button>
                     </div>
@@ -911,6 +911,71 @@
         </div>
     </div>
 
+    <!-- Delete Monthly Tracker Modal -->
+    <div class="modal fade" id="deleteData" tabindex="-1" aria-labelledby="deleteDataModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 15px; background-color: white;">
+                <div style="position: relative; padding: 1rem;">
+                    <!-- Title -->
+                    <h4 class="modal-title heading text-black" id="deleteCategoryModalLabel"
+                        style="margin: 0; font-size: 26px;">
+                        Delete Monthly Tracker
+                    </h4>
+
+                    <!-- Close button -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
+                    </button>
+
+                    <!-- Card content -->
+                    <div class="card"
+                        style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
+                        <p class="paragraph" style="margin: 0;">LAST WARNING!</p>
+                        <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
+                            If you decided to delete this month’s budget tracker, all data related to it will also
+                            be
+                            deleted.
+                        </p>
+                    </div>
+
+                    <!-- Footer buttons -->
+                    <div class="modal-footer d-flex justify-content-end" style="border: none;">
+                        <button type="button" class="btn paragraph" data-bs-dismiss="modal"
+                            style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger paragraph" data-bs-toggle="modal"
+                            data-bs-target="#confirmDeleteDataModal" style="color: white; margin-left: 0.5rem;">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Monthly Tracker the deletion -->
+    <div class="modal fade" id="confirmDeleteDataModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"
+                style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
+                <div class="modal-header" style="border: none;">
+                    <h4 class="modal-title heading text-center w-100" id="confirmDeleteModalLabel" style="margin: 0;">
+                        Monthly Tracker Deleted</h4>
+                </div>
+                <div class="modal-body text-center">
+                    The monthly tracker has been successfully deleted.
+                </div>
+                <div class="modal-footer d-flex justify-content-center" style="border: none;">
+                    <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
