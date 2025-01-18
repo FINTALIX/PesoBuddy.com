@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
 } else {
-    header("location:admin/index.php");   
+    header("location:admin/index.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
 
 <body>
 
-<?php include('assets/shared/navbar.php'); ?>
+    <?php include('assets/shared/navbar.php'); ?>
 
     <div class="container py-5">
         <!-- Header Navigation -->
@@ -60,8 +60,14 @@ if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
                                 alt="Profile Picture" class="rounded-circle profile-picture">
                         </div>
                         <div class="profile-buttons">
-                            <button class="btn btn-primary">Upload Profile Picture</button>
-                            <button class="btn btn-primary">Remove Profile Picture</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#uploadProfilePic">
+                                Upload Profile Picture
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#removeProfilePic">
+                                Remove Profile Picture
+                            </button>
                         </div>
                         <form>
                             <div class="row mb-4">
@@ -144,17 +150,67 @@ if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
-                        US</a>
-                    <span class="paragraph">FINTALIX ©2025</span>
+        <!-- MODALS -->
+        <!-- Upload Logo Modal -->
+        <div class="modal fade" id="uploadProfilePic" tabindex="-1" aria-labelledby="uploadProfilePicModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-white rounded-4">
+                    <div class="modal-header border-0 d-flex flex-column align-items-center">
+                        <h5 class="modal-title subheading text-black text-uppercase" id="uploadProfileModalLabel"
+                            style="text-align: right; margin-right: 20px;">
+                            <b>Upload Profile
+                                Picture
+                            </b>
+                        </h5>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="uploadProfile" enctype="multipart/form-data">
+                            <div class="d-flex flex-column align-items-center gap-3">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden bg-black"
+                                        style="width: 120px; height: 120px;">
+                                        <img id="previewImage" src="./assets/images/pesobuddy_icon.png"
+                                            alt="Current Photo" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <input type="text" id="fileNameDisplay"
+                                        class="form-control text-black bg-transparent rounded-2" value="sampleimage.png"
+                                        readonly style="max-width: 350px; width: 100%;">
+                                    <label
+                                        class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
+                                        for="fileInput">
+                                        Browse<i class="bi-upload ms-2"></i>
+                                    </label>
+                                    <input type="file" class="d-none" id="fileInput" accept="image/*">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center mb-2">
+                        <button type="submit" form="uploadProfile"
+                            class="btn btn-primary text-uppercase align-self-center">Upload</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <hr>
+            <div class="d-flex justify-content-between">
+                <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
+                    US</a>
+                <span class="paragraph">FINTALIX ©2025</span>
+            </div>
+        </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
