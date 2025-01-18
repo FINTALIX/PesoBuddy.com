@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
 } else {
-    header("location:index.php");   
+    header("location:admin/index.php");   
     exit();
 }
 
