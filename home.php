@@ -652,157 +652,232 @@
                                         </td>
                                     </tr>
 
-                                      <!-- Edit Transaction Modal -->
-                                      <div class="modal fade" id="editTransaction" tabindex="-1"
-                                                        aria-labelledby="editTransactionModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content p-4"
-                                                                style="border-radius: 15px; background-color: white; border: none;">
-                                                                <div class="modal-body">
-                                                                    <div
-                                                                        class="d-flex justify-content-between align-items-center mb-4">
-                                                                        <h5 class="heading"
-                                                                            style="margin: 0; font-size: 1.8rem;">
-                                                                            Edit Transaction
-                                                                        </h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <div class="row g-3">
-                                                                            <div class="col-md-7">
-                                                                                <select class="form-select"
-                                                                                    id="editTransactionType">
-                                                                                    <option selected>Transaction
-                                                                                        Type
-                                                                                    </option>
-                                                                                    <option value="1">
-                                                                                        Transaction 1
-                                                                                    </option>
-                                                                                    <option value="2">
-                                                                                        Transaction 2
-                                                                                    </option>
-                                                                                    <option value="3">
-                                                                                        Transaction 3
-                                                                                    </option>
-                                                                                </select>
-                                                                            </div>
+                                    <!-- Edit Transaction Modal -->
+                                    <div class="modal fade" id="editTransaction" tabindex="-1"
+                                        aria-labelledby="editTransactionModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content p-4"
+                                                style="border-radius: 15px; background-color: white; border: none;">
+                                                <div class="modal-body">
+                                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                                        <h5 class="heading" style="margin: 0; font-size: 1.8rem;">
+                                                            Edit Transaction
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="row g-3">
+                                                            <div class="col-md-7">
+                                                                <select class="form-select" id="editTransactionType">
+                                                                    <option selected>Transaction
+                                                                        Type
+                                                                    </option>
+                                                                    <option value="1">
+                                                                        Transaction 1
+                                                                    </option>
+                                                                    <option value="2">
+                                                                        Transaction 2
+                                                                    </option>
+                                                                    <option value="3">
+                                                                        Transaction 3
+                                                                    </option>
+                                                                </select>
+                                                            </div>
 
-                                                                            <div class="col-md-5">
-                                                                                <select class="form-select"
-                                                                                    id="editCategoryType">
-                                                                                    <option selected>Category
-                                                                                    </option>
-                                                                                    <option value="1">Category 1
-                                                                                    </option>
-                                                                                    <option value="2">Category 2
-                                                                                    </option>
-                                                                                    <option value="3">Category 3
-                                                                                    </option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <input class="form-control" type="text"
-                                                                            name="date" placeholder="Date"
-                                                                            onfocus="(this.type='date')" required>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <textarea class="form-control"
-                                                                            id="editDescriptionMesssage"
-                                                                            placeholder="Description"></textarea>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <div class="row g-3 align-items-center">
-                                                                            <div class="col-12 col-md-9">
-                                                                                <input type="text" class="form-control"
-                                                                                    id="editAmount"
-                                                                                    placeholder="Amount">
-                                                                            </div>
-
-                                                                            <div class="col-12 col-md-3">
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary"
-                                                                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                                                                    data-bs-target="#transactionEditSuccessModal"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-dismiss="modal"
-                                                                                    aria-label="Save changes and open success modal">
-                                                                                    SAVE
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="col-md-5">
+                                                                <select class="form-select" id="editCategoryType">
+                                                                    <option selected>Category
+                                                                    </option>
+                                                                    <option value="1">Category 1
+                                                                    </option>
+                                                                    <option value="2">Category 2
+                                                                    </option>
+                                                                    <option value="3">Category 3
+                                                                    </option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <!-- Edit Transaction Success Modal -->
-                                                    <div class="modal fade" id="transactionEditSuccessModal"
-                                                        tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content"
-                                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                                                                <div class="modal-body p-4">
-                                                                    <h5>Transaction successfully edited!</h5>
-                                                                    <button type="button" class="btn mt-3"
-                                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
+                                                    <div class="mb-3">
+                                                        <input class="form-control" type="text" name="date"
+                                                            placeholder="Date" onfocus="(this.type='date')" required>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" id="editDescriptionMesssage"
+                                                            placeholder="Description"></textarea>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <div class="row g-3 align-items-center">
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" class="form-control" id="editAmount"
+                                                                    placeholder="Amount">
+                                                            </div>
+
+                                                            <div class="col-12 col-md-3">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                                                    data-bs-target="#transactionEditSuccessModal"
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal"
+                                                                    aria-label="Save changes and open success modal">
+                                                                    SAVE
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                    <!-- SAMPLE Data ONLY -->
-                                    <tr>
-                                        <td scope="row">2</td>
-                                        <td>Income</td>
-                                        <td>Salary</td>
-                                        <td>1000</td>
-                                        <td>02 January 2024</td>
-                                        <td>Income from the salary</td>
-                                        <td>
-                                            <div class="dropdown dropstart">
-                                                <button class="btn options-btn p-1" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi bi-three-dots"></i>
-                                                </button>
-
-                                                <ul class="dropdown-menu">
-                                                    <!-- Edit Button -->
-                                                    <li>
-                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                                                            data-bs-target="#editTransaction"
-                                                            style="text-decoration: none;">
-                                                            <i class="bi bi-pencil-square px-1"></i> Edit
-                                                        </a>
-                                                    </li>
-
-                                                    <!-- Delete Button -->
-                                                    <li>
-                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                                                            data-bs-target="#deleteTransaction"
-                                                            style="color: red; text-decoration: none;">
-                                                            <i class="bi bi-trash3 px-1"></i> Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- Edit Transaction Success Modal -->
+                                    <div class="modal fade" id="transactionEditSuccessModal" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                                                <div class="modal-body p-4">
+                                                    <h5>Transaction successfully edited!</h5>
+                                                    <button type="button" class="btn mt-3"
+                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Category Modal -->
+                                    <div class="modal fade" id="deleteTransaction" tabindex="-1"
+                                        aria-labelledby="deleteTransactionModalLabel" aria-hidden="true"
+                                        data-bs-backdrop="static" data-bs-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered ms-auto">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: white;">
+                                                <div style="position: relative; padding: 1rem;">
+                                                    <!-- Title -->
+                                                    <h4 class="modal-title heading text-black"
+                                                        id="deleteCategoryModalLabel"
+                                                        style="margin: 0; font-size: 26px;">
+                                                        Delete Transaction
+                                                    </h4>
+
+                                                    <!-- Close button -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"
+                                                        style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
+                                                    </button>
+
+                                                    <!-- Card content -->
+                                                    <div class="card"
+                                                        style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
+                                                        <p class="paragraph" style="margin: 0;">Are you
+                                                            sure you want to delete this
+                                                            transaction?</p>
+                                                        <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
+                                                            Once deleted, it cannot be retrieved
+                                                            anymore.
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Footer buttons -->
+                                                    <div class="modal-footer d-flex justify-content-end"
+                                                        style="border: none;">
+                                                        <button type="button" class="btn paragraph"
+                                                            data-bs-dismiss="modal"
+                                                            style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
+                                                            Cancel
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger paragraph"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#confirmTransactionDeleteModal"
+                                                            style="color: white; margin-left: 0.5rem;">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Confirm the deletion -->
+                                    <div class="modal fade" id="confirmTransactionDeleteModal" tabindex="-1"
+                                        aria-labelledby="confirmTransactionDeleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
+                                                <div class="modal-header" style="border: none;">
+                                                    <h4 class="modal-title heading text-center w-100"
+                                                        id="confirmDeleteModalLabel" style="margin: 0;">
+                                                        Transaction Deleted</h4>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    The transaction has been successfully
+                                                    deleted.
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center"
+                                                    style="border: none;">
+                                                    <button type="button" class="btn btn-light paragraph"
+                                                        data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">SAVE</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+
+    <!-- SAMPLE Data ONLY -->
+    <tr>
+        <td scope="row">2</td>
+        <td>Income</td>
+        <td>Salary</td>
+        <td>1000</td>
+        <td>02 January 2024</td>
+        <td>Income from the salary</td>
+        <td>
+            <div class="dropdown dropstart">
+                <button class="btn options-btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots"></i>
+                </button>
+
+                <ul class="dropdown-menu">
+                    <!-- Edit Button -->
+                    <li>
+                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                            data-bs-target="#editTransaction" style="text-decoration: none;">
+                            <i class="bi bi-pencil-square px-1"></i> Edit
+                        </a>
+                    </li>
+
+                    <!-- Delete Button -->
+                    <li>
+                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                            data-bs-target="#deleteTransaction" style="color: red; text-decoration: none;">
+                            <i class="bi bi-trash3 px-1"></i> Delete
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <!-- Danger Zone -->
