@@ -753,7 +753,7 @@
                                     <div class="modal fade" id="deleteTransaction" tabindex="-1"
                                         aria-labelledby="deleteTransactionModalLabel" aria-hidden="true"
                                         data-bs-backdrop="static" data-bs-keyboard="false">
-                                        <div class="modal-dialog modal-dialog-centered ms-auto">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content"
                                                 style="border-radius: 15px; background-color: white;">
                                                 <div style="position: relative; padding: 1rem;">
