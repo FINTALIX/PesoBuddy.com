@@ -1,3 +1,10 @@
+<?php
+
+include("authorization.php");
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 

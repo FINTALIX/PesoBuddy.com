@@ -12,6 +12,10 @@ if (isset($_POST['btnLogin'])) {
   $username = $_POST['userName'];
   $password = $_POST['password'];
 
+  // CLEAN INJECTION
+  $username = str_replace('\'', '', $username);
+  $password = str_replace('\'', '', $password);
+
   $loginQuery = "SELECT * FROM users WHERE (userName = '$username' OR email = '$username') AND password = '$password'";
   $loginResult = executeQuery($loginQuery);
 
@@ -23,7 +27,6 @@ if (isset($_POST['btnLogin'])) {
   $_SESSION['birthday'] = "";
   $_SESSION['profilePicture'] = "";
   $_SESSION['role'] = "";
-
 
   if (mysqli_num_rows($loginResult) > 0) {
     while ($user = mysqli_fetch_assoc($loginResult)) {
@@ -48,6 +51,7 @@ if (isset($_POST['btnLogin'])) {
   }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">

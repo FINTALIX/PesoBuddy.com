@@ -40,7 +40,6 @@ if (isset($_POST['btnRegister'])) {
 
     $_SESSION['userID'] = $lastInsertedId;
     $_SESSION['userName'] = $username;
-    $_SESSION['password'] = $password;
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
     $_SESSION['birthday'] = $birthday;
