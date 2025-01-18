@@ -26,7 +26,7 @@
         <div id="settings" class="container-fluid">
             <div class="row pt-4 p-md-4">
                 <div class="col-12">
-                    <h2 class="heading">WEBSITE SETTINGS</h2>
+                    <h2 class="heading text-center text-sm-start">WEBSITE SETTINGS</h2>
                     <hr class="my-4">
                 </div>
             </div>
