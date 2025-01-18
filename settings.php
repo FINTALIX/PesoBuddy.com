@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
+} else {
+    header("location:admin/index.php");   
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
