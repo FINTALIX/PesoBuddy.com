@@ -22,8 +22,8 @@ include("authorization.php");
 
 <body>
 
-    <!-- Navbar for phone size -->
-    <nav class="navbar navbar-expand-lg">
+        <!-- Navbar for phone size -->
+        <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">
                 <img src="../assets/images/pesobuddy_icon.png" alt="Logo" style="height: 40px;">
@@ -39,8 +39,7 @@ include("authorization.php");
     <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex align-items-center">
-                <img src="../assets/images/pesobuddy_icon.png" id="toggleSidebar" alt="Toggle Sidebar"
-                    class="toggle-logo">
+                <img src="../assets/images/pesobuddy_icon.png" id="toggleSidebar" alt="Toggle Sidebar" class="toggle-logo">
                 <div class="sidebar-logo">
                     <a href="#">PESOBUDDY</a>
                 </div>
@@ -80,25 +79,21 @@ include("authorization.php");
         </aside>
 
         <!-- Offcanvas for phone size -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas"
-            aria-labelledby="sidebarOffcanvasLabel">
-            <div class="offcanvas-header">
-                <img src="../assets/images/pesobuddy_logoW.png" alt="PESOBUDDY" class="img-fluid"
-                    id="sidebarOffcanvasLabel" style="max-height: 94px; max-width: 200px">
-                <button type="button" class="btn-close text-reset m-0" data-bs-dismiss="offcanvas" aria-label="Close"
-                    style="background-color: transparent;"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="list-unstyled">
-                    <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i>
-                            Dashboard</a></li>
-                    <li><a href="users.php"><i class="bi bi-person"></i> Users</a></li>
-                    <li><a href="categories.php"><i class="bi bi-list"></i> Categories</a></li>
-                    <li><a href="settings.php"><i class="bi bi-gear"></i> Settings</a></li>
-                    <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                </ul>
-            </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+        <div class="offcanvas-header" >
+        <img src="../assets/images/pesobuddy_logoW.png" alt="PESOBUDDY" class="img-fluid" id="sidebarOffcanvasLabel" style="max-height: 94px; max-width: 200px">
+        <button type="button" class="btn-close text-reset m-0" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: transparent;"></button>
         </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i> Dashboard</a></li>
+                <li><a href="users.php"><i class="bi bi-person"></i> Users</a></li>
+                <li><a href="categories.php"><i class="bi bi-list"></i> Categories</a></li>
+                <li><a href="settings.php"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
 
         <!-- Main Content -->
         <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
@@ -109,27 +104,23 @@ include("authorization.php");
                         <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">WEBSITE ENGAGEMENT</h2>
                         <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: left;">Monthly
-                            User Signups</h3>
-                        <div
-                            style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; padding: 24px;">
+                    <div class="card-container bg-white mt-4">
+                        <div class="p-4">
                             <div style="height: 400px; position: relative;">
                                 <canvas id="userSignupsChart"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: left;">Monthly
-                            Login Activity</h3>
-                        <div
-                            style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; padding: 24px;">
+            <!-- Monthly Login Activity Section -->
+            <div class="row p-md-4">
+                <div class="col-12 mt-4 mt-lg-2 mb-2">
+                    <div class="subheading mb-3">MONTHLY LOGIN ACTIVITY</>
+                    </div>
+                    <div class="card-container bg-white mt-4">
+                        <div class="p-4">
                             <div style="height: 400px; position: relative;">
                                 <canvas id="loginActivityChart"></canvas>
                             </div>
@@ -137,28 +128,28 @@ include("authorization.php");
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-                integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
 
-                // Sidebar JS
-                document.getElementById("toggleSidebar").addEventListener("click", function () {
-                    const sidebar = document.getElementById("sidebar");
-                    const mainContent = document.querySelector(".main");
-                    sidebar.classList.toggle("expand");
+        // Sidebar JS
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebar = document.getElementById("sidebar");
+            const mainContent = document.querySelector(".main");
+            sidebar.classList.toggle("expand");
 
-                    if (sidebar.classList.contains("expand")) {
-                        mainContent.style.marginLeft = "260px";
-                    } else {
-                        mainContent.style.marginLeft = "70px";
-                    }
-                });
+            if (sidebar.classList.contains("expand")) {
+                mainContent.style.marginLeft = "260px";
+            } else {
+                mainContent.style.marginLeft = "70px";
+            }
+        });
 
                 // Chart.js
                 const chartOptions = {
@@ -171,16 +162,16 @@ include("authorization.php");
                     }
                 };
 
-                const signupData = {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: 'Signups',
-                        data: [65, 9, 100, 81, 56, 55, 70],
-                        backgroundColor: '#FFAEBC',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                };
+        const signupData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Signups',
+                data: [65, 9, 100, 81, 56, 55, 70],
+                backgroundColor: '#FFAEBC',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
 
                 const loginData = {
                     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
