@@ -33,8 +33,9 @@
 
             <!-- Monthly User Signups Section -->
             <div class="row p-md-4">
-                <div class="col-12">
-                    <h2 class="subheading mb-3">MONTHLY USER SIGNUPS</h2>
+                <div class="col-12 mt-4 mt-lg-2 mb-2">
+                    <div class="subheading mb-3">MONTHLY USER SIGNUPS</>
+                    </div>
                     <div class="card-container bg-white mt-4">
                         <div class="p-4">
                             <div style="height: 400px; position: relative;">
@@ -47,9 +48,10 @@
 
             <!-- Monthly Login Activity Section -->
             <div class="row p-md-4">
-                <div class="col-12">
-                    <h3 class="subheading mb-3">Monthly Login Activity</h3>
-                    <div class="card-container bg-white mb-4">
+                <div class="col-12 mt-4 mt-lg-2 mb-2">
+                    <div class="subheading mb-3">MONTHLY LOGIN ACTIVITY</>
+                    </div>
+                    <div class="card-container bg-white mt-4">
                         <div class="p-4">
                             <div style="height: 400px; position: relative;">
                                 <canvas id="loginActivityChart"></canvas>
@@ -85,7 +87,7 @@
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: 'Signups',
-                data: [65, 9, 100, 81, 56, 55, 70],
+                data: [65, 9, 89, 81, 56, 55, 70],
                 backgroundColor: '#FFAEBC',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
