@@ -1,9 +1,9 @@
 <?php
 
-include ("assets/php/functions.php");
+// include ("assets/php/functions.php");
 
-session_start();
-userAuth();
+// session_start();
+// userAuth();
 
 ?>
 
@@ -195,18 +195,17 @@ userAuth();
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Remove Profile Pic Modal -->
-    <div class="modal fade" id="removeProfilePic" tabindex="-1" aria-labelledby="removeProfilePicModalLabel"
-        aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 15px; background-color: white;">
-                <div style="position: relative; padding: 1rem;">
-                    <!-- Title -->
-                    <h4 class="modal-title heading text-black" id="removeProfilePicModalLabel"
-                        style="margin: 0; font-size: 26px;">
-                        Remove Profile Picture </h4>
+        
+        <!-- Remove Profile Pic Modal -->
+        <div class="modal fade" id="removeProfilePic" tabindex="-1" aria-labelledby="removeProfilePicModalLabel"
+            aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius: 15px; background-color: white;">
+                    <div style="position: relative; padding: 1rem;">
+                        <!-- Title -->
+                        <h4 class="modal-title heading text-black" id="removeProfilePicModalLabel"
+                            style="margin: 0; font-size: 26px;">
+                            Remove Profile Picture </h4>
 
                     <!-- Close button -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -246,7 +245,8 @@ userAuth();
             <div class="modal-content"
                 style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
                 <div class="modal-header" style="border: none;">
-                    <h4 class="modal-title heading text-center w-100" id="confirmRemovePicModalLabel" style="margin: 0;">
+                    <h4 class="modal-title heading text-center w-100" id="confirmRemovePicModalLabel"
+                        style="margin: 0;">
                         Profile Picture Removed
                     </h4>
                 </div>
