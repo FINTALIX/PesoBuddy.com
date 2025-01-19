@@ -44,7 +44,7 @@ LEFT JOIN categories ON transactions.categoryID = categories.categoryID
 LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
 WHERE transactions.userID = '{$_SESSION['userID']}'";
 
-$transactionHistory = new TransactionsHistory($transactionQuery);
+$transactionHistory = new TransactionsHistory($transactionsQuery);
 
 // Filter transactions
 $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
@@ -658,7 +658,7 @@ $transactionsResult = executeQuery($transactionsQuery);
     <div class="container">
         <div class="row mb-4 px-2">
             <div class="col-12">
-                <div class="card card-container p-4">
+                <div class="card card-container p-4" style="height: 750px;">
                     <!-- FILTER TRANSACTIONS -->
                     <div class="row my-3">
 
@@ -695,7 +695,7 @@ $transactionsResult = executeQuery($transactionsQuery);
                     </div>
 
                     <!-- TRANSACTION TABLE -->
-                    <div class="row">
+                    <div class="row" style="overflow-y: auto;">
                         <div class="table-responsive">
                             <table class="table table-striped table-borderless m-0">
 
