@@ -33,7 +33,7 @@ userAuth();
 
             <div class="col-12 col-md-auto d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
                 <div class="col-auto text-md-end">
-                <span class="subheading" style="color:#1A7431;">JANUARY 10</span><br>FRIDAY
+                <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>JANUARY 10
                 </div>
 
                 <div class="col-auto px-3 d-none d-md-block">
