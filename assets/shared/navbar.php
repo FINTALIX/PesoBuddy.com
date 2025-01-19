@@ -15,16 +15,27 @@
         <!-- Collapsible Menu -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#">Overview</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#transaction-history">Transaction</a>
-                </li>
+                <?php
+                $currentPage = basename($_SERVER['PHP_SELF']);
 
+                if ($currentPage != 'settings.php') { ?>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#transaction-history">Transaction</a>
+                    </li>
+                <?php
+                } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="home.php">Home</a>
+                    </li>
+                    <?php
+                }
+                ?>
 
                 <!-- User Profile Dropdown -->
                 <li class="nav-item dropdown ms-lg-3 px-2">
