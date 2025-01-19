@@ -7,6 +7,14 @@ include("assets/php/classes.php");
 session_start();
 userAuth();
 
+$userID = $_SESSION['userID'];
+$year = isset($_GET['year']) ? $_GET['year'] : '2025';
+
+$annualTotalIncome = computeAnnualIncome($userID, $year);
+$annualTotalSavings = computeAnnualSavings($userID, $year);
+$annualTotalExpense = computeAnnualExpense($userID, $year);
+$annualRemainingBalance = computeRemainingBalance($annualTotalIncome, $annualTotalSavings, $annualTotalExpense);
+
 // Instantiate the class
 $userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
 
@@ -55,13 +63,13 @@ if (isset($_POST['btnEditCategory'])) {
     <div class="container" style="padding-top: 5rem;">
         <div class="row align-items-center justify-content-between px-2">
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading order-2 order-md-1">
-                Hello, <span style="color:#1A7431">Name!</span>
+                Hello, <span style="color:#1A7431"><?php echo $_SESSION['firstName']?></span>
             </div>
             <div
                 class="col-12 col-md-auto paragraph d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
                 <!-- Date -->
                 <div class="col-auto text-md-end">
-                    <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>January 10, 2024
+                    <span class="subheading" style="color:#1A7431;"><?php echo strtoupper(date('l')); ?></span><br><?php echo date("F d, Y");?>
                 </div>
                 <!-- Vertical Line -->
                 <div class="col-auto px-3 d-none d-md-block">
@@ -82,21 +90,26 @@ if (isset($_POST['btnEditCategory'])) {
                         </div>
                     </div>
                     <div class="row text-center align-items-center m-2">
+                        <?php 
+                        ?>
                         <!-- Total Income -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL INCOME</b></div>
-                            <p class="paragraph pt-2">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalIncome, 2, ".", ",")?></p>
                         </div>
+                        
                         <!-- Total Savings -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL SAVINGS</b></div>
-                            <p class="paragraph pt-2">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalSavings, 2, ".", ",")?></p>
                         </div>
+                       
                         <!-- Total Expense -->
                         <div class="col-12 col-md-4">
                             <div class="subheading"><b>TOTAL EXPENSE</b></div>
-                            <p class="paragraph pt-2">₱ 100,000.00</p>
+                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalExpense, 2, ".", ",")?></p>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -113,7 +126,7 @@ if (isset($_POST['btnEditCategory'])) {
                         <div class="subheading text-center pb-2"><b>REMAINING BALANCE</b></div>
                     </div>
                     <div class="text-center">
-                        <p class="heading">₱ 100,000.00</p>
+                        <p class="heading">₱ <?php echo number_format($annualRemainingBalance, 2, ".", ",")?></p>
                     </div>
                 </div>
             </div>
