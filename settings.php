@@ -1,6 +1,6 @@
 <?php
 
-include ("assets/php/functions.php");
+include("assets/php/functions.php");
 
 session_start();
 userAuth();
@@ -17,7 +17,6 @@ userAuth();
     <link rel="icon" href="assets/images/pesobuddy_icon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/settings.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -25,121 +24,123 @@ userAuth();
 
     <?php include('assets/shared/navbar.php'); ?>
 
-    <div class="container py-5">
+    <div class="container-fluid px-3 px-md-5 py-5">
         <!-- Header Navigation -->
-        <div class="row mb-4 mt-5">
-            <div class="col-md-6">
-                <h1 class="heading">SETTINGS</h1>
+        <div class="row mb-4 mt-5 align-items-center justify-content-between px-2">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 order-2 order-md-1">
+                <h1 class="heading mb-0">SETTINGS</h1>
             </div>
-            <div class="col-md-6 d-flex flex-row justify-content-md-end align-items-center">
-                <div class="text-md-end">
-                    <p class="paragraph mb-0" style="color: black;">JANUARY XX</p>
-                    <p class="paragraph mb-0" style="color: #1A7431; font-weight: bold; text-transform: uppercase;">
-                        FRIDAY</p>
 
+            <div class="col-12 col-md-auto d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
+                <div class="col-auto text-md-end">
+                <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>JANUARY 10
                 </div>
+
                 <div class="col-auto px-3 d-none d-md-block">
                     <div style="width: 1px; background-color: black; height: 40px;"></div>
                 </div>
             </div>
         </div>
         <!-- Header Divider -->
-        <div class="section-divider mb-4"></div>
+        <hr class="mb-4">
 
         <!-- Main Content -->
-        <div class="row align-items-stretch">
+        <div class="row g-4">
             <!-- Left Column - Profile Section -->
-            <div class="col-md-5 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="profile-picture-container">
+            <div class="col-12 col-lg-5">
+                <div class="card stat-card h-100">
+                    <div class="card-body px-3 px-md-4 d-flex flex-column">
+                        <div class="text-center mb-5">
                             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0iI2VlZSIvPjxwYXRoIGQ9Ik01MCAzNmExNCAxNCAwIDEgMCAwIDI4IDE0IDE0IDAgMCAwIDAtMjh6bTAgNDBjLTE2IDAtMzAgOC0zMCAyNGg2MGMwLTE2LTE0LTI0LTMwLTI0eiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg=="
-                                alt="Profile Picture" class="rounded-circle profile-picture">
+                                alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px;">
+                            <div class="d-flex flex-column flex-md-row flex-sm-row justify-content-center gap-4 mb-4">
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#uploadProfilePic">Upload Profile Picture</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#removeProfilePic">Remove Profile Picture</button>
+                            </div>
                         </div>
-                        <div class="profile-buttons">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#uploadProfilePic">
-                                Upload Profile Picture
-                            </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#removeProfilePic">
-                                Remove Profile Picture
-                            </button>
-                        </div>
-                        <form>
-                            <div class="row mb-4">
-                                <div class="col-6">
-                                    <label class="form-label">First Name</label>
+                        <form class="flex-grow-1 d-flex flex-column">
+                            <div class="row mb-5">
+                                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                                    <label class="paragraph form-label">First Name</label>
                                     <input type="text" class="form-control form-control-lg">
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label">Last Name</label>
+                                <div class="col-12 col-sm-6">
+                                    <label class="paragraph form-label">Last Name</label>
                                     <input type="text" class="form-control form-control-lg">
                                 </div>
                             </div>
-                            <div class="mb-4">
-                                <label class="form-label">Phone Number</label>
+                            <div class="mb-5">
+                                <label class="paragraph form-label">Phone Number</label>
                                 <input type="tel" class="form-control form-control-lg">
                             </div>
-                            <div class="mb-4">
-                                <label class="form-label">Birthday</label>
+                            <div class="mb-5">
+                                <label class="paragraph form-label">Birthday</label>
                                 <input type="date" class="form-control form-control-lg">
                             </div>
-                            <button class="btn btn-primary btn-lg float-end rounded-pill">SAVE</button>
+                            <div class="text-end">
+                                <button class="btn btn-primary btn-lg rounded-pill">SAVE</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
 
             <!-- Right Column - Account Settings -->
-            <div class="col-md-7 mb-4">
-                <div class="card card-transparent h-100">
-                    <div class="card-body d-flex flex-column">
+            <div class="col-12 col-lg-7">
+                <div class="card border-0 h-100" style="background-color: transparent;">
+                    <div class="card-body px-3 px-md-4">
                         <!-- Account Information -->
                         <div class="mb-4">
                             <h5 class="subheading mb-2">ACCOUNT INFORMATION</h5>
-                            <div class="section-divider mb-3"></div>
+                            <hr class="mb-3">
                             <form>
                                 <div class="mb-3">
-                                    <label class="form-label paragraph">Username</label>
+                                    <label class="paragraph form-label">Username</label>
                                     <input type="text" class="form-control">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label paragraph">Email</label>
+                                    <label class="paragraph form-label">Email</label>
                                     <input type="email" class="form-control">
                                 </div>
-                                <button class="btn btn-primary float-end rounded-pill">SAVE</button>
+                                <div class="text-end">
+                                    <button class="btn btn-primary rounded-pill">SAVE</button>
+                                </div>
                             </form>
                         </div>
 
                         <!-- Change Password -->
                         <div class="mb-4">
                             <h5 class="subheading mb-2">CHANGE YOUR PASSWORD</h5>
-                            <div class="section-divider mb-3"></div>
+                            <hr class="mb-3">
                             <form>
                                 <div class="mb-3">
-                                    <label class="form-label paragraph">Current Password</label>
+                                    <label class="paragraph form-label">Current Password</label>
                                     <input type="password" class="form-control">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label paragraph">New Password</label>
+                                    <label class="paragraph form-label">New Password</label>
                                     <input type="password" class="form-control">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label paragraph">Confirm Password</label>
+                                    <label class="paragraph form-label">Confirm Password</label>
                                     <input type="password" class="form-control">
                                 </div>
-                                <button class="btn btn-primary float-end rounded-pill">SAVE</button>
+                                <div class="text-end">
+                                    <button class="btn btn-primary rounded-pill">SAVE</button>
+                                </div>
                             </form>
                         </div>
 
                         <!-- Delete Account -->
                         <div class="mt-auto">
                             <h5 class="subheading mb-2">DELETE YOUR ACCOUNT</h5>
-                            <div class="section-divider mb-3"></div>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <hr class="mb-3">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
                                 <p class="paragraph mb-0">Once deleted, your account can no longer be retrieved.</p>
-                                <button class="btn btn-primary rounded-pill">DELETE</button>
+                                <button class="btn btn-danger rounded-pill align-self-end">DELETE</button>
                             </div>
                         </div>
                     </div>
@@ -207,72 +208,73 @@ userAuth();
                             style="margin: 0; font-size: 26px;">
                             Remove Profile Picture </h4>
 
-                    <!-- Close button -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
-                    </button>
-
-                    <!-- Card content -->
-                    <div class="account-card"
-                        style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
-                        <p class="paragraph" style="margin: 0;">Are you sure you want to remove your profile picture?
-                        </p>
-                        <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
-                            If yes, your profile will be set to our default picture.
-                        </p>
-                    </div>
-
-                    <!-- Footer buttons -->
-                    <div class="modal-footer d-flex justify-content-end" style="border: none;">
-                        <button type="button" class="btn paragraph" data-bs-dismiss="modal"
-                            style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
-                            Cancel
+                        <!-- Close button -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
                         </button>
-                        <button type="button" class="btn btn-danger paragraph" data-bs-toggle="modal"
-                            data-bs-target="#confirmRemovePictureModal" style="color: white; margin-left: 0.5rem;">
-                            Delete
+
+                        <!-- Card content -->
+                        <div class="account-card"
+                            style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
+                            <p class="paragraph" style="margin: 0;">Are you sure you want to remove your profile
+                                picture?
+                            </p>
+                            <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
+                                If yes, your profile will be set to our default picture.
+                            </p>
+                        </div>
+
+                        <!-- Footer buttons -->
+                        <div class="modal-footer d-flex justify-content-end" style="border: none;">
+                            <button type="button" class="btn paragraph" data-bs-dismiss="modal"
+                                style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger paragraph" data-bs-toggle="modal"
+                                data-bs-target="#confirmRemovePictureModal" style="color: white; margin-left: 0.5rem;">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm the deletion -->
+        <div class="modal fade" id="confirmRemovePictureModal" tabindex="-1"
+            aria-labelledby="confirmRemovePicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"
+                    style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
+                    <div class="modal-header" style="border: none;">
+                        <h4 class="modal-title heading text-center w-100" id="confirmRemovePicModalLabel"
+                            style="margin: 0;">
+                            Profile Picture Removed
+                        </h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        Your profile picture has been set to the default.
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center" style="border: none;">
+                        <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
+                            Close
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Confirm the deletion -->
-    <div class="modal fade" id="confirmRemovePictureModal" tabindex="-1" aria-labelledby="confirmRemovePicModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content"
-                style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
-                <div class="modal-header" style="border: none;">
-                    <h4 class="modal-title heading text-center w-100" id="confirmRemovePicModalLabel"
-                        style="margin: 0;">
-                        Profile Picture Removed
-                    </h4>
-                </div>
-                <div class="modal-body text-center">
-                    Your profile picture has been set to the default.
-                </div>
-                <div class="modal-footer d-flex justify-content-center" style="border: none;">
-                    <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
-                        Close
-                    </button>
+        <!-- Footer -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
+                        US</a>
+                    <span class="paragraph">FINTALIX ©2025</span>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <hr>
-            <div class="d-flex justify-content-between">
-                <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
-                    US</a>
-                <span class="paragraph">FINTALIX ©2025</span>
-            </div>
-        </div>
-    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
