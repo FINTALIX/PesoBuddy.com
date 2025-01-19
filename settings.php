@@ -1,9 +1,9 @@
 <?php
 
-// include ("assets/php/functions.php");
+include ("assets/php/functions.php");
 
-// session_start();
-// userAuth();
+session_start();
+userAuth();
 
 ?>
 
@@ -195,7 +195,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Remove Profile Pic Modal -->
         <div class="modal fade" id="removeProfilePic" tabindex="-1" aria-labelledby="removeProfilePicModalLabel"
             aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
