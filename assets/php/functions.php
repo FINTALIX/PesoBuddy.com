@@ -6,7 +6,7 @@ function adminAuth(){
             exit();
         }
     } else {
-        header("Location: ../index.php");
+        header("Location: .././");
         exit();
     }
 }
@@ -14,11 +14,11 @@ function adminAuth(){
 function userAuth(){
     if (isset($_SESSION['userID'])) {
         if ($_SESSION['role'] != 'user') {
-            header("Location: admin/index.php");
+            header("Location: admin/");
             exit();
         }
     } else {
-        header("Location: index.php");
+        header("Location: ./");
         exit();
     }
 }
