@@ -1,10 +1,14 @@
 <?php
 
-include ("assets/php/functions.php");
+include("connect.php");
+include("assets/php/functions.php");
+include("assets/php/classes.php");
 
 session_start();
 userAuth();
 
+// Instantiate the class
+$userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
 ?>
 
 <!doctype html>
@@ -99,19 +103,20 @@ userAuth();
             </div>
 
             <!-- Year Dropdown Button -->
-            <div class="w-25 pt-4">
-                <div class="subheading">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        YEAR
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">2025</a></li>
-                        <li><a class="dropdown-item" href="#">2024</a></li>
-                        <li><a class="dropdown-item" href="#">2023</a></li>
-                    </ul>
+            <form method="get">
+                <div class="row pt-4">
+                    <div class="col-auto">
+                        <div class="subheading">
+                            <?= $userTransactionCategory->displayYearDropdown(); ?>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="subheading">
+                            <?= $userTransactionCategory->displayCategoryTypeDropdown(); ?>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -742,63 +747,66 @@ userAuth();
                                         </div>
                                     </div>
 
-                                                    <!-- Edit Transaction Success Modal -->
-                                                    <div class="modal fade" id="transactionEditSuccessModal"
-                                                        tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content"
-                                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                                                                <div class="modal-body p-4">
-                                                                    <h5>Transaction successfully edited!</h5>
-                                                                    <button type="button" class="btn mt-3"
-                                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <!-- Edit Transaction Success Modal -->
+                                    <div class="modal fade" id="transactionEditSuccessModal" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                                                <div class="modal-body p-4">
+                                                    <h5>Transaction successfully edited!</h5>
+                                                    <button type="button" class="btn mt-3"
+                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-    <!-- SAMPLE Data ONLY -->
-    <tr>
-        <td scope="row">2</td>
-        <td>Income</td>
-        <td>Salary</td>
-        <td>1000</td>
-        <td>02 January 2024</td>
-        <td>Income from the salary</td>
-        <td>
-            <div class="dropdown dropstart">
-                <button class="btn options-btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots"></i>
-                </button>
+                                    <!-- SAMPLE Data ONLY -->
+                                    <tr>
+                                        <td scope="row">2</td>
+                                        <td>Income</td>
+                                        <td>Salary</td>
+                                        <td>1000</td>
+                                        <td>02 January 2024</td>
+                                        <td>Income from the salary</td>
+                                        <td>
+                                            <div class="dropdown dropstart">
+                                                <button class="btn options-btn p-1" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
 
-                <ul class="dropdown-menu">
-                    <!-- Edit Button -->
-                    <li>
-                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                            data-bs-target="#editTransaction" style="text-decoration: none;">
-                            <i class="bi bi-pencil-square px-1"></i> Edit
-                        </a>
-                    </li>
+                                                <ul class="dropdown-menu">
+                                                    <!-- Edit Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#editTransaction"
+                                                            style="text-decoration: none;">
+                                                            <i class="bi bi-pencil-square px-1"></i> Edit
+                                                        </a>
+                                                    </li>
 
-                    <!-- Delete Button -->
-                    <li>
-                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                            data-bs-target="#deleteTransaction" style="color: red; text-decoration: none;">
-                            <i class="bi bi-trash3 px-1"></i> Delete
-                        </a>
-                    </li>
-                </ul>
+                                                    <!-- Delete Button -->
+                                                    <li>
+                                                        <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteTransaction"
+                                                            style="color: red; text-decoration: none;">
+                                                            <i class="bi bi-trash3 px-1"></i> Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        </div>
     </div>
 
     <!-- Danger Zone -->
@@ -906,14 +914,14 @@ userAuth();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('yearlyChart');
-        const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const labels = [<?php echo '"' . implode('","', $userTransactionCategory->getChartLabels()) . '"' ?>];
 
         const data = {
             labels: labels,
             datasets: [{
                 axis: 'y',
-                label: 'Yearly Budget Report',
-                data: [65, 59, 80, 81, 56, 55, 40, 70, 85, 90, 72, 60],
+                label: 'Yearly Finance Report',
+                data: [<?php echo implode(',', $userTransactionCategory->getChartData()) ?>],
                 fill: false,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.6)',
