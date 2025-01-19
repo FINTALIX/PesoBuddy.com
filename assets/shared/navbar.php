@@ -55,3 +55,26 @@
         </div>
     </div>
 </div>
+
+<Script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const SettingsPage = window.location.pathname.includes('settings.php');
+
+        if (SettingsPage) {
+            const navItems = document.querySelectorAll('.nav-item:not(.dropdown)');
+
+            navItems.forEach(function (navItems, index) {
+                if (index === 0) {
+                    const link = navItems.querySelector('.nav-link');
+                    link.textContent = 'Home';
+                    link.href = 'home.php';
+                }
+                else {
+                    navItem.style.display = 'none';
+                }
+            });
+        }
+    });
+    
+</Script>
