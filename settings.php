@@ -26,23 +26,18 @@ userAuth();
 
     <div class="container-fluid px-3 px-md-5 py-5">
         <!-- Header Navigation -->
-        <div class="row mb-4 mt-5">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h1 class="heading mb-0">SETTINGS</h1>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="text-end">
-                            <p class="paragraph mb-0" style="text-transform: uppercase;">JANUARY XX</p>
-                            <p class="paragraph mb-0"
-                                style="color: var(--darkColor); font-weight: bold; text-transform: uppercase;">FRIDAY
-                            </p>
-                        </div>
-                        <div class="px-3">
-                            <div style="width: 1px; background-color: black; height: 25px;"></div>
-                        </div>
-                    </div>
+        <div class="row mb-4 mt-5 align-items-center justify-content-between px-2">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 order-2 order-md-1">
+                <h1 class="heading mb-0">SETTINGS</h1>
+            </div>
+
+            <div class="col-12 col-md-auto d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
+                <div class="col-auto text-md-end">
+                <span class="subheading" style="color:#1A7431;">JANUARY 10</span><br>FRIDAY
+                </div>
+
+                <div class="col-auto px-3 d-none d-md-block">
+                    <div style="width: 1px; background-color: black; height: 40px;"></div>
                 </div>
             </div>
         </div>
@@ -145,7 +140,7 @@ userAuth();
                             <div
                                 class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
                                 <p class="paragraph mb-0">Once deleted, your account can no longer be retrieved.</p>
-                                <button class="btn btn-primary rounded-pill align-self-end">DELETE</button>
+                                <button class="btn btn-danger rounded-pill align-self-end">DELETE</button>
                             </div>
                         </div>
                     </div>
