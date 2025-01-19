@@ -2,7 +2,7 @@
 <div class="container-fluid px-0 fixed-top">
     <div class="navbar navbar-expand-lg px-3">
         <!-- Logo -->
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="assets/images/pesobuddy_logoW.png" width="230" height="50" alt="Logo">
         </a>
 
