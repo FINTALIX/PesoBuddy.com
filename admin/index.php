@@ -1,9 +1,9 @@
 <?php
 
-// include("../assets/php/functions.php");
+include("../assets/php/functions.php");
 
-// session_start();
-// adminAuth();
+session_start();
+adminAuth();
 
 ?>
 
@@ -107,6 +107,7 @@
         <!-- Main Content -->
         <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
+        <!-- Admin Greeting -->
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
                     Hello, <span style="color: var(--darkColor)">Admin!</span>
