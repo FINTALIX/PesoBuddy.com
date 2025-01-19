@@ -104,7 +104,7 @@ $userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
 
             <!-- Year Dropdown Button -->
             <form method="get">
-                <div class="row pt-4">
+                <div class="row py-4">
                     <div class="col-auto">
                         <div class="subheading">
                             <?= $userTransactionCategory->displayYearDropdown(); ?>
