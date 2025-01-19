@@ -560,7 +560,7 @@ userAuth();
             <div class="modal-content"
                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                 <div class="modal-body p-4">
-                    <h5>Transaction successfully added!</h5>
+                    <h5 class="text-uppercase"><b>Transaction successfully added!</b></h5>
                     <button type="button" class="btn mt-3"
                         style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
                         data-bs-dismiss="modal">Close</button>
@@ -742,21 +742,110 @@ userAuth();
                                         </div>
                                     </div>
 
-                                                    <!-- Edit Transaction Success Modal -->
-                                                    <div class="modal fade" id="transactionEditSuccessModal"
-                                                        tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content"
-                                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                                                                <div class="modal-body p-4">
-                                                                    <h5>Transaction successfully edited!</h5>
-                                                                    <button type="button" class="btn mt-3"
-                                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                    <!-- Edit Transaction Success Modal -->
+                                    <div class="modal fade" id="transactionEditSuccessModal" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                                                <div class="modal-body p-4">
+                                                    <h5 class="text-uppercase"><b>Transaction successfully edited!</b></h5>
+                                                    <button type="button" class="btn mt-3"
+                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Transaction Modal -->
+                                    <div class="modal fade" id="deleteTransaction" tabindex="-1"
+                                        aria-labelledby="deleteTransactionModalLabel" aria-hidden="true"
+                                        data-bs-backdrop="static" data-bs-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: white;">
+                                                <div style="position: relative; padding: 1rem;">
+                                                    <!-- Title -->
+                                                    <h4 class="modal-title heading text-black"
+                                                        id="deleteCategoryModalLabel"
+                                                        style="margin: 0; font-size: 26px;">
+                                                        Delete Transaction
+                                                    </h4>
+
+                                                    <!-- Close button -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"
+                                                        style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
+                                                    </button>
+
+                                                    <!-- Card content -->
+                                                    <div class="card"
+                                                        style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
+                                                        <p class="paragraph" style="margin: 0;">Are you
+                                                            sure you want to delete this
+                                                            transaction?</p>
+                                                        <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
+                                                            Once deleted, it cannot be retrieved
+                                                            anymore.
+                                                        </p>
                                                     </div>
+
+                                                    <!-- Footer buttons -->
+                                                    <div class="modal-footer d-flex justify-content-end"
+                                                        style="border: none;">
+                                                        <button type="button" class="btn paragraph"
+                                                            data-bs-dismiss="modal"
+                                                            style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
+                                                            Cancel
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger paragraph"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#confirmTransactionDeleteModal"
+                                                            style="color: white; margin-left: 0.5rem;">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Confirm the deletion -->
+                                    <div class="modal fade" id="confirmTransactionDeleteModal" tabindex="-1"
+                                        aria-labelledby="confirmTransactionDeleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
+                                                <div class="modal-header" style="border: none;">
+                                                    <h4 class="modal-title heading text-center w-100"
+                                                        id="confirmDeleteModalLabel" style="margin: 0;">
+                                                        Transaction Deleted</h4>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    The transaction has been successfully
+                                                    deleted.
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center"
+                                                    style="border: none;">
+                                                    <button type="button" class="btn btn-light paragraph"
+                                                        data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
     <!-- SAMPLE Data ONLY -->
     <tr>
