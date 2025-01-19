@@ -1,6 +1,9 @@
 <?php
 
-include("authorization.php");
+include ("../assets/php/functions.php");
+
+session_start();
+adminAuth();
 
 ?>
 
