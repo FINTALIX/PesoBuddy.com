@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#logout" class="sidebar-link">
+                <a href="../login.php" class="sidebar-link">
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Logout</span>
                 </a>
@@ -69,7 +69,32 @@
                 <li><a href="users.php" class="sidebar-link"><i class="bi bi-person"></i> Users</a></li>
                 <li><a href="categories.php" class="sidebar-link"><i class="bi bi-list"></i> Categories</a></li>
                 <li><a href="settings.php" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a></li>
-                <li><a href="#logout" class="sidebar-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                <li><a href="../login.php" class="sidebar-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
             </ul>
         </div>
     </div>
+
+    <script>
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebar = document.getElementById("sidebar");
+            const mainContent = document.querySelector(".main");
+            sidebar.classList.toggle("expand");
+            if (sidebar.classList.contains("expand")) {
+                mainContent.style.marginLeft = "260px";
+            } else {
+                mainContent.style.marginLeft = "70px";
+            }
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathName = window.location.pathname;
+            const links = document.querySelectorAll(".sidebar-link");
+            links.forEach(link => {
+                const linkHref = link.getAttribute("href");
+                if (pathName.includes(linkHref)) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        });
+    </script>
