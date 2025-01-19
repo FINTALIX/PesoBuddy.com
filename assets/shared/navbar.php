@@ -2,7 +2,7 @@
 <div class="container-fluid px-0 fixed-top">
     <div class="navbar navbar-expand-lg px-3">
         <!-- Logo -->
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="assets/images/pesobuddy_logoW.png" width="230" height="50" alt="Logo">
         </a>
 
@@ -15,16 +15,27 @@
         <!-- Collapsible Menu -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#">Overview</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-2" href="#transaction-history">Transaction</a>
-                </li>
+                <?php
+                $currentPage = basename($_SERVER['PHP_SELF']);
 
+                if ($currentPage != 'settings.php') { ?>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#budget-tracker">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="#transaction-history">Transaction</a>
+                    </li>
+                <?php
+                } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link px-2" href="home.php">Home</a>
+                    </li>
+                    <?php
+                }
+                ?>
 
                 <!-- User Profile Dropdown -->
                 <li class="nav-item dropdown ms-lg-3 px-2">

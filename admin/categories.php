@@ -82,7 +82,8 @@ adminAuth();
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal" data-bs-target="#editCategory"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#adminEditCategory"
                                                                 style="text-decoration: none;">
                                                                 <i class="bi bi-pencil-square px-1"></i> Edit
                                                             </a>
@@ -114,7 +115,8 @@ adminAuth();
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal" data-bs-target="#editCategory"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#adminEditCategory"
                                                                 style="text-decoration: none;">
                                                                 <i class="bi bi-pencil-square px-1"></i> Edit
                                                             </a>
@@ -134,6 +136,63 @@ adminAuth();
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Edit Category Modal -->
+        <div class="modal fade" id="adminEditCategory" tabindex="-1" aria-labelledby="adminEditCategoryLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content py-4 px-2"
+                    style="border-radius: 15px; background-color: white; border: none;">
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="heading" style="margin: 0;">EDIT CATEGORY
+                            </p>
+                            <!-- Close button -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="adminEditCategoryType" placeholder="Type">
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="adminEditCategoryName" placeholder="Category">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary me-2"
+                                        style="background-color: var(--borderColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1rem;"
+                                        data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close">
+                                        CANCEL
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                        data-bs-target="#editSuccessModal" data-bs-toggle="modal"
+                                        data-bs-dismiss="modal">
+                                        EDIT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal fade" id="editSuccessModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"
+                    style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                    <div class="modal-body p-4">
+                        <h5 class="subheading text-uppercase">Category successfully edited!</h5>
+                        <button type="button" class="btn mt-3"
+                            style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
