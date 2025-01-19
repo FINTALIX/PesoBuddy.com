@@ -75,4 +75,63 @@ function computeRemainingBalance($annualTotalIncome, $annualTotalSavings, $annua
     $annualRemainingBalance = (($annualTotalIncome + $annualTotalSavings) - $annualTotalExpense);
     return $annualRemainingBalance;
 }
+
+function filterTransactions($transactionsQuery) {
+    if (isset($_GET['transactionType'])) {
+        $type = $_GET['transactionType'];
+        $transactionsQuery .= " AND (categories.categoryType LIKE '%$type%' OR defaultcategories.defaultCategoryType LIKE '%$type%')";
+    }
+
+    if (isset($_GET['transactionCategory'])) {
+        $category = $_GET['transactionCategory'];
+        $transactionsQuery .= " AND (categories.categoryName LIKE '%$category%' OR defaultcategories.defaultCategoryName LIKE '%$category%')";
+    }
+
+    return $transactionsQuery;
+}
+
+function createTransactionRow($transactionRow, $transactionNo) {
+    // Format Data
+    $transactionType = ($transactionRow['defaultCategoryType']) ? $transactionRow['defaultCategoryType'] : $transactionRow['categoryType'];
+    $transactionType = ucfirst($transactionType);
+
+    $transactionCategory = ($transactionRow['defaultCategoryName']) ? $transactionRow['defaultCategoryName'] : $transactionRow['categoryName'];
+
+    $transactionAmount = number_format($transactionRow['amount'], 2, ".", ",");
+    $transactionDate = date('F j, Y', strtotime($transactionRow['transactionDate']));
+    $transactionDescription = $transactionRow['description'];
+
+    // Create Row
+    return 
+    '
+        <tr>
+            <td scope="row" class="text-center">'.$transactionNo.'</td>
+            <td>'.$transactionType.'</td>
+            <td>'.$transactionCategory.'</td>
+            <td>₱ '.$transactionAmount.'</td>
+            <td>'.$transactionDate.'</td>
+            <td>'.$transactionDescription.'</td>
+
+            <td>
+                <div class="dropdown dropstart">
+                    <button class="btn options-btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item option-dropdown" data-bs-toggle="modal" data-bs-target="#editTransaction">
+                                <i class="bi bi-pencil-square px-1"></i> Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item option-dropdown" data-bs-toggle="modal" data-bs-target="#deleteTransaction">
+                                <i class="bi bi-trash3 px-1"></i> Delete
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    ';
+}
 ?>
