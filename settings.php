@@ -1,12 +1,9 @@
 <?php
 
-session_start();
+include ("assets/php/functions.php");
 
-if (isset($_SESSION['userID']) && $_SESSION['role'] == 'user') {
-} else {
-    header("location:admin/index.php");
-    exit();
-}
+session_start();
+userAuth();
 
 ?>
 

@@ -43,6 +43,8 @@ if (isset($_POST['btnRegister'])) {
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
     $_SESSION['birthday'] = $birthday;
+    $_SESSION['role'] = "user";
+
 
     header("Location: home.php");
   } else {
