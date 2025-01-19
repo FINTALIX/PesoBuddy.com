@@ -749,7 +749,8 @@ userAuth();
                                             <div class="modal-content"
                                                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                                                 <div class="modal-body p-4">
-                                                    <h5 class="text-uppercase"><b>Transaction successfully edited!</b></h5>
+                                                    <h5 class="text-uppercase"><b>Transaction successfully edited!</b>
+                                                    </h5>
                                                     <button type="button" class="btn mt-3"
                                                         style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
                                                         data-bs-dismiss="modal">Close</button>
@@ -836,8 +837,6 @@ userAuth();
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary">SAVE</button>
                         </div>
                     </div>
                 </div>
