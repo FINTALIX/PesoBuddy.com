@@ -44,8 +44,10 @@ LEFT JOIN categories ON transactions.categoryID = categories.categoryID
 LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
 WHERE transactions.userID = '{$_SESSION['userID']}'";
 
+$transactionHistory = new TransactionsHistory($transactionQuery);
+
 // Filter transactions
-$transactionsQuery = filterTransactions($transactionsQuery);
+$transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
 $transactionsResult = executeQuery($transactionsQuery);
 ?>
 
@@ -671,10 +673,10 @@ $transactionsResult = executeQuery($transactionsQuery);
                             <!-- Filter Form -->
                             <div class="col col-md-auto d-flex flex-row mb-2">
                                 <!-- Type -->
-                                <input class="form-control mx-1" type="text" name="transactionType" placeholder="Type">
+                                <input class="form-control mx-1" type="text" name="transactionType" value="<?php echo ($transactionHistory->transactionType) ? $transactionHistory->transactionType : "" ?>" placeholder="Type">
 
                                 <!-- Category -->
-                                <input class="form-control mx-1" type="text" name="transactionCategory" placeholder="Category">
+                                <input class="form-control mx-1" type="text" name="transactionCategory" value="<?php echo ($transactionHistory->transactionCategory) ? $transactionHistory->transactionCategory : "" ?>" placeholder="Category">
                             </div>
 
                             <div class="col-12 col-md-auto text-center text-md-end mb-2">
@@ -682,9 +684,9 @@ $transactionsResult = executeQuery($transactionsQuery);
                                 <button class="btn btn-primary rounded-pill mx-1" type="submit">
                                     SEARCH
                                 </button>
-                                
+
                                 <!-- Clear Button -->
-                                <a href="home.php#transaction-history" class="btn btn-primary rounded-pill me-1" type="button">
+                                <a href="home.php#transaction-history" class="btn btn-primary rounded-pill" type="button">
                                     CLEAR
                                 </a>
                             </div>
@@ -717,7 +719,7 @@ $transactionsResult = executeQuery($transactionsQuery);
 
                                     if (mysqli_num_rows($transactionsResult) > 0) {
                                         while ($transactionRow = mysqli_fetch_array($transactionsResult)) {
-                                            echo createTransactionRow($transactionRow, $transactionNo);
+                                            echo $transactionHistory->createRow($transactionRow, $transactionNo);
 
                                             $transactionNo++;
                                         }
