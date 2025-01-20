@@ -32,76 +32,76 @@ adminAuth();
     <!-- Main Content -->
     <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
-     <!-- Settings -->
-     <div class="col-12" style="padding-left: 25px">
-                <div class="col-12 col-md-6 pt-3 pt-md-4 heading">SETTINGS</div>
-            </div>
+        <!-- Settings -->
+        <div class="col-12" style="padding-left: 25px">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 heading">SETTINGS</div>
+        </div>
 
-            <div id="settings" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="subheading mb-2">ACCOUNT SETTINGS</div>
-                        <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+        <div id="settings" class="container-fluid py-4 px-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="subheading mb-2">ACCOUNT SETTINGS</div>
+                    <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Username -->
+        <div class="col-12 mb-3 px-5">
+            <p class="subheading"><b>Change Username</b></p>
+        </div>
+
+        <!-- Change Username Card -->
+        <div class="card settings-card rounded-4 mb-5">
+            <div class="card-body d-flex flex-column">
+                <form>
+                    <div class="mb-3">
+                        <div class="row g-1">
+                            <div class="col-md-3 col-lg-2 d-flex align-items-center">
+                                <label class="form-label mb-2 paragraph"><b>Username</b></label>
+                            </div>
+                            <div class="col-md-9 col-lg-10 mb-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <button class="btn btn-primary mx-auto d-block">Save Username</button>
+                </form>
             </div>
+        </div>
 
-            <!-- Change Username -->
-            <div class="col-12 mb-3 px-5">
-                <p class="subheading"><b>Change Username</b></p>
-            </div>
+        <!-- Change Password -->
+        <div class="col-12 mb-3 px-5">
+            <p class="subheading"><b>Change Password</b></p>
+        </div>
 
-            <!-- Change Username Card -->
-            <div class="card settings-card rounded-4 mb-5">
-                <div class="card-body d-flex flex-column">
-                    <form>
-                        <div class="mb-3">
-                            <div class="row g-1">
-                                <div class="col-md-3 col-lg-2 d-flex align-items-center">
-                                    <label class="form-label mb-2 paragraph"><b>Username</b></label>
-                                </div>
-                                <div class="col-md-9 col-lg-10 mb-3">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary mx-auto d-block">Save Username</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Change Password -->
-            <div class="col-12 mb-3 px-5">
-                <p class="subheading"><b>Change Password</b></p>
-            </div>
-
-            <!-- Change Password Card -->
-            <div class="card settings-card rounded-4 mb-5">
-                <div class="card-body d-flex flex-column">
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label paragraph"><b>Current Password</b></label>
-                            <div class="row mb-4">
-                            <div class="col-md-6 col-12">
-                                    <input type="text" class="form-control w-100">
-                                </div>
-                            </div>
-                        </div>
-
+        <!-- Change Password Card -->
+        <div class="card settings-card rounded-4 mb-5">
+            <div class="card-body d-flex flex-column">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label paragraph"><b>Current Password</b></label>
                         <div class="row mb-4">
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label paragraph"><b>New Password</b></label>
-                                <input type="text" class="form-control w-100">
-                            </div>
                             <div class="col-md-6 col-12">
-                                <label class="form-label paragraph"><b>Confirm Password</b></label>
                                 <input type="text" class="form-control w-100">
                             </div>
                         </div>
-                        <button class="btn btn-primary mx-auto d-block">Save Password</button>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 col-12 mb-3">
+                            <label class="form-label paragraph"><b>New Password</b></label>
+                            <input type="text" class="form-control w-100">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label class="form-label paragraph"><b>Confirm Password</b></label>
+                            <input type="text" class="form-control w-100">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mx-auto d-block">Save Password</button>
+                </form>
             </div>
+        </div>
 
         <!-- Settings -->
         <div id="settings" class="container-fluid">
@@ -123,13 +123,69 @@ adminAuth();
                 </div>
                 <div
                     class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end gap-3 pe-lg-5">
-                    <button class="btn btn-primary">Change</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#changeLogoModal">Change</button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadLogoModal">Upload
                         New</button>
                 </div>
             </div>
         </div>
 
+        <!-- Change Logo Modal -->
+        <div class="modal fade" id="changeLogoModal" tabindex="-1" aria-labelledby="changeLogoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-white rounded-4">
+                    <div class="modal-header border-0 d-flex flex-column align-items-center">
+                        <h5 class="modal-title text-black text-uppercase" id="changeLogoModalLabel">Change Logo</h5>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="changeForm" enctype="multipart/form-data">
+                            <div class="d-flex gap-3">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden bg-black"
+                                        style="width: 120px; height: 120px;">
+                                        <img id="previewImage" src="../assets/images/pesobuddy_icon.png"
+                                            alt="Current Photo" class="w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <p class="text-black mt-2 mb-0 small text-nowrap">Current Photo</p>
+                                </div>
+                                <div class="flex-grow-1 mt-5">
+                                    <div class="dropdown w-100">
+                                        <button
+                                            class="btn btn-outline-secondary dropdown-toggle w-100 text-start d-flex justify-content-between align-items-center"
+                                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                            onmouseover="this.style.backgroundColor=getComputedStyle(this).getPropertyValue('--primaryColor'); this.style.color='white';"
+                                            onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                            Select an image
+                                            <span class="dropdown-caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                                            <li>
+                                                <label class="dropdown-item">
+                                                    <input type="file" class="form-control d-none" id="fileInput"
+                                                        accept="image/*">
+                                                    Choose Image
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Logo Modal -->
         <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
