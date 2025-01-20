@@ -142,25 +142,24 @@ adminAuth();
                             data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex justify-content-center align-items-center">
-                        <form id="uploadForm" enctype="multipart/form-data" class="text-center">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="flex-grow-1 mt-2">
-                                    <div
-                                        class="d-flex flex-column flex-md-row gap-1 gap-md-0 justify-content-center align-items-center">
+                            <form id="uploadForm" enctype="multipart/form-data" class="text-center">
+                                <div class="row g-0 justify-content-center align-items-center flex-nowrap">
+                                    <div class="col-auto">
                                         <input type="text" id="fileNameDisplay"
                                             class="form-control text-black bg-transparent rounded-2"
-                                            value="sampleimg.png" readonly style="width: 250px;">
+                                            value="sampleimg.png" readonly style="max-width: 220px;">
+                                    </div>
+                                    <div class="col-auto">
                                         <label
                                             class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
-                                            for="fileInput">
+                                            for="fileInput" style="white-space: nowrap;">
                                             Browse<i class="bi-upload ms-2"></i>
                                         </label>
                                         <input type="file" class="d-none" id="fileInput" accept="image/*">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     <div class="modal-footer border-0 justify-content-center mb-2">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
