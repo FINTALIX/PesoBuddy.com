@@ -114,13 +114,15 @@ $transactionsResult = executeQuery($transactionsQuery);
                         <!-- Total Savings -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL SAVINGS</b></div>
-                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalSavings, 2, ".", ",") ?></p>
+                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalSavings, 2, ".", ",") ?>
+                            </p>
                         </div>
 
                         <!-- Total Expense -->
                         <div class="col-12 col-md-4">
                             <div class="subheading"><b>TOTAL EXPENSE</b></div>
-                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalExpense, 2, ".", ",") ?></p>
+                            <p class="paragraph pt-2">₱ <?php echo number_format($annualTotalExpense, 2, ".", ",") ?>
+                            </p>
                         </div>
 
                     </div>
@@ -540,7 +542,23 @@ $transactionsResult = executeQuery($transactionsQuery);
                                         </div>
                                     </div>
 
-                                    <button type="submit" name="btnEditCategory" class="btn btn-primary">SAVE</button>
+                                    <button type="submit" name="btnEditCategory" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#saveModal">SAVE</button>
+
+                                    <!-- Save Modal -->
+                                    <div class="modal fade" id="saveModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                                                <div class="modal-body p-4">
+                                                    <h5>The edited category has been successfully saved!</h5>
+                                                    <button type="button" class="btn mt-3"
+                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                             <!-- Invisible iframe for form submission -->
@@ -662,7 +680,8 @@ $transactionsResult = executeQuery($transactionsQuery);
                     <!-- FILTER TRANSACTIONS -->
                     <div class="row my-3">
 
-                        <form class="d-flex flex-row flex-wrap justify-content-center align-items-center" method="GET" action="#transaction-history">
+                        <form class="d-flex flex-row flex-wrap justify-content-center align-items-center" method="GET"
+                            action="#transaction-history">
                             <!-- Label -->
                             <div class="col-12 col-md-auto text-center text-md-start mb-1">
                                 <div class="h6 mx-1">
@@ -673,10 +692,14 @@ $transactionsResult = executeQuery($transactionsQuery);
                             <!-- Filter Form -->
                             <div class="col col-md-auto d-flex flex-row mb-2">
                                 <!-- Type -->
-                                <input class="form-control mx-1" type="text" name="transactionType" value="<?php echo ($transactionHistory->transactionType) ? $transactionHistory->transactionType : "" ?>" placeholder="Type">
+                                <input class="form-control mx-1" type="text" name="transactionType"
+                                    value="<?php echo ($transactionHistory->transactionType) ? $transactionHistory->transactionType : "" ?>"
+                                    placeholder="Type">
 
                                 <!-- Category -->
-                                <input class="form-control mx-1" type="text" name="transactionCategory" value="<?php echo ($transactionHistory->transactionCategory) ? $transactionHistory->transactionCategory : "" ?>" placeholder="Category">
+                                <input class="form-control mx-1" type="text" name="transactionCategory"
+                                    value="<?php echo ($transactionHistory->transactionCategory) ? $transactionHistory->transactionCategory : "" ?>"
+                                    placeholder="Category">
                             </div>
 
                             <div class="col-12 col-md-auto text-center text-md-end mb-2">
@@ -686,7 +709,8 @@ $transactionsResult = executeQuery($transactionsQuery);
                                 </button>
 
                                 <!-- Clear Button -->
-                                <a href="home.php#transaction-history" class="btn btn-primary rounded-pill" type="button">
+                                <a href="home.php#transaction-history" class="btn btn-primary rounded-pill"
+                                    type="button">
                                     CLEAR
                                 </a>
                             </div>
