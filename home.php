@@ -552,9 +552,10 @@ $transactionsResult = executeQuery($transactionsQuery);
                                                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                                                 <div class="modal-body p-4">
                                                     <h5>The edited category has been successfully saved!</h5>
-                                                    <button type="button" class="btn mt-3"
-                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                                        data-bs-dismiss="modal">Close</button>
+                                                    <a href="home.php" class="btn mt-3"
+                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;">
+                                                        Close
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
