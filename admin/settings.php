@@ -31,6 +31,78 @@ adminAuth();
 
     <!-- Main Content -->
     <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+
+     <!-- Settings -->
+     <div class="col-12" style="padding-left: 25px">
+                <div class="col-12 col-md-6 pt-3 pt-md-4 heading">SETTINGS</div>
+            </div>
+
+            <div id="settings" class="container-fluid py-4 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="subheading mb-2">ACCOUNT SETTINGS</div>
+                        <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Change Username -->
+            <div class="col-12 mb-3 px-5">
+                <p class="subheading"><b>Change Username</b></p>
+            </div>
+
+            <!-- Change Username Card -->
+            <div class="card settings-card rounded-4 mb-5">
+                <div class="card-body d-flex flex-column">
+                    <form>
+                        <div class="mb-3">
+                            <div class="row g-1">
+                                <div class="col-md-3 col-lg-2 d-flex align-items-center">
+                                    <label class="form-label mb-2 paragraph"><b>Username</b></label>
+                                </div>
+                                <div class="col-md-9 col-lg-10 mb-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mx-auto d-block">Save Username</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Change Password -->
+            <div class="col-12 mb-3 px-5">
+                <p class="subheading"><b>Change Password</b></p>
+            </div>
+
+            <!-- Change Password Card -->
+            <div class="card settings-card rounded-4 mb-5">
+                <div class="card-body d-flex flex-column">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label paragraph"><b>Current Password</b></label>
+                            <div class="row mb-4">
+                            <div class="col-md-6 col-12">
+                                    <input type="text" class="form-control w-100">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 col-12 mb-3">
+                                <label class="form-label paragraph"><b>New Password</b></label>
+                                <input type="text" class="form-control w-100">
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="form-label paragraph"><b>Confirm Password</b></label>
+                                <input type="text" class="form-control w-100">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mx-auto d-block">Save Password</button>
+                    </form>
+                </div>
+            </div>
+
         <!-- Settings -->
         <div id="settings" class="container-fluid">
             <div class="row pt-4 p-md-4">
