@@ -1,4 +1,4 @@
-<div?php
+<?php
 
 include ("../assets/php/functions.php");
 
