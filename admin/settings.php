@@ -30,8 +30,84 @@ adminAuth();
 
 
     <!-- Main Content -->
+<<<<<<< HEAD
     <div class="main px-2 px-md-0"
         style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+=======
+    <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+
+        <!-- Settings -->
+        <div class="col-12" style="padding-left: 25px">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 heading">SETTINGS</div>
+        </div>
+
+        <div id="settings" class="container-fluid py-4 px-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="subheading mb-2">ACCOUNT SETTINGS</div>
+                    <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Username -->
+        <div class="col-12 mb-3 px-5">
+            <p class="subheading"><b>Change Username</b></p>
+        </div>
+
+        <!-- Change Username Card -->
+        <div class="card settings-card rounded-4 mb-5">
+            <div class="card-body d-flex flex-column">
+                <form>
+                    <div class="mb-3">
+                        <div class="row g-1">
+                            <div class="col-md-3 col-lg-2 d-flex align-items-center">
+                                <label class="form-label mb-2 paragraph"><b>Username</b></label>
+                            </div>
+                            <div class="col-md-9 col-lg-10 mb-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mx-auto d-block">Save Username</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="col-12 mb-3 px-5">
+            <p class="subheading"><b>Change Password</b></p>
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="card settings-card rounded-4 mb-5">
+            <div class="card-body d-flex flex-column">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label paragraph"><b>Current Password</b></label>
+                        <div class="row mb-4">
+                            <div class="col-md-6 col-12">
+                                <input type="text" class="form-control w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 col-12 mb-3">
+                            <label class="form-label paragraph"><b>New Password</b></label>
+                            <input type="text" class="form-control w-100">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label class="form-label paragraph"><b>Confirm Password</b></label>
+                            <input type="text" class="form-control w-100">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mx-auto d-block">Save Password</button>
+                </form>
+            </div>
+        </div>
+
+>>>>>>> 9005efd298fc8304c8dfe1a2df9f08a15e18ea4f
         <!-- Settings -->
         <div id="settings" class="container-fluid">
             <div class="row pt-4 p-md-4">
@@ -52,13 +128,52 @@ adminAuth();
                 </div>
                 <div
                     class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end gap-3 pe-lg-5">
-                    <button class="btn btn-primary">Change</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#changeLogoModal">Change</button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadLogoModal">Upload
                         New</button>
                 </div>
             </div>
         </div>
 
+        <!-- Change Logo Modal -->
+        <div class="modal fade" id="changeLogoModal" tabindex="-1" aria-labelledby="changeLogoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-white rounded-4">
+                    <div class="modal-header border-0 d-flex flex-column align-items-center">
+                        <h5 class="modal-title text-black text-uppercase" id="changeLogoModalLabel">Change Logo</h5>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center align-items-center">
+                            <form id="uploadForm" enctype="multipart/form-data" class="text-center">
+                                <div class="row g-0 justify-content-center align-items-center flex-nowrap">
+                                    <div class="col-auto">
+                                        <input type="text" id="fileNameDisplay"
+                                            class="form-control text-black bg-transparent rounded-2"
+                                            value="sampleimg.png" readonly style="max-width: 220px;">
+                                    </div>
+                                    <div class="col-auto">
+                                        <label
+                                            class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
+                                            for="fileInput" style="white-space: nowrap;">
+                                            Browse<i class="bi-upload ms-2"></i>
+                                        </label>
+                                        <input type="file" class="d-none" id="fileInput" accept="image/*">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    <div class="modal-footer border-0 justify-content-center mb-2">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Logo Modal -->
         <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
