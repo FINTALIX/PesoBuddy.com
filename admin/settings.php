@@ -1,6 +1,6 @@
 <?php
 
-include("../assets/php/functions.php");
+include ("../assets/php/functions.php");
 
 session_start();
 adminAuth();
@@ -30,11 +30,7 @@ adminAuth();
 
 
     <!-- Main Content -->
-<<<<<<< HEAD
-    <div class="main px-2 px-md-0"
-        style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
-=======
-    <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+    <div class="main px-2 px-md-0" style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
         <!-- Settings -->
         <div class="col-12" style="padding-left: 25px">
@@ -107,7 +103,6 @@ adminAuth();
             </div>
         </div>
 
->>>>>>> 9005efd298fc8304c8dfe1a2df9f08a15e18ea4f
         <!-- Settings -->
         <div id="settings" class="container-fluid">
             <div class="row pt-4 p-md-4">
