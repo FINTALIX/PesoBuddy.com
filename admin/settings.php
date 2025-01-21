@@ -141,43 +141,26 @@ adminAuth();
                         <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
                             data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form id="changeForm" enctype="multipart/form-data">
-                            <div class="d-flex gap-3">
-                                <div class="text-center">
-                                    <div class="rounded-circle overflow-hidden bg-black"
-                                        style="width: 120px; height: 120px;">
-                                        <img id="previewImage" src="../assets/images/pesobuddy_icon.png"
-                                            alt="Current Photo" class="w-100 h-100" style="object-fit: cover;">
+                    <div class="modal-body d-flex justify-content-center align-items-center">
+                            <form id="uploadForm" enctype="multipart/form-data" class="text-center">
+                                <div class="row g-0 justify-content-center align-items-center flex-nowrap">
+                                    <div class="col-auto">
+                                        <input type="text" id="fileNameDisplay"
+                                            class="form-control text-black bg-transparent rounded-2"
+                                            value="sampleimg.png" readonly style="max-width: 220px;">
                                     </div>
-                                    <p class="text-black mt-2 mb-0 small text-nowrap">Current Photo</p>
-                                </div>
-                                <div class="flex-grow-1 mt-5">
-                                    <div class="dropdown w-100">
-                                        <button
-                                            class="btn btn-outline-secondary dropdown-toggle w-100 text-start d-flex justify-content-between align-items-center"
-                                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                            onmouseover="this.style.backgroundColor=getComputedStyle(this).getPropertyValue('--primaryColor'); this.style.color='white';"
-                                            onmouseout="this.style.backgroundColor=''; this.style.color='';">
-                                            Select an image
-                                            <span class="dropdown-caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <label class="dropdown-item">
-                                                    <input type="file" class="form-control d-none" id="fileInput"
-                                                        accept="image/*">
-                                                    Choose Image
-                                                </label>
-                                            </li>
-                                        </ul>
+                                    <div class="col-auto">
+                                        <label
+                                            class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
+                                            for="fileInput" style="white-space: nowrap;">
+                                            Browse<i class="bi-upload ms-2"></i>
+                                        </label>
+                                        <input type="file" class="d-none" id="fileInput" accept="image/*">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer border-0 justify-content-center">
+                            </form>
+                        </div>
+                    <div class="modal-footer border-0 justify-content-center mb-2">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="uploadForm" class="btn btn-primary">Save</button>
                     </div>
