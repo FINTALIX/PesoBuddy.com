@@ -1,10 +1,97 @@
 <?php
 
 include("assets/php/functions.php");
+include("connect.php");
 
 session_start();
 userAuth();
 
+$error = "";
+$userID = $_SESSION['userID'];
+
+$personalInfoQuery="SELECT * FROM userS WHERE userID=$userID";
+$personalInfoResults= executeQuery($personalInfoQuery);
+
+//Handle file uploads for profile picture
+if (isset($_POST['btnUploadProfile'])) {
+    $profilePicture = $_FILES['profilePic']['name'];
+    $profilePictureTmp = $_FILES['profilePic']['tmp_name'];
+    $uploadDir = __DIR__ . '/assets/images/userProfile/';
+    
+    if (!empty($profilePicture)) {
+        move_uploaded_file($profilePictureTmp, $uploadDir . $profilePicture);
+        
+        $updateProfileQuery = "UPDATE users SET profilePicture = '$profilePicture' WHERE userID = $userID";
+        executeQuery($updateProfileQuery);
+    }
+}
+// Display user Profile Picture
+$displayProfileQuery = "SELECT profilePicture FROM users WHERE userID = $userID;";
+$uploadResult = executeQuery($displayProfileQuery);
+
+$profilePicture = "defaultProfile.png"; 
+while($row = mysqli_fetch_assoc($uploadResult)){
+    $profilePicture = !empty($row['profilePicture']) ? $row['profilePicture'] : "defaultProfile.png";
+}
+
+//Deletion of Profile Picture
+if(isset($_POST['btnDeleteProfilePic'])){
+    $updateProfileQuery = "UPDATE users SET profilePicture = NULL WHERE userID = $userID";
+        executeQuery($updateProfileQuery);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+//updating Fullname and birthday
+if(isset($_POST['btnProfile'])){ 
+    $firstName=$_POST['firstName'];
+    $lastName=$_POST['lastName'];
+    $birthday=$_POST['birthday'];
+
+    if (!empty($firstName) && !empty($lastName) && !empty($birthday)) {
+    $updatePersonalInfoQuery="UPDATE users SET `firstName`='$firstName',`lastName`='$lastName', `birthday`='$birthday'  WHERE userID=$userID";
+    executeQuery($updatePersonalInfoQuery);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+    }
+}
+
+//updating username and email
+if(isset($_POST['btnAccountInfo'])){
+    $username=$_POST['username'];
+    $email=$_POST['email'];
+
+    if (!empty($username) && !empty($email)) {
+    $updatePersonalInfoQuery="UPDATE users SET `username`='$username',`email`='$email' WHERE userID = $userID";
+    executeQuery($updatePersonalInfoQuery);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+    }
+}
+
+//updating password
+if(isset($_POST['btnChangePassword'])){
+    $oldpassword=$_POST['oldpassword'];
+    $newpassword=$_POST['newpassword'];
+    $confirmpassword=$_POST['confirmpassword'];
+
+ if($newpassword == $confirmpassword && $newpassword != $oldpassword && strlen($newpassword) >= 8) {
+    $updatePersonalInfoQuery="UPDATE users SET `password`='$newpassword' WHERE userID = $userID";
+    executeQuery($updatePersonalInfoQuery);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+    } else{
+        $error = "Password Error";
+    }
+}
+
+//Account Deletion
+if(isset($_POST['btnAccountDelete'])){
+    $deleteAccountQuery="DELETE FROM users WHERE userID = $userID";
+    executeQuery($deleteAccountQuery);
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +110,9 @@ userAuth();
 <body>
 
     <?php include('assets/shared/navbar.php'); ?>
+    <?php if(mysqli_num_rows($personalInfoResults)>0){
+        while($personalInfoRows=mysqli_fetch_assoc($personalInfoResults)){
+    ?>    
 
     <div class="container-fluid px-3 px-md-5 py-5">
         <!-- Header Navigation -->
@@ -33,7 +123,7 @@ userAuth();
 
             <div class="col-12 col-md-auto d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
                 <div class="col-auto text-md-end">
-                    <span class="subheading" style="color:#1A7431;">FRIDAY</span><br>JANUARY 10
+                    <span class="subheading" style="color:#1A7431;"><?php echo strtoupper(date('l')); ?></span><br><?php echo date("F d"); ?>
                 </div>
 
                 <div class="col-auto px-3 d-none d-md-block">
@@ -51,7 +141,7 @@ userAuth();
                 <div class="card stat-card h-100">
                     <div class="card-body px-3 px-md-4 d-flex flex-column">
                         <div class="text-center mb-5">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0iI2VlZSIvPjxwYXRoIGQ9Ik01MCAzNmExNCAxNCAwIDEgMCAwIDI4IDE0IDE0IDAgMCAwIDAtMjh6bTAgNDBjLTE2IDAtMzAgOC0zMCAyNGg2MGMwLTE2LTE0LTI0LTMwLTI0eiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg=="
+                            <img id="profilePreview" src="./assets/images/userProfile/<?php echo $profilePicture?>"
                                 alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px;">
                             <div class="d-flex flex-column flex-md-row flex-sm-row justify-content-center gap-4 mb-4">
                                 <button class="btn btn-primary" data-bs-toggle="modal"
@@ -60,23 +150,23 @@ userAuth();
                                     data-bs-target="#removeProfilePic">Remove Profile Picture</button>
                             </div>
                         </div>
-                        <form class="flex-grow-1 d-flex flex-column">
+                        <form method="POST" class="flex-grow-1 d-flex flex-column">
                             <div class="row mb-5">
                                 <div class="col-12">
                                     <label class="paragraph form-label">First Name</label>
-                                    <input type="text" class="form-control form-control-lg">
+                                    <input type="text" class="form-control form-control-lg" name="firstName" value="<?php echo $personalInfoRows['firstName']?>">
                                 </div>
                             </div>
                             <div class="mb-5">
                                 <label class="paragraph form-label">Last Name</label>
-                                <input type="text" class="form-control form-control-lg">
+                                <input type="text" class="form-control form-control-lg" name="lastName" value="<?php echo $personalInfoRows['lastName']?>">
                             </div>
                             <div class="mb-5">
-                                <label class="paragraph form-label">Birthday</label>
-                                <input type="date" class="form-control form-control-lg">
+                                <label class="paragraph form-label">Birthday: <?php echo strtoupper(date("F d, Y", strtotime($personalInfoRows['birthday'])))?></label>
+                                <input type="date" class="form-control form-control-lg" name="birthday" value="<?php echo strtoupper(date("F d, Y", strtotime($personalInfoRows['birthday'])))?>">
                             </div>
                             <div class="text-end">
-                                <button class="btn btn-primary btn-lg rounded-pill">SAVE</button>
+                                <button class="btn btn-primary btn-lg rounded-pill" type="submit" name="btnProfile">SAVE</button>
                             </div>
                         </form>
                     </div>
@@ -91,17 +181,17 @@ userAuth();
                         <div class="mb-4">
                             <h5 class="subheading mb-2">ACCOUNT INFORMATION</h5>
                             <hr class="mb-3">
-                            <form>
+                            <form method="POST">
                                 <div class="mb-3">
                                     <label class="paragraph form-label">Username</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="username" value="<?php echo $personalInfoRows['username']?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="paragraph form-label">Email</label>
-                                    <input type="email" class="form-control">
+                                    <input type="email" class="form-control" name="email" value="<?php echo $personalInfoRows['email']?>">
                                 </div>
                                 <div class="text-end">
-                                    <button class="btn btn-primary rounded-pill">SAVE</button>
+                                    <button class="btn btn-primary rounded-pill" type="submit" name="btnAccountInfo">SAVE</button>
                                 </div>
                             </form>
                         </div>
@@ -110,22 +200,33 @@ userAuth();
                         <div class="mb-4">
                             <h5 class="subheading mb-2">CHANGE YOUR PASSWORD</h5>
                             <hr class="mb-3">
-                            <form>
+                            <form method="POST">
                                 <div class="mb-3">
                                     <label class="paragraph form-label">Current Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="oldpassword" value="<?php echo $personalInfoRows['password'];?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="paragraph form-label">New Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="newpassword">
                                 </div>
                                 <div class="mb-3">
                                     <label class="paragraph form-label">Confirm Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="confirmpassword">
                                 </div>
                                 <div class="text-end">
-                                    <button class="btn btn-primary rounded-pill">SAVE</button>
+                                    <button class="btn btn-primary rounded-pill" type="submit" name="btnChangePassword">SAVE</button>
                                 </div>
+                                
+                                <!-- Alert for incorrect password change -->
+                                <?php if ($error == "Password Error") { ?>
+                                    <div class="row justify-content-center mt-2">
+                                        <div class="col-12">
+                                            <div class="alert alert-warning" role="alert">
+                                            Password does not match or it is not 8 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }?>
                             </form>
                         </div>
 
@@ -144,7 +245,10 @@ userAuth();
                 </div>
             </div>
         </div>
-
+        <?php
+             }
+            }
+        ?>
         <!-- MODALS -->
         <!-- Upload Logo Modal -->
         <div class="modal fade" id="uploadProfilePic" tabindex="-1" aria-labelledby="uploadProfilePicModalLabel"
@@ -163,32 +267,32 @@ userAuth();
                     </div>
 
                     <div class="modal-body">
-                        <form id="uploadProfile" enctype="multipart/form-data">
+                        <form id="uploadProfile" enctype="multipart/form-data" method="POST">
                             <div class="d-flex flex-column align-items-center gap-3">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden bg-black"
                                         style="width: 120px; height: 120px;">
-                                        <img id="previewImage" src="./assets/images/pesobuddy_icon.png"
+                                        <img id="profilePreview2" src="./assets/images/userProfile/<?php echo $profilePicture?>"
                                             alt="Current Photo" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <input type="text" id="fileNameDisplay"
-                                        class="form-control text-black bg-transparent rounded-2" value="sampleimage.png"
+                                        class="form-control text-black bg-transparent rounded-2" value=""
                                         readonly style="max-width: 350px; width: 100%;">
                                     <label
                                         class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
                                         for="fileInput">
                                         Browse<i class="bi-upload ms-2"></i>
                                     </label>
-                                    <input type="file" class="d-none" id="fileInput" accept="image/*">
+                                    <input type="file" class="d-none" id="fileInput" accept="image/*" name="profilePic">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer border-0 justify-content-center mb-2">
                         <button type="submit" form="uploadProfile"
-                            class="btn btn-primary text-uppercase align-self-center">Upload</button>
+                            class="btn btn-primary text-uppercase align-self-center" name="btnUploadProfile">Upload</button>
                     </div>
                 </div>
             </div>
@@ -253,9 +357,11 @@ userAuth();
                         Your profile picture has been set to the default.
                     </div>
                     <div class="modal-footer d-flex justify-content-center" style="border: none;">
-                        <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
+                    <form method="POST">
+                        <button type="submit" name="btnDeleteProfilePic" class="btn btn-light paragraph" data-bs-dismiss="modal">
                             Close
                         </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -316,11 +422,14 @@ userAuth();
                         </h4>
                     </div>
                     <div class="modal-body text-center">This account has been successfully deleted.
+                    You have been logged out and will be redirected to the login page.
                     </div>
                     <div class="modal-footer d-flex justify-content-center" style="border: none;">
-                        <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
+                        <form method="POST">
+                        <button type="submit" name="btnAccountDelete" class="btn btn-light paragraph" data-bs-dismiss="modal">
                             Close
                         </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -340,6 +449,25 @@ userAuth();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const profilePreview = document.getElementById('profilePreview');
+        const profilePreview2 = document.getElementById('profilePreview2');
+
+        fileInput.addEventListener('change', function () {
+            if (this.files && this.files.length > 0) {
+                fileNameDisplay.value = this.files[0].name;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePreview.src = e.target.result; 
+                    profilePreview2.src = e.target.result; 
+                };
+                reader.readAsDataURL(this.files[0]); 
+            }
+        });
+    </script>
 </body>
 
 </html>
