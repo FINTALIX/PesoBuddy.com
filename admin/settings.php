@@ -1,4 +1,4 @@
-<?php
+<div?php
 
 include ("../assets/php/functions.php");
 
@@ -31,7 +31,8 @@ adminAuth();
 
     <!-- Main Content -->
     <div class="main px-2 px-md-0" style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
-
+        
+        <div id="settings" class="container-fluid">
         <!-- Settings -->
         <div class="col-12" style="padding-left: 25px">
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading">SETTINGS</div>
@@ -41,7 +42,7 @@ adminAuth();
             <div class="row">
                 <div class="col-12">
                     <div class="subheading mb-2">ACCOUNT SETTINGS</div>
-                    <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+                    <hr style="border-top: 2px solid #fff; margin: 1rem 0 2rem 0; opacity: 1;">
                 </div>
             </div>
         </div>
@@ -104,11 +105,11 @@ adminAuth();
         </div>
 
         <!-- Settings -->
-        <div id="settings" class="container-fluid">
-            <div class="row pt-4 p-md-4">
+        <div class="container-fluid py-4 px-4">
+            <div class="row">
                 <div class="col-12">
-                    <h2 class="heading text-center text-sm-start">WEBSITE SETTINGS</h2>
-                    <hr class="my-4">
+                    <div class="subheading mb-2">WEBSITE SETTINGS</div>
+                    <hr style="border-top: 2px solid #fff; margin: 1rem 0 2rem 0; opacity: 1;">
                 </div>
             </div>
 
