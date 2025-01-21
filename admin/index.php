@@ -33,6 +33,7 @@ adminAuth();
     <div class="main px-2 px-md-0"
         style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
+    <div id="dashboard" class="container-fluid py-4 px-4">
         <!-- Admin Greeting -->
         <div class="row align-items-center justify-content-between">
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
@@ -71,7 +72,7 @@ adminAuth();
         </div>
 
         <!-- Dashboard -->
-        <div id="dashboard" class="container-fluid py-4 px-4">
+        <div class="container-fluid py-4 px-4">
             <div class="row">
                 <div class="col-12">
                     <div class="subheading">WEBSITE ENGAGEMENT</div>
