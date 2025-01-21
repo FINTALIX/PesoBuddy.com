@@ -311,9 +311,9 @@ class BiggestTransaction
                     </div>
 
                     <div class="text-center">
-                        <p class="heading pt-3"> ' . $this->categoryName . '</p>
+                        <p class="heading pt-3" style="text-transform: capitalize"> ' . $this->categoryName . '</p>
                         <p class="heading pb-3">₱ ' . number_format($this->maxTransactionAmount, 2, ".", ",") . '</p>
-                        <p class="subheading ps-3 text-start"> ' . $this->categoryType . '</p>
+                        <p class="subheading ps-3 text-start" style="text-transform: uppercase"> ' . $this->categoryType . '</p>
                     </div>
                 </div>
             </div>';
