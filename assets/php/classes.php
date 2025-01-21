@@ -160,7 +160,8 @@ class FinanceDashboard
     }
 }
 
-class TransactionsHistory {
+class TransactionsHistory
+{
     public $transactionsQuery;
     public $transactionType;
     public $transactionCategory;
@@ -168,18 +169,20 @@ class TransactionsHistory {
     public $transactionDate;
     public $transactionDescription;
 
-    public function __construct($transactionsQuery){
+    public function __construct($transactionsQuery)
+    {
         $this->transactionsQuery = $transactionsQuery;
     }
 
-    public function filterTransactions($transactionsQuery) {
-        if(isset($_GET['transactionType'])) {
+    public function filterTransactions($transactionsQuery)
+    {
+        if (isset($_GET['transactionType'])) {
             $type = $_GET['transactionType'];
             $this->transactionType = $type;
             $transactionsQuery .= " AND (categories.categoryType LIKE '%$type%' OR defaultcategories.defaultCategoryType LIKE '%$type%')";
         }
-        
-        if(isset($_GET['transactionCategory'])) {
+
+        if (isset($_GET['transactionCategory'])) {
             $category = $_GET['transactionCategory'];
             $this->transactionCategory = $category;
             $transactionsQuery .= " AND (categories.categoryName LIKE '%$category%' OR defaultcategories.defaultCategoryName LIKE '%$category%')";
@@ -188,14 +191,15 @@ class TransactionsHistory {
         return $transactionsQuery;
     }
 
-    public function setRowVariables($transactionRow) {
+    public function setRowVariables($transactionRow)
+    {
         // Set Type
         $this->transactionType = ($transactionRow['defaultCategoryType']) ? $transactionRow['defaultCategoryType'] : $transactionRow['categoryType'];
         $this->transactionType = ucfirst($this->transactionType);
 
         // Set Category
         $this->transactionCategory = ($transactionRow['defaultCategoryName']) ? $transactionRow['defaultCategoryName'] : $transactionRow['categoryName'];
-        
+
         // Format Amount and Date
         $this->transactionAmount = number_format($transactionRow['amount'], 2);
         $this->transactionDate = date('F j, Y', strtotime($transactionRow['transactionDate']));
@@ -203,18 +207,19 @@ class TransactionsHistory {
         $this->transactionDescription = $transactionRow['description'];
     }
 
-    public function createRow($transactionRow, $transactionNo) {
+    public function createRow($transactionRow, $transactionNo)
+    {
         $this->setRowVariables($transactionRow);
 
         return
-        '
+            '
             <tr>
-                <td scope="row" class="text-center">'.$transactionNo.'</td>
-                <td>'.$this->transactionType.'</td>
-                <td>'.$this->transactionCategory.'</td>
-                <td>'.$this->transactionAmount.'</td>
-                <td>'.$this->transactionDate.'</td>
-                <td>'.$this->transactionDescription.'</td>
+                <td scope="row" class="text-center">' . $transactionNo . '</td>
+                <td>' . $this->transactionType . '</td>
+                <td>' . $this->transactionCategory . '</td>
+                <td>' . $this->transactionAmount . '</td>
+                <td>' . $this->transactionDate . '</td>
+                <td>' . $this->transactionDescription . '</td>
 
                 <td>
                     <div class="dropdown dropstart">
@@ -246,6 +251,72 @@ class TransactionsHistory {
                 </td>
             </tr>
         ';
+    }
+}
+
+
+class BiggestTransaction
+{
+    public $userID;
+    public $categoryName;
+    public $categoryType;
+    public $maxTransactionAmount;
+
+    public function __construct($userID)
+    {
+        $this->userID = $userID;
+        $this->getBiggestTransaction();
+    }
+
+    public function getBiggestTransaction()
+    {
+        $maxTransactionAmountQuery = "
+        SELECT 
+            transactions.amount AS maxTransactionAmount,
+            COALESCE(categories.categoryType, defaultcategories.defaultCategoryType) AS categoryType,
+            COALESCE(categories.categoryName, defaultcategories.defaultCategoryName) AS categoryName
+        FROM 
+            transactions 
+        LEFT JOIN 
+            categories ON transactions.categoryID = categories.categoryID 
+        LEFT JOIN 
+            defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
+        WHERE 
+            transactions.amount = (SELECT MAX(amount) FROM transactions WHERE userID = $this->userID)  
+            AND transactions.userID = $this->userID
+        ORDER BY 
+            transactions.transactionDate DESC
+        LIMIT 1";
+
+        $maxTransactionAmountResult = executeQuery($maxTransactionAmountQuery);
+
+        if (mysqli_num_rows($maxTransactionAmountResult) > 0) {
+            $maxTransactionAmountRow = mysqli_fetch_assoc($maxTransactionAmountResult);
+
+            $this->maxTransactionAmount = $maxTransactionAmountRow['maxTransactionAmount'];
+            $this->categoryName = $maxTransactionAmountRow['categoryName'];
+            $this->categoryType = $maxTransactionAmountRow['categoryType'];
+        }
+    }
+
+    public function displayTransactionCard()
+    {
+        return '
+        <div class="col-12 col-lg-4 px-lg-5 py-4">
+                <div class="card stat-card rounded-5">
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="subheading pt-4 pb-4 pe-3 text-end">
+                            <b>YOUR <span style="color: #1A7431;">BIGGEST TRANSACTIONS</span>, YET!</b>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="heading pt-3" style="text-transform: capitalize"> ' . $this->categoryName . '</p>
+                        <p class="heading pb-3">₱ ' . number_format($this->maxTransactionAmount, 2, ".", ",") . '</p>
+                        <p class="subheading ps-3 text-start" style="text-transform: uppercase"> ' . $this->categoryType . '</p>
+                    </div>
+                </div>
+            </div>';
     }
 }
 
