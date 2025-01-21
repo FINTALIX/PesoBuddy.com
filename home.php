@@ -49,6 +49,48 @@ $transactionHistory = new TransactionsHistory($transactionsQuery);
 // Filter transactions
 $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
 $transactionsResult = executeQuery($transactionsQuery);
+
+// Transaction form-select Queries
+$transactionTypeQuery="SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
+$transactionsTypeResults= executeQuery($transactionTypeQuery);
+
+$defaultCategoriesQuery= "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
+$defaultCategoriesResults= executeQuery($defaultCategoriesQuery);
+
+$categoriesQuery= "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
+$categoriesResults= executeQuery($categoriesQuery);
+
+// Transaction Add Button
+if(isset($_POST['btnAddTransaction'])){
+    $userID= $_SESSION['userID'];
+    $amount=$_POST['amount'];
+    $transactionDate=$_POST['date'];
+    $description=$_POST['descriptionMesssage'];
+    
+    $categoryInput = explode("_" , $_POST['categoryName']);
+
+    $categoryKind = $categoryInput[0]; 
+    $categoryID = $categoryInput[1];
+
+    // Getting ID's From Category and Default Category
+    if ($categoryKind == 'default') {
+        $defaultCategoryID = $categoryID;
+        $categoryID = null;
+    } elseif ($categoryKind == 'custom') {
+        $customCategoryID = $categoryID;
+        $defaultCategoryID = null;
+    }
+        //Inserting To Database
+        $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) 
+            VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
+        executeQuery($insertTransactionQuery);
+        
+        //To prevent resubmission
+        $_SESSION['transaction_added'] = true;
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+}
+    unset($_SESSION['transaction_added']);
 ?>
 
 <!doctype html>
@@ -595,82 +637,105 @@ $transactionsResult = executeQuery($transactionsQuery);
     </div>
 
     <!-- Add Transaction Modal -->
-    <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
-                <div class="modal-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="heading" style="margin: 0; font-size: 1.8rem;">Add New Transaction
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="mb-3">
-                        <div class="row g-3">
-                            <div class="col-md-7">
-                                <select class="form-select" id="addtransactionType">
-                                    <option selected>Transaction Type</option>
-                                    <option value="1">Transaction 1</option>
-                                    <option value="2">Transaction 2</option>
-                                    <option value="3">Transaction 3</option>
-                                </select>
-                            </div>
+    <form method="POST"> 
+        <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="heading" style="margin: 0; font-size: 1.8rem;">Add New Transaction
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row g-3">
+                                <div class="col-md-7">
+                                    <select class="form-select" name="categoryType" id="addtransactionType">
+                                    <?php
+                                        if(mysqli_num_rows($transactionsTypeResults) > 0) {
+                                            while($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
+                                    ?> 
+                                        <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo strtoupper($transactionsTypeRows['defaultCategoryType']); ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
 
-                            <div class="col-md-5">
-                                <select class="form-select" id="addcategoryType">
-                                    <option selected>Category</option>
-                                    <option value="1">Category 1</option>
-                                    <option value="2">Category 2</option>
-                                    <option value="3">Category 3</option>
-                                </select>
+                                <div class="col-md-5">
+                                    <select class="form-select" name="categoryName" id="addcategoryType">
+                                    <?php
+                                        if(mysqli_num_rows($defaultCategoriesResults) > 0) {
+                                            while($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
+                                    ?> 
+                                        <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                    <?php
+                                        if(mysqli_num_rows($categoriesResults) > 0) {
+                                            while($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
+                                    ?> 
+                                    <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <input class="form-control" type="text" name="date" placeholder="Date"
-                            onfocus="(this.type='date')" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <textarea class="form-control" id="descriptionMesssage" placeholder="Description"></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-12 col-md-9">
-                                <input type="text" class="form-control" id="Amount" placeholder="Amount">
-                            </div>
-
-                            <div class="col-12 col-md-3">
-                                <button type="button" class="btn btn-primary"
-                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.9rem;"
-                                    data-bs-target="#transactionSuccessModal" data-bs-toggle="modal"
-                                    data-bs-dismiss="modal">
-                                    ADD
-                                </button>
-                            </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="date" placeholder="Date"
+                                onfocus="(this.type='date')" required>
                         </div>
+
+                        <div class="mb-3">
+                            <textarea class="form-control" name="descriptionMesssage" id="descriptionMesssage" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-12 col-md-9">
+                                    <input type="text" class="form-control" name="amount" id="Amount" placeholder="Amount">
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <button type="button" class="btn btn-primary"
+                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.9rem;"
+                                        data-bs-target="#transactionSuccessModal" data-bs-toggle="modal"
+                                        data-bs-dismiss="modal">
+                                        ADD
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                      
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!--Transaction Success Modal -->
-    <div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content"
-                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                <div class="modal-body p-4">
-                    <h5 class="text-uppercase"><b>Transaction successfully added!</b></h5>
-                    <button type="button" class="btn mt-3"
-                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                        data-bs-dismiss="modal">Close</button>
+                                    
+        <!--Transaction Success Modal -->
+        <div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"
+                    style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
+                    <div class="modal-body p-4">
+                        <h5 class="text-uppercase"><b>Transaction successfully added!</b></h5>
+                        <a href=home.php>
+                            <button type="submit" class="btn mt-3" name="btnAddTransaction"
+                            style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                            data-bs-dismiss="modal">Close</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Transaction History Table -->
     <div class="container">
