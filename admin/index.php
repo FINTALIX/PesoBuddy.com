@@ -26,150 +26,78 @@ adminAuth();
 
 <body>
 
-    <!-- Navbar for phone size -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
-                <img src="../assets/images/pesobuddy_icon.png" alt="Logo" style="height: 40px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
-                aria-controls="sidebarOffcanvas">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
+    <?php include('../assets/shared/sidebar.php'); ?>
 
-    <!-- sidebar -->
-    <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex align-items-center">
-                <img src="../assets/images/pesobuddy_icon.png" id="toggleSidebar" alt="Toggle Sidebar"
-                    class="toggle-logo">
-                <div class="sidebar-logo">
-                    <a href="#">PESOBUDDY</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="#dashboard" class="sidebar-link active">
-                        <i class="bi bi-bar-chart-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="users.php" class="sidebar-link">
-                        <i class="bi bi-person"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="categories.php" class="sidebar-link">
-                        <i class="bi bi-list"></i>
-                        <span>Categories</span>
-                    </a>
-                </li>
-                <li class="sidebar-item mt-auto">
-                    <a href="settings.php" class="sidebar-link">
-                        <i class="bi bi-gear"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#logout" class="sidebar-link">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
 
-        <!-- Offcanvas for phone size -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas"
-            aria-labelledby="sidebarOffcanvasLabel">
-            <div class="offcanvas-header">
-                <img src="../assets/images/pesobuddy_logoW.png" alt="PESOBUDDY" class="img-fluid"
-                    id="sidebarOffcanvasLabel" style="max-height: 94px; max-width: 200px">
-                <button type="button" class="btn-close text-reset m-0" data-bs-dismiss="offcanvas" aria-label="Close"
-                    style="background-color: transparent;"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="list-unstyled">
-                    <li><a href="#dashboard" class="sidebar-link active"><i class="bi bi-bar-chart-line"></i>
-                            Dashboard</a></li>
-                    <li><a href="users.php"><i class="bi bi-person"></i> Users</a></li>
-                    <li><a href="categories.php"><i class="bi bi-list"></i> Categories</a></li>
-                    <li><a href="settings.php"><i class="bi bi-gear"></i> Settings</a></li>
-                    <li><a href="#logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                </ul>
-            </div>
-        </div>
+    <!-- Main Content -->
+    <div class="main px-2 px-md-0"
+        style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
-        <!-- Main Content -->
-        <div class="main" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
-
+    <div id="dashboard" class="container-fluid py-4 px-4">
         <!-- Admin Greeting -->
-            <div class="row align-items-center justify-content-between">
-                <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
-                    Hello, <span style="color: var(--darkColor)">Admin!</span>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
+                Hello, <span style="color: var(--darkColor)">Admin!</span>
+            </div>
+        </div>
+
+        <!-- User Statistics -->
+        <div id="userStatistics" class="container-fluid py-4 px-4 mb-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="subheading mb-3">USER STATISTICS</div>
+                    <hr style="border-top: 2px solid #fff; margin: 1rem 0 2rem 0; opacity: 1;">
                 </div>
             </div>
 
-            <!-- User Statistics -->
-            <div id="userStatistics" class="container-fluid py-4 px-4 mb-3">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="subheading mb-3">USER STATISTICS</div>
-                        <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
+            <div class="card user-card rounded-4">
+                <div class="row text-center m-3">
+                    <!-- Total Users -->
+                    <div class="col-12 col-md-4 mb-3 mb-md-0">
+                        <p class="heading">100</p>
+                        <h6 class="pb-2">TOTAL USERS</h6>
                     </div>
-                </div>
-
-                <div class="card user-card rounded-4">
-                    <div class="row text-center m-3">
-                        <!-- Total Users -->
-                        <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">100</p>
-                            <h6 class="pb-2">TOTAL USERS</h6>
-                        </div>
-                        <!-- Active Users -->
-                        <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">80</p>
-                            <h6 class="pb-2">ACTIVE USERS</h6>
-                        </div>
-                        <!-- Inactive Users -->
-                        <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">20</p>
-                            <h6 class="pb-2">INACTIVE USERS</h6>
-                        </div>
+                    <!-- Active Users -->
+                    <div class="col-12 col-md-4 mb-3 mb-md-0">
+                        <p class="heading">80</p>
+                        <h6 class="pb-2">ACTIVE USERS</h6>
+                    </div>
+                    <!-- Inactive Users -->
+                    <div class="col-12 col-md-4 mb-3 mb-md-0">
+                        <p class="heading">20</p>
+                        <h6 class="pb-2">INACTIVE USERS</h6>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Dashboard -->
-            <div id="dashboard" class="container-fluid py-4 px-4">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">WEBSITE ENGAGEMENT</h2>
-                        <hr style="border-top: 2px solid #000; margin: 1rem 0 2rem 0; opacity: 1;">
-                    </div>
-                    <div class="card-container bg-white mt-4">
-                        <div class="p-4">
-                            <div style="height: 400px; position: relative;">
-                                <canvas id="userSignupsChart"></canvas>
+        <!-- Dashboard -->
+        <div class="container-fluid py-4 px-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="subheading">WEBSITE ENGAGEMENT</div>
+                    <hr style="border-top: 2px solid #fff; margin: 1rem 0 2rem 0; opacity: 1;">
+                </div>
+
+                <!-- Monthly User Signups Section -->
+                <div class="row p-md-4">
+                    <div class="col-12 mt-4 mt-lg-2 mb-2">
+                        <div class="paragraph mb-2"><b>MONTHLY USER SIGNUPS</b></div>
+                        <div class="card-container mt-4">
+                            <div class="p-4">
+                                <div style="height: 400px; position: relative;">
+                                    <canvas id="userSignupsChart"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Monthly Login Activity Section -->
-            <div class="row p-md-4">
-                <div class="col-12 mt-4 mt-lg-2 mb-2">
-                    <div class="subheading mb-3">MONTHLY LOGIN ACTIVITY</>
-                    </div>
-                    <div class="card-container bg-white mt-4">
-                        <div class="p-4">
-                            <div style="height: 400px; position: relative;">
-                                <canvas id="loginActivityChart"></canvas>
+                        <!-- Monthly Login Activity Section -->
+                        <div class="paragraph mt-5"><b>MONTHLY LOGIN ACTIVITY</b></div>
+                        <div class="card-container mt-4">
+                            <div class="p-4">
+                                <div style="height: 400px; position: relative;">
+                                    <canvas id="loginActivityChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,26 +115,49 @@ adminAuth();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
 
-        // Sidebar JS
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebar = document.getElementById("sidebar");
-            const mainContent = document.querySelector(".main");
-            sidebar.classList.toggle("expand");
-
-            if (sidebar.classList.contains("expand")) {
-                mainContent.style.marginLeft = "260px";
-            } else {
-                mainContent.style.marginLeft = "70px";
-            }
-        });
-
         // Chart.js
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white',
+                        font: {
+                            family: '"Lexend Exa", sans-serif',
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'white'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white',
+                        font: {
+                            family: '"Lexend Exa", sans-serif',
+                            size: 14
+                        }
+                    },
+                    grid: {
+                        color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white',
+                        font: {
+                            family: '"Lexend Exa", sans-serif',
+                            size: 16
+                        }
+                    },
+                    grid: {
+                        color: 'white'
+                    }
                 }
             }
         };
@@ -215,10 +166,10 @@ adminAuth();
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: 'Signups',
-                data: [65, 9, 100, 81, 56, 55, 70],
-                backgroundColor: '#FFAEBC',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                data: [65, 9, 89, 81, 56, 55, 70],
+                backgroundColor: '#ffc09f',
+                borderColor: '#39914f',
+                borderWidth: 1,
             }]
         };
 
@@ -227,8 +178,8 @@ adminAuth();
             datasets: [{
                 label: 'Logins',
                 data: [45, 52, 60, 89, 40, 55, 80],
-                backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: '#ffee93',
+                borderColor: '#39914f',
                 borderWidth: 1
             }]
         };

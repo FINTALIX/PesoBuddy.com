@@ -17,6 +17,7 @@ $annualRemainingBalance = computeRemainingBalance($annualTotalIncome, $annualTot
 
 // Instantiate the class
 $userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
+$transaction = new BiggestTransaction($_SESSION['userID']);
 
 $userID = $_SESSION['userID'];
 // Query to get the list of cateories
@@ -267,21 +268,7 @@ if (isset($_POST['close'])) {
             </div>
 
             <!-- Biggest Transactions -->
-            <div class="col-12 col-lg-10 col-xl-4 px-lg-5 py-4">
-                <div class="card stat-card rounded-5">
-                    <div class="d-flex flex-column align-items-end">
-                        <div class="subheading pt-4 pb-4 pe-3 text-end">
-                            <b>YOUR <span style="color: #1A7431;">BIGGEST TRANSACTIONS</span>, YET!</b>
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <p class="heading pt-3">EMERGENCY FUND</p>
-                        <p class="heading pb-3">₱ 100,000.00</p>
-                        <p class="subheading ps-3 text-start">SAVINGS</p>
-                    </div>
-                </div>
-            </div>
+            <?php echo $transaction->displayTransactionCard();?>
         </div>
     </div>
 
