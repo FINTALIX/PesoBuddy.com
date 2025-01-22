@@ -43,12 +43,13 @@ if (isset($_POST['btnEditCategory'])) {
 $transactionsQuery = "SELECT * FROM transactions 
 LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
 LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
-WHERE transactions.userID = '$userID' ORDER BY transactions.transactionDate";
+WHERE transactions.userID = '$userID'";
 
 $transactionHistory = new TransactionsHistory($transactionsQuery);
 
 // Filter transactions
 $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
+$transactionsQuery .= "ORDER BY transactions.transactionDate";
 
 // Transaction form-select Queries
 $transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
