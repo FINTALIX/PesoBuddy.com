@@ -43,13 +43,13 @@ if (isset($_POST['btnEditCategory'])) {
 $transactionsQuery = "SELECT * FROM transactions 
 LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
 LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
-WHERE transactions.userID = '{$_SESSION['userID']}'";
+WHERE transactions.userID = '$userID'";
 
 $transactionHistory = new TransactionsHistory($transactionsQuery);
 
 // Filter transactions
 $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
-$transactionsResult = executeQuery($transactionsQuery);
+$transactionsQuery .= "ORDER BY transactions.transactionDate";
 
 // Transaction form-select Queries
 $transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
@@ -81,17 +81,26 @@ if (isset($_POST['btnAddTransaction'])) {
         $customCategoryID = $categoryID;
         $defaultCategoryID = null;
     }
-    //Inserting To Database
-    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) 
-            VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
-    executeQuery($insertTransactionQuery);
 
+    //Inserting To Database
+    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
+    executeQuery($insertTransactionQuery);
+        
     //To prevent resubmission
     $_SESSION['transaction_added'] = true;
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: " . $_SERVER['PHP_SELF'] . "#transaction-history");
     exit();
 }
 unset($_SESSION['transaction_added']);
+
+// Delete Transaction
+$transactionHistory->deleteTransaction();
+
+// Edit Transaction
+$transactionHistory->editTransaction();
+
+// Display Transactions
+$transactionsResult = executeQuery($transactionsQuery);
 
 
 // Add new categories
@@ -526,7 +535,7 @@ if (isset($_POST['close'])) {
             <!-- HEADING -->
             <div class="col-12 mb-4">
                 <hr>
-                <div class="row align-items-center justify-content-lg-between">
+                <div class="row align-items-center justify-content-md-between">
                     <!-- Heading -->
                     <div class="col-auto d-flex flex-row align-items-center mb-2">
                         <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
@@ -559,39 +568,41 @@ if (isset($_POST['close'])) {
                         <div class="mb-3">
                             <div class="row g-3">
                                 <div class="col-md-7">
-                                    <select class="form-select" name="categoryType" id="addtransactionType">
-                                        <?php
-                                        if (mysqli_num_rows($transactionsTypeResults) > 0) {
-                                            while ($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
-                                        ?>
-                                                <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo strtoupper($transactionsTypeRows['defaultCategoryType']); ?></option>
-                                        <?php
-                                            }
+                                    <select class="form-select" name="categoryType" id="addtransactionType" onchange="filterCategoryOptions()">
+                                        <option selected disabled>Transaction Type</option>
+                                    <?php
+                                        if(mysqli_num_rows($transactionsTypeResults) > 0) {
+                                            while($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
+                                    ?> 
+                                        <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo ucfirst($transactionsTypeRows['defaultCategoryType']); ?></option>
+                                    <?php
                                         }
-                                        ?>
+                                    }
+                                    ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-5">
-                                    <select class="form-select" name="categoryName" id="addcategoryType">
-                                        <?php
-                                        if (mysqli_num_rows($defaultCategoriesResults) > 0) {
-                                            while ($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
-                                        ?>
-                                                <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
-                                        <?php
-                                            }
+                                    <select class="form-select" name="categoryName" id="addcategoryType" onchange="selectType()">
+                                        <option selected disabled>Category</option>
+                                    <?php
+                                        if(mysqli_num_rows($defaultCategoriesResults) > 0) {
+                                            while($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
+                                    ?> 
+                                        <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>" data-type="<?php echo ($defaultCategoriesRows['defaultCategoryType']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
+                                    <?php
                                         }
-                                        ?>
-                                        <?php
-                                        if (mysqli_num_rows($categoriesResults) > 0) {
-                                            while ($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
-                                        ?>
-                                                <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
-                                        <?php
-                                            }
+                                    }
+                                    ?>
+                                    <?php
+                                        if(mysqli_num_rows($categoriesResults) > 0) {
+                                            while($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
+                                    ?> 
+                                    <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>" data-type="<?php echo ($defaultCategoriesRows['categoryType']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
+                                    <?php
                                         }
-                                        ?>
+                                    }
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -649,7 +660,7 @@ if (isset($_POST['close'])) {
     <div class="container">
         <div class="row mb-4 px-2">
             <div class="col-12">
-                <div class="card card-container p-4" style="height: 750px;">
+                <div class="card card-container p-4">
                     <!-- FILTER TRANSACTIONS -->
                     <div class="row my-3">
 
@@ -693,7 +704,7 @@ if (isset($_POST['close'])) {
 
                     <!-- TRANSACTION TABLE -->
                     <div class="row" style="overflow-y: auto;">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="max-height: 650px; overflow-y: auto;">
                             <table class="table table-striped table-borderless m-0">
 
                                 <!-- Column Heading -->
@@ -712,196 +723,21 @@ if (isset($_POST['close'])) {
                                 <!-- Data -->
                                 <tbody>
                                     <?php
-                                    $transactionNo = 1;
+                                        $transactionNo = 1;
 
-                                    if (mysqli_num_rows($transactionsResult) > 0) {
-                                        while ($transactionRow = mysqli_fetch_array($transactionsResult)) {
-                                            echo $transactionHistory->createRow($transactionRow, $transactionNo);
+                                        if (mysqli_num_rows($transactionsResult) > 0) {
+                                            while ($transactionRow = mysqli_fetch_array($transactionsResult)) {
 
-                                            $transactionNo++;
-                                        }
-                                    } else { ?>
-                                        <tr>
-                                            <td colspan='100%' class='text-center py-3'>No data available.</td>
-                                        </tr>";
+                                                echo $transactionHistory->createRow($transactionRow, $transactionNo);
+                                                
+                                                include("assets/php/modals/transaction_modals.php");
+                                                $transactionNo++;
+                                            }
+                                        } else { ?>
+                                            <tr>
+                                                <td colspan='100%' class='text-center py-3'>No data available.</td>
+                                            </tr>";
                                     <?php } ?>
-
-                                    <!-- Edit Transaction Modal -->
-                                    <div class="modal fade" id="editTransaction" tabindex="-1"
-                                        aria-labelledby="editTransactionModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content p-4"
-                                                style="border-radius: 15px; background-color: white; border: none;">
-                                                <div class="modal-body">
-                                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                                        <h5 class="heading" style="margin: 0; font-size: 1.8rem;">
-                                                            Edit Transaction
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-7">
-                                                                <select class="form-select" id="editTransactionType">
-                                                                    <option selected>Transaction
-                                                                        Type
-                                                                    </option>
-                                                                    <option value="1">
-                                                                        Transaction 1
-                                                                    </option>
-                                                                    <option value="2">
-                                                                        Transaction 2
-                                                                    </option>
-                                                                    <option value="3">
-                                                                        Transaction 3
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="col-md-5">
-                                                                <select class="form-select" id="editCategoryType">
-                                                                    <option selected>Category
-                                                                    </option>
-                                                                    <option value="1">Category 1
-                                                                    </option>
-                                                                    <option value="2">Category 2
-                                                                    </option>
-                                                                    <option value="3">Category 3
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <input class="form-control" type="text" name="date"
-                                                            placeholder="Date" onfocus="(this.type='date')" required>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <textarea class="form-control" id="editDescriptionMesssage"
-                                                            placeholder="Description"></textarea>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <div class="row g-3 align-items-center">
-                                                            <div class="col-12 col-md-9">
-                                                                <input type="text" class="form-control" id="editAmount"
-                                                                    placeholder="Amount">
-                                                            </div>
-
-                                                            <div class="col-12 col-md-3">
-                                                                <button type="button" class="btn btn-primary"
-                                                                    style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                                                    data-bs-target="#transactionEditSuccessModal"
-                                                                    data-bs-toggle="modal" data-bs-dismiss="modal"
-                                                                    aria-label="Save changes and open success modal">
-                                                                    SAVE
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Edit Transaction Success Modal -->
-                                    <div class="modal fade" id="transactionEditSuccessModal" tabindex="-1"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content"
-                                                style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                                                <div class="modal-body p-4">
-                                                    <h5 class="text-uppercase"><b>Transaction successfully edited!</b>
-                                                    </h5>
-                                                    <button type="button" class="btn mt-3"
-                                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Delete Transaction Modal -->
-                                    <div class="modal fade" id="deleteTransaction" tabindex="-1"
-                                        aria-labelledby="deleteTransactionModalLabel" aria-hidden="true"
-                                        data-bs-backdrop="static" data-bs-keyboard="false">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content"
-                                                style="border-radius: 15px; background-color: white;">
-                                                <div style="position: relative; padding: 1rem;">
-                                                    <!-- Title -->
-                                                    <h4 class="modal-title heading text-black"
-                                                        id="deleteCategoryModalLabel"
-                                                        style="margin: 0; font-size: 26px;">
-                                                        Delete Transaction
-                                                    </h4>
-
-                                                    <!-- Close button -->
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"
-                                                        style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
-                                                    </button>
-
-                                                    <!-- Card content -->
-                                                    <div class="card"
-                                                        style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
-                                                        <p class="paragraph" style="margin: 0;">Are you
-                                                            sure you want to delete this
-                                                            transaction?</p>
-                                                        <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
-                                                            Once deleted, it cannot be retrieved
-                                                            anymore.
-                                                        </p>
-                                                    </div>
-
-                                                    <!-- Footer buttons -->
-                                                    <div class="modal-footer d-flex justify-content-end"
-                                                        style="border: none;">
-                                                        <button type="button" class="btn paragraph"
-                                                            data-bs-dismiss="modal"
-                                                            style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
-                                                            Cancel
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger paragraph"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#confirmTransactionDeleteModal"
-                                                            style="color: white; margin-left: 0.5rem;">
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Confirm the deletion -->
-                                    <div class="modal fade" id="confirmTransactionDeleteModal" tabindex="-1"
-                                        aria-labelledby="confirmTransactionDeleteModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content"
-                                                style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
-                                                <div class="modal-header" style="border: none;">
-                                                    <h4 class="modal-title heading text-center w-100"
-                                                        id="confirmDeleteModalLabel" style="margin: 0;">
-                                                        Transaction Deleted</h4>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    The transaction has been successfully
-                                                    deleted.
-                                                </div>
-                                                <div class="modal-footer d-flex justify-content-center"
-                                                    style="border: none;">
-                                                    <button type="button" class="btn btn-light paragraph"
-                                                        data-bs-dismiss="modal">
-                                                        Close
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </tbody>
                             </table>
                         </div>
@@ -1139,6 +975,76 @@ if (isset($_POST['close'])) {
                 <?php unset($_SESSION['category_added']); ?>
             }
         });
+
+        // Function for filtering categories based on selected transaction type
+        function filterCategoryOptions() {
+            var typeForm = document.getElementById("addtransactionType");
+            var typeOptions = typeForm.options;
+            var selectedType = typeForm.value;
+
+            var categoryForm = document.getElementById("addcategoryType");
+            var categoryOptions = categoryForm.options;
+
+            for (var i = 0; i < categoryOptions.length; i++) {
+                var categoryOption = categoryOptions[i];
+                var categoryOptionType = categoryOption.getAttribute("data-type");
+
+                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
+            }
+        }
+
+        // Function for selecting type based on selected category
+        function selectType() {
+            var typeForm = document.getElementById("addtransactionType");
+
+            var categoryForm = document.getElementById("addcategoryType");
+            var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
+            var categoryOptionType = selectedCategory.getAttribute("data-type");
+
+            if (categoryOptionType) {
+                typeForm.value = categoryOptionType;
+            }
+        }
+
+        function filterEditCategory() {
+            var typeForm = document.getElementById("editTransactionType");
+            var typeOptions = typeForm.options;
+            var selectedType = typeForm.value;
+
+            var categoryForm = document.getElementById("editCategoryType");
+            var categoryOptions = categoryForm.options;
+
+            for (var i = 0; i < categoryOptions.length; i++) {
+                var categoryOption = categoryOptions[i];
+                var categoryOptionType = categoryOption.getAttribute("data-type");
+
+                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
+            }
+        }
+
+        function selectEditType() {
+            var typeForm = document.getElementById("editTransactionType");
+
+            var categoryForm = document.getElementById("editCategoryType");
+            var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
+            var categoryOptionType = selectedCategory.getAttribute("data-type");
+
+            if (categoryOptionType) {
+                typeForm.value = categoryOptionType;
+            }
+        }
+
+        // Prevent edit success modal from showing if amount is invalid
+        var editSuccessModal = document.getElementById('transactionEditSuccessModal');
+        editSuccessModal.addEventListener('show.bs.modal', function (event) {
+            var amount = document.getElementById("editAmount").value;
+
+            if (amount <= 0) {
+                alert("Please enter a valid amount.");
+                return event.preventDefault();
+            }
+        })
+
     </script>
 </body>
 

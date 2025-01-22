@@ -163,6 +163,7 @@ class FinanceDashboard
 class TransactionsHistory
 {
     public $transactionsQuery;
+    public $transactionID;
     public $transactionType;
     public $transactionCategory;
     public $transactionAmount;
@@ -200,11 +201,11 @@ class TransactionsHistory
         // Set Category
         $this->transactionCategory = ($transactionRow['defaultCategoryName']) ? $transactionRow['defaultCategoryName'] : $transactionRow['categoryName'];
 
-        // Format Amount and Date
-        $this->transactionAmount = number_format($transactionRow['amount'], 2);
-        $this->transactionDate = date('F j, Y', strtotime($transactionRow['transactionDate']));
-
+        // Set other attributes
+        $this->transactionID = $transactionRow['transactionID'];
+        $this->transactionDate = $transactionRow['transactionDate'];
         $this->transactionDescription = $transactionRow['description'];
+        $this->transactionAmount = $transactionRow['amount'];
     }
 
     public function createRow($transactionRow, $transactionNo)
@@ -215,11 +216,11 @@ class TransactionsHistory
             '
             <tr>
                 <td scope="row" class="text-center">' . $transactionNo . '</td>
-                <td>' . $this->transactionType . '</td>
-                <td>' . $this->transactionCategory . '</td>
-                <td>' . $this->transactionAmount . '</td>
-                <td>' . $this->transactionDate . '</td>
-                <td>' . $this->transactionDescription . '</td>
+                <td>'.$this->transactionType.'</td>
+                <td>'.$this->transactionCategory.'</td>
+                <td>'.number_format($this->transactionAmount, 2).'</td>
+                <td>'.date('F j, Y', strtotime($this->transactionDate)).'</td>
+                <td>'.$this->transactionDescription.'</td>
 
                 <td>
                     <div class="dropdown dropstart">
@@ -232,7 +233,7 @@ class TransactionsHistory
                             <!-- Edit Button -->
                             <li>
                                 <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                                    data-bs-target="#editTransaction"
+                                    data-bs-target="#editTransaction'.$this->transactionID.'"
                                     style="text-decoration: none;">
                                     <i class="bi bi-pencil-square px-1"></i> Edit
                                 </a>
@@ -241,7 +242,7 @@ class TransactionsHistory
                             <!-- Delete Button -->
                             <li>
                                 <a class="dropdown-item option-dropdown" data-bs-toggle="modal"
-                                    data-bs-target="#deleteTransaction"
+                                    data-bs-target="#deleteTransaction'.$this->transactionID.'"
                                     style="color: red; text-decoration: none;">
                                     <i class="bi bi-trash3 px-1"></i> Delete
                                 </a>
@@ -251,6 +252,49 @@ class TransactionsHistory
                 </td>
             </tr>
         ';
+    }
+
+    public function editTransaction()
+    {
+        if(isset($_POST['btnEditTransaction'])) {
+            // Set Category
+            $categoryInput = explode("_", $_POST['transactionCategory']);
+
+            $categoryKind = $categoryInput[0]; 
+            $categoryID = $categoryInput[1];
+
+            $defaultCategoryID = null;
+            $customCategoryID = null;
+
+            if ($categoryKind == 'default') {
+                $defaultCategoryID = $categoryID;
+                $categoryID = null;
+            } elseif ($categoryKind == 'custom') {
+                $customCategoryID = $categoryID;
+                $defaultCategoryID = null;
+            }
+
+            // Set Other Values 
+            $transactionID = $_POST['transactionID'];
+            $date = $_POST['transactionDate'];
+            $description = htmlspecialchars($_POST['transactionDescription']);
+            $amount = $_POST['transactionAmount'];
+
+            $editTransactionQuery = "UPDATE transactions SET categoryID = '$customCategoryID', amount = '$amount', transactionDate = '$date', description = '$description', defaultCategoryID = '$defaultCategoryID' WHERE transactionID = '$transactionID'";
+
+            return executeQuery($editTransactionQuery);
+        }
+    }
+
+    public function deleteTransaction()
+    {
+        if(isset($_POST['btnDeleteTransaction'])) {
+            $transactionID = $_POST['transactionID'];
+
+            $deleteTransactionQuery = "DELETE FROM transactions WHERE transactionID = '$transactionID' AND userID = '{$_SESSION['userID']}'";
+
+            return executeQuery($deleteTransactionQuery);
+        }
     }
 }
 

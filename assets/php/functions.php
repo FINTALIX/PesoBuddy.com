@@ -268,4 +268,25 @@ function loadChart($userID, $year, $month, $type)
         });";
 
 }
+
+function queryTransactionTypes() {
+    $transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
+    $transactionsTypeResults = executeQuery($transactionTypeQuery);
+
+    return $transactionsTypeResults;
+}
+
+function queryDefaultCategories() {
+    $defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
+    $defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
+
+    return $defaultCategoriesResults;
+}
+
+function queryCategories() {
+    $categoriesQuery = "SELECT * FROM categories WHERE userID = {$_SESSION['userID']} ORDER BY categoryName ASC";
+    $categoriesResults = executeQuery($categoriesQuery);
+
+    return $categoriesResults;
+}
 ?>
