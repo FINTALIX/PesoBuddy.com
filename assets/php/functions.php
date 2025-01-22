@@ -75,4 +75,180 @@ function computeRemainingBalance($annualTotalIncome, $annualTotalSavings, $annua
     $annualRemainingBalance = (($annualTotalIncome + $annualTotalSavings) - $annualTotalExpense);
     return $annualRemainingBalance;
 }
+
+function computeMonthlyIncome($id, $year, $month)
+{
+    $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
+    $totalMonthlyIncomeQuery = "SELECT SUM(amount) AS totalMonthlyIncome FROM `transactions` 
+    WHERE userID = $id AND 
+    transactionDate LIKE '$year-$transactionMonth%' AND 
+    (categoryID IN (SELECT categoryID FROM categories WHERE categoryType = 'income' and userID = $id) OR 
+    defaultCategoryID IN (SELECT defaultCategoryID FROM defaultcategories WHERE defaultCategoryType = 'income'));";
+
+    $monthlyIncome = executeQuery($totalMonthlyIncomeQuery);
+
+    if (mysqli_num_rows($monthlyIncome) > 0) {
+        while ($monthlyIncomeRow = mysqli_fetch_assoc($monthlyIncome)) {
+            return $monthlyIncomeRow['totalMonthlyIncome'];
+        }
+    }
+}
+
+function computeMonthlySavings($id, $year, $month)
+{
+    $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
+    $totalMonthlySavingsQuery = "SELECT SUM(amount) AS totalMonthlySavings FROM `transactions` 
+    WHERE userID = $id AND 
+    transactionDate LIKE '$year-$transactionMonth%' AND 
+    (categoryID IN (SELECT categoryID FROM categories WHERE categoryType = 'savings' and userID = $id) OR 
+    defaultCategoryID IN (SELECT defaultCategoryID FROM defaultcategories WHERE defaultCategoryType = 'savings'));";
+
+    $monthlySavings = executeQuery($totalMonthlySavingsQuery);
+
+    if (mysqli_num_rows($monthlySavings) > 0) {
+        while ($monthlySavingsRow = mysqli_fetch_assoc($monthlySavings)) {
+            return $monthlySavingsRow['totalMonthlySavings'];
+        }
+    }
+}
+
+function computeMonthlyExpense($id, $year, $month)
+{
+    $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
+    $totalMonthlyExpenseQuery = "SELECT SUM(amount) AS totalMonthlyExpense FROM `transactions` 
+    WHERE userID = $id AND 
+    transactionDate LIKE '$year-$transactionMonth%' AND 
+    (categoryID IN (SELECT categoryID FROM categories WHERE categoryType = 'expense' and userID = $id) OR 
+    defaultCategoryID IN (SELECT defaultCategoryID FROM defaultcategories WHERE defaultCategoryType = 'expense'));";
+
+    $monthlyExpense = executeQuery($totalMonthlyExpenseQuery);
+
+    if (mysqli_num_rows($monthlyExpense) > 0) {
+        while ($monthlyExpenseRow = mysqli_fetch_assoc($monthlyExpense)) {
+            return $monthlyExpenseRow['totalMonthlyExpense'];
+        }
+    }
+}
+
+function getDefaultYear($userID)
+{
+
+    $defaultYearQuery = "SELECT MAX(YEAR(transactionDate)) AS defaultYear FROM `transactions` WHERE userID = $userID";
+    $defaultYearResult = executeQuery($defaultYearQuery);
+
+    if (mysqli_num_rows($defaultYearResult) > 0) {
+        while ($defaultYearRow = mysqli_fetch_assoc($defaultYearResult)) {
+            ;
+            return $defaultYearRow['defaultYear'];
+        }
+    }
+}
+
+function getDefaultMonth($userID, $defaultYear)
+{
+
+    $defaultMonthQuery = "SELECT MIN(MONTH(transactionDate)) AS defaultMonth FROM `transactions` WHERE userID = $userID AND YEAR(transactionDate) = $defaultYear";
+    $defaultMonthResult = executeQuery($defaultMonthQuery);
+
+    if (mysqli_num_rows($defaultMonthResult) > 0) {
+        while ($defaultMonthRow = mysqli_fetch_assoc($defaultMonthResult)) {
+            $defaultMonth = strtoupper(date("F", mktime(0, 0, 0, $defaultMonthRow['defaultMonth'], 1))); // Get first month name
+            return $defaultMonth;
+        }
+    }
+}
+function listMonthlyBreakdown($userID, $year, $month, $type)
+{
+    $colors = array('#FF6384','#FF9F40','#FFCD56','#4BC0C0','#36A2EB','#9966FF','#C9CBCE','#00FFFF','#FF69B4','#008000','#FFA500','#87CEEB');
+
+    $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
+    $listCategoryBreakdown = array();
+
+    $categoryTotalQuery = "SELECT c.categoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN categories AS c ON c.userID = t.userID AND c.categoryID = t.categoryID WHERE t.userID = $userID AND c.categoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY c.categoryName;";
+    $defaultCategoryTotalQuery = "SELECT d.defaultCategoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN defaultcategories AS d ON d.defaultCategoryID = t.defaultCategoryID WHERE t.userID = $userID AND d.defaultCategoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY d.defaultCategoryName;";
+
+    $categoryTotal = executeQuery($categoryTotalQuery);
+    $defaultCategoryTotal = executeQuery($defaultCategoryTotalQuery);
+
+    if (mysqli_num_rows($categoryTotal) > 0) {
+        while ($categoryTotalRow = mysqli_fetch_assoc($categoryTotal)) {
+            $category = array($categoryTotalRow['categoryName'], $categoryTotalRow['totalAmount']);
+            array_push($listCategoryBreakdown, $category);
+        }
+    }
+
+    if (mysqli_num_rows($defaultCategoryTotal) > 0) {
+        while ($defaultCategoryTotalRow = mysqli_fetch_assoc($defaultCategoryTotal)) {
+            $defaultCategory = array($defaultCategoryTotalRow['defaultCategoryName'], $defaultCategoryTotalRow['totalAmount']);
+            array_push($listCategoryBreakdown, $defaultCategory);
+        }
+    }
+
+    $colorIndex = 0;
+    foreach ($listCategoryBreakdown as $categoryBreakdown) {
+        echo '<li class="d-flex justify-content-between align-items-center">
+                <span><span class="color-box" style="background-color: '. $colors[$colorIndex] .';"></span>' . $categoryBreakdown[0] . '</span>
+                <span>₱ ' . $categoryBreakdown[1] . '.00</span>
+            </li>';
+
+        if (count($listCategoryBreakdown) < count($colors))
+            $colorIndex += 1;
+    }
+
+}
+
+function loadChart($userID, $year, $month, $type)
+{
+    $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
+    $listCategory = array();
+    $listPercentage = array();
+    $total = '';
+
+    if ($type == 'income') {
+        $total = computeMonthlyIncome($userID, $year, $month);
+    } else if ($type == 'savings') {
+        $total = computeMonthlySavings($userID, $year, $month);
+    } else {
+        $total = computeMonthlyExpense($userID, $year, $month);
+    }
+
+    $categoryTotalQuery = "SELECT c.categoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN categories AS c ON c.userID = t.userID AND c.categoryID = t.categoryID WHERE t.userID = $userID AND c.categoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY c.categoryName;";
+    $defaultCategoryTotalQuery = "SELECT d.defaultCategoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN defaultcategories AS d ON d.defaultCategoryID = t.defaultCategoryID WHERE t.userID = $userID AND d.defaultCategoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY d.defaultCategoryName;";
+
+    $categoryTotal = executeQuery($categoryTotalQuery);
+    $defaultCategoryTotal = executeQuery($defaultCategoryTotalQuery);
+
+    if (mysqli_num_rows($categoryTotal) > 0) {
+        while ($categoryTotalRow = mysqli_fetch_assoc($categoryTotal)) {
+            $categoryPercentage = $categoryTotalRow['totalAmount'] / $total * 100;
+            array_push($listCategory, $categoryTotalRow['categoryName']);
+            array_push($listPercentage, $categoryPercentage);
+        }
+    }
+
+    if (mysqli_num_rows($defaultCategoryTotal) > 0) {
+        while ($defaultCategoryTotalRow = mysqli_fetch_assoc($defaultCategoryTotal)) {
+            $defaultCategoryPercentage = ($defaultCategoryTotalRow['totalAmount'] / $total) * 100;
+            array_push($listCategory, $defaultCategoryTotalRow['defaultCategoryName']);
+            array_push($listPercentage, $defaultCategoryPercentage);
+        }
+    }
+
+    return "const ctx2 = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['" . implode("','", $listCategory) . "'],
+                datasets: [{
+                    data: ['" . implode("','", $listPercentage) . "'],
+                    backgroundColor: ['#FF6384','#FF9F40','#FFCD56','#4BC0C0','#36A2EB','#9966FF','#C9CBCE','#00FFFF','#FF69B4','#008000','#FFA500','#87CEEB']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });";
+
+}
 ?>
