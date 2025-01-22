@@ -275,145 +275,9 @@ if (isset($_POST['close'])) {
     </div>
 
     <!-- User Budget Tracker Section -->
-    <div class="container" id="budget-tracker">
-        <div class="row align-items-center mb-4 px-2">
-            <div class="col-12">
-                <hr>
-                <div class="row justify-content-md-between align-items-center">
+    <?php include('budget-tracker.php'); ?>
 
-                    <div class="col-12 col-md-auto d-flex flex-row align-items-center mb-2">
-                        <div class="me-3" style="width: 15px; background-color: var(--darkColor); height: 40px;"></div>
-                        <span class="heading">BUDGET TRACKER</span>
-                    </div>
-
-                    <div class="col-12 col-md-auto d-flex mb-2">
-                        <div class="subheading">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                YEAR
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-sm-end">
-                                <li><a class="dropdown-item" href="#">2025</a></li>
-                                <li><a class="dropdown-item" href="#">2024</a></li>
-                                <li><a class="dropdown-item" href="#">2023</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Monthly Buttons -->
-    <div class="container">
-        <div class="row px-2">
-            <div class="col-12 pt-3">
-                <div class="row g-3 pb-3 justify-content-center">
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">JANUARY</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">FEBRUARY</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">MARCH</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">APRIL</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">MAY</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">JUNE</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">JULY</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">AUGUST</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">SEPTEMBER</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">OCTOBER</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">NOVEMBER</button>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-2 subheading">
-                        <button type="button" class="btn btn-primary w-100 p-3">DECEMBER</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOR THE MONTH OF -->
-    <div class="container mt-5">
-        <div class="row text-center">
-            <div class="col-12">
-                <div class="divider"></div>
-                <h4>For the month of XXXXXXX</h4>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="row text-center mt-4">
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <button class="btn btn-primary">TOTAL INCOME</button>
-            </div>
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <button class="btn btn-primary">TOTAL SAVINGS</button>
-            </div>
-            <div class="col-md-4">
-                <h5>₱ 100,000.00</h5>
-                <button class="btn btn-primary">TOTAL EXPENSE</button>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-md-6 d-flex align-items-center">
-                <div class="chart-container">
-                    <canvas id="doughnutChart"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card card-container">
-                    <h5 style="text-align: center;">Categories</h5>
-                    <ul class="list-unstyled">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FF6384;"></span> Salary</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #36A2EB;"></span> Part-time</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FFCE56;"></span> Freelance</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #FF9F40;"></span> Allowance</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #4BC0C0;"></span> Stipend</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span><span class="color-box" style="background-color: #9966FF;"></span> Others</span>
-                            <span>₱XX,XXX.XX</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+    <div class="container mt-5" id="manage-categories">
         <div class="row category-section mt-5">
             <div class="col-12">
                 <div class="divider"></div>
@@ -1247,21 +1111,7 @@ if (isset($_POST['close'])) {
     </script>
 
     <script>
-        const ctx2 = document.getElementById('doughnutChart').getContext('2d');
-        const doughnutChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: ['Salary', 'Part-time', 'Freelance', 'Allowance', 'Stipend', 'Others'],
-                datasets: [{
-                    data: [30, 20, 15, 10, 15, 10],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0', '#9966FF']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+        <?php echo loadChart($userID, $budgetTrackerYear, $budgetTrackerMonth, $transactionType); ?>
     </script>
 
     <script>
