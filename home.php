@@ -21,7 +21,7 @@ $transaction = new BiggestTransaction($_SESSION['userID']);
 
 $userID = $_SESSION['userID'];
 // Query to get the list of cateories
-$customCategoryQuery = "SELECT * FROM categories WHERE userID = $userID";
+$customCategoryQuery = "SELECT * FROM categories WHERE userID = $userID AND isDeleted ='no'";
 $customCategoryResult = executeQuery($customCategoryQuery);
 
 // Check if form is submitted and process it
@@ -52,25 +52,25 @@ $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery)
 $transactionsResult = executeQuery($transactionsQuery);
 
 // Transaction form-select Queries
-$transactionTypeQuery="SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
-$transactionsTypeResults= executeQuery($transactionTypeQuery);
+$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
+$transactionsTypeResults = executeQuery($transactionTypeQuery);
 
-$defaultCategoriesQuery= "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
-$defaultCategoriesResults= executeQuery($defaultCategoriesQuery);
+$defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
+$defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
 
-$categoriesQuery= "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
-$categoriesResults= executeQuery($categoriesQuery);
+$categoriesQuery = "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
+$categoriesResults = executeQuery($categoriesQuery);
 
 // Transaction Add Button
-if(isset($_POST['btnAddTransaction'])){
-    $userID= $_SESSION['userID'];
-    $amount=$_POST['amount'];
-    $transactionDate=$_POST['date'];
-    $description=$_POST['descriptionMesssage'];
-    
-    $categoryInput = explode("_" , $_POST['categoryName']);
+if (isset($_POST['btnAddTransaction'])) {
+    $userID = $_SESSION['userID'];
+    $amount = $_POST['amount'];
+    $transactionDate = $_POST['date'];
+    $description = $_POST['descriptionMesssage'];
 
-    $categoryKind = $categoryInput[0]; 
+    $categoryInput = explode("_", $_POST['categoryName']);
+
+    $categoryKind = $categoryInput[0];
     $categoryID = $categoryInput[1];
 
     // Getting ID's From Category and Default Category
@@ -81,17 +81,64 @@ if(isset($_POST['btnAddTransaction'])){
         $customCategoryID = $categoryID;
         $defaultCategoryID = null;
     }
-        //Inserting To Database
-        $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) 
+    //Inserting To Database
+    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) 
             VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
-        executeQuery($insertTransactionQuery);
-        
-        //To prevent resubmission
-        $_SESSION['transaction_added'] = true;
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
+    executeQuery($insertTransactionQuery);
+
+    //To prevent resubmission
+    $_SESSION['transaction_added'] = true;
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
-    unset($_SESSION['transaction_added']);
+unset($_SESSION['transaction_added']);
+
+
+// Add new categories
+$_SESSION['userID'] = $userID;
+if (isset($_POST['btnSaveCategory'])) {
+    $categoryType = $_POST['categoryType'];
+    $categoryName = $_POST['categoryName'];
+
+    if (!empty($categoryType) && !empty($categoryName)) {
+        $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
+        executeQuery($categoryQuery);
+        // header("Location:home.php");
+        $_SESSION['category_added'] = true;
+    } else {
+        echo '<script>alert("Please fill both category type and category name.")</script>';
+    }
+}
+
+if (isset($_POST['btnSuccessModal'])) {
+    unset($_SESSION['category_added']);
+    header("Location:home.php");
+
+    exit();
+}
+
+
+// Delete Categories
+if (isset($_GET['categoryID'])) {
+    $categoryID = $_GET['categoryID'];
+}
+
+$_SESSION['userID'] = $userID;
+if (isset($_POST['btnDeleteCategory'])) {
+    $categoryID = $_POST['categoryID'];
+    $userID = $_SESSION['userID'];
+    $deleteCategoryQuery = "UPDATE categories SET isDeleted = 'yes' WHERE  categoryID = $categoryID AND userID = $userID";
+    executeQuery($deleteCategoryQuery);
+    header("Location:home.php");
+    exit();
+}
+
+//Redirect to home page after deleting data
+if (isset($_POST['close'])) {
+    header("Location:home.php");
+    exit();
+}
+
 ?>
 
 <!doctype html>
@@ -223,7 +270,7 @@ if(isset($_POST['btnAddTransaction'])){
             </div>
 
             <!-- Biggest Transactions -->
-            <?php echo $transaction->displayTransactionCard();?>
+            <?php echo $transaction->displayTransactionCard(); ?>
         </div>
     </div>
 
@@ -387,40 +434,69 @@ if(isset($_POST['btnAddTransaction'])){
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content p-4"
                             style="border-radius: 15px; background-color: white; border: none;">
-                            <div class="modal-body">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h1 class="heading" style="margin: 0;">Add New Category</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                            <form method="POST">
+                                <div class="modal-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <h1 class="heading" style="margin: 0;">Add New Category</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="categoryType">Category Type</label>
+                                        <?php $categoryType = $category['categoryType'] ?? ''; ?>
+                                        <select class="form-control" id="categoryType" name="categoryType">
+                                            <option value="" disabled selected>Select a category</option>
+                                            <option value="Expense" <?php echo ($categoryType == 'expense') ? 'selected' : ''; ?>>Expense</option>
+                                            <option value="Income" <?php echo ($categoryType == 'income') ? 'selected' : ''; ?>>Income</option>
+                                            <option value="Savings" <?php echo ($categoryType == 'savings') ? 'selected' : ''; ?>>Savings</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="categoryName" class="form-label paragraph">Category Name</label>
+                                        <input type="text" class="form-control" id="categoryName" name="categoryName"
+                                            placeholder="Enter Category Name" required>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" name="btnSaveCategory" id="saveButton"
+                                            class="btn btn-primary"
+                                            style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
+                                            data-bs-toggle="modal" data-bs-target="#successModal">
+                                            SAVE
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="categoryType" class="form-label paragraph">
-                                        Category Type
-                                    </label>
-                                    <select class="form-select" id="categoryType">
-                                        <option selected>Choose type...</option>
-                                        <option value="1">Type 1</option>
-                                        <option value="2">Type 2</option>
-                                        <option value="3">Type 3</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="categoryName" class="form-label paragraph">
-                                        Category Name
-                                    </label>
-                                    <input type="text" class="form-control" id="categoryName" placeholder="Enter name">
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary"
-                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                        data-bs-target="#successModal" data-bs-toggle="modal" data-bs-dismiss="modal">
-                                        SAVE
-                                    </button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const categoryType = document.getElementById('categoryType');
+                        const categoryName = document.getElementById('categoryName');
+                        const saveButton = document.getElementById('saveButton');
+
+                        saveButton.disabled = true;
+
+                        function toggleButton() {
+                            if (categoryType.value && categoryName.value) {
+                                saveButton.disabled = false;
+                            } else {
+                                saveButton.disabled = true;
+                            }
+                        }
+
+                        categoryType.addEventListener('change', toggleButton);
+                        categoryName.addEventListener('input', toggleButton);
+
+                        if (<?php echo isset($_SESSION['category_added']) && $_SESSION['category_added'] ? 'true' : 'false'; ?>) {
+                            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                            successModal.show();
+                            <?php unset($_SESSION['category_added']); ?>
+                        }
+                    });
+                </script>
+
 
                 <!-- Success Modal -->
                 <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
@@ -429,9 +505,11 @@ if(isset($_POST['btnAddTransaction'])){
                             style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                             <div class="modal-body p-4">
                                 <h5>Category successfully added!</h5>
-                                <button type="button" class="btn mt-3"
-                                    style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                    data-bs-dismiss="modal">Close</button>
+                                <form method="POST">
+                                    <button type="submit" name="btnSuccessModal" class="btn mt-3"
+                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                        data-bs-dismiss="modal">Close</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -449,12 +527,12 @@ if(isset($_POST['btnAddTransaction'])){
                                     while ($customCategoryRow = mysqli_fetch_assoc($customCategoryResult)) {
                                         $categoryID = $customCategoryRow['categoryID'];
                                         $categoryName = $customCategoryRow['categoryName'];
-                                        ?>
+                                ?>
                                         <button type="submit" name="categoryID" value="<?php echo $categoryID ?>"
                                             class="btn text-start w-100 my-1">
                                             <?php echo $categoryName ?>
                                         </button>
-                                        <?php
+                                <?php
                                     }
                                 }
                                 ?>
@@ -495,7 +573,7 @@ if(isset($_POST['btnAddTransaction'])){
 
                                 <div class="button-container d-flex justify-content-end mt-3">
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteCategoryModal-<?php echo $categoryID; ?>">DELETE</button>
+                                        data-bs-target="#deleteCategoryModal">DELETE</button>
 
                                     <!-- Delete Category Modal -->
                                     <div class="modal fade" id="deleteCategoryModal" tabindex="-1"
@@ -535,11 +613,14 @@ if(isset($_POST['btnAddTransaction'])){
                                                             style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
                                                             Cancel
                                                         </button>
-                                                        <button type="button" class="btn btn-danger paragraph"
-                                                            data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
-                                                            style="color: white; margin-left: 0.5rem;">
-                                                            Delete
-                                                        </button>
+                                                        <form Method="post">
+                                                            <button type="submit" name="btnDeleteCategory"
+                                                                class="btn btn-danger paragraph" data-bs-toggle="modal"
+                                                                data-bs-target="#confirmDeleteModal"
+                                                                style="color: white; margin-left: 0.5rem;">
+                                                                Delete
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -562,10 +643,12 @@ if(isset($_POST['btnAddTransaction'])){
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center"
                                                     style="border: none;">
-                                                    <button type="button" class="btn btn-light paragraph"
-                                                        data-bs-dismiss="modal">
-                                                        Close
-                                                    </button>
+                                                    <form method="POST">
+                                                        <button type="submit" name="close"
+                                                            class="btn btn-light paragraph" data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -625,7 +708,7 @@ if(isset($_POST['btnAddTransaction'])){
     </div>
 
     <!-- Add Transaction Modal -->
-    <form method="POST"> 
+    <form method="POST">
         <div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -640,38 +723,38 @@ if(isset($_POST['btnAddTransaction'])){
                             <div class="row g-3">
                                 <div class="col-md-7">
                                     <select class="form-select" name="categoryType" id="addtransactionType">
-                                    <?php
-                                        if(mysqli_num_rows($transactionsTypeResults) > 0) {
-                                            while($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
-                                    ?> 
-                                        <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo strtoupper($transactionsTypeRows['defaultCategoryType']); ?></option>
-                                    <?php
+                                        <?php
+                                        if (mysqli_num_rows($transactionsTypeResults) > 0) {
+                                            while ($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
+                                        ?>
+                                                <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo strtoupper($transactionsTypeRows['defaultCategoryType']); ?></option>
+                                        <?php
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-5">
                                     <select class="form-select" name="categoryName" id="addcategoryType">
-                                    <?php
-                                        if(mysqli_num_rows($defaultCategoriesResults) > 0) {
-                                            while($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
-                                    ?> 
-                                        <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
-                                    <?php
+                                        <?php
+                                        if (mysqli_num_rows($defaultCategoriesResults) > 0) {
+                                            while ($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
+                                        ?>
+                                                <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
+                                        <?php
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <?php
-                                        if(mysqli_num_rows($categoriesResults) > 0) {
-                                            while($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
-                                    ?> 
-                                    <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
-                                    <?php
+                                        ?>
+                                        <?php
+                                        if (mysqli_num_rows($categoriesResults) > 0) {
+                                            while ($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
+                                        ?>
+                                                <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
+                                        <?php
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -701,12 +784,12 @@ if(isset($_POST['btnAddTransaction'])){
                                     </button>
                                 </div>
                             </div>
-                        </div>                      
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-                                    
+
         <!--Transaction Success Modal -->
         <div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -716,8 +799,8 @@ if(isset($_POST['btnAddTransaction'])){
                         <h5 class="text-uppercase"><b>Transaction successfully added!</b></h5>
                         <a href=home.php>
                             <button type="submit" class="btn mt-3" name="btnAddTransaction"
-                            style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                            data-bs-dismiss="modal">Close</button>
+                                style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
+                                data-bs-dismiss="modal">Close</button>
                         </a>
                     </div>
                 </div>
@@ -1188,12 +1271,9 @@ if(isset($_POST['btnAddTransaction'])){
             }
         };
         new Chart(ctx, config);
-
-
     </script>
 
     <script>
-
         const ctx2 = document.getElementById('doughnutChart').getContext('2d');
         const doughnutChart = new Chart(ctx2, {
             type: 'doughnut',
