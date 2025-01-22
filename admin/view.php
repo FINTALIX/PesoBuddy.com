@@ -1,6 +1,6 @@
 <?php
 
-include ("../assets/php/functions.php");
+include("../assets/php/functions.php");
 
 session_start();
 adminAuth();
@@ -29,7 +29,8 @@ adminAuth();
     <?php include('../assets/shared/sidebar.php'); ?>
 
     <!-- Main Content -->
-    <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+    <div class="main px-2 px-md-0"
+        style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
         <!-- View User -->
         <div class="container-fluid">
@@ -38,7 +39,7 @@ adminAuth();
                 <!-- Back to user's page -->
                 <div class="col-12">
                     <a href="users.php">
-                        <div class="text-center text-sm-start pb-3" style="color:#616161; text-decoration:underline;"><i
+                        <div class="text-center text-sm-start pb-3" style="color:white; text-decoration:underline;"><i
                                 class="bi bi-arrow-left"></i>
                             <b>Go back to users page</b>
                         </div>
@@ -47,7 +48,8 @@ adminAuth();
 
                 <!-- Heading -->
                 <div class="col-12 my-3">
-                    <div class="heading text-center text-sm-start"><span style="color: #1A7431;">USER ID:</span> 001
+                    <div class="heading text-center text-sm-start">
+                        USER ID: 001
                     </div>
                 </div>
 

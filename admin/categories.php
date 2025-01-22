@@ -1,6 +1,8 @@
 <?php
 
-include ("../assets/php/functions.php");
+include("../connect.php");
+include("../assets/php/functions.php");
+include("../assets/php/classes.php");
 
 session_start();
 adminAuth();
@@ -29,7 +31,7 @@ adminAuth();
     <?php include('../assets/shared/sidebar.php'); ?>
 
     <!-- Main Content -->
-    <div class="main px-2 px-md-0" style="margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
+    <div class="main px-2 px-md-0" style="background-color: #191919 !important; color: white !important; margin-left: 70px; transition: margin-left 0.25s ease-in-out;">
 
         <!-- Manage Categories -->
         <div id="categories" class="container-fluid">
@@ -47,28 +49,28 @@ adminAuth();
                     </a>
                 </div>
 
-                  <!-- Admin Add Category Modal -->
-                  <div class="modal fade" id="addDefaultCategory" tabindex="-1"
+                <!-- Admin Add Category Modal -->
+                <form method="POST">
+                    <div class="modal fade" id="addDefaultCategory" tabindex="-1"
                         aria-labelledby="addDefaultCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content py-4 px-2"
                                 style="border-radius: 15px; background-color: white; border: none;">
                                 <div class="modal-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <p class="heading" style="margin: 0;">ADD NEW CATEGORY
-                                        </p>
+                                        <p class="heading" style="margin: 0; color:black;">ADD NEW CATEGORY</p>
                                         <!-- Close button -->
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close">
                                         </button>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="adminAddCategoryType"
-                                            placeholder="Type">
+                                        <input type="text" class="form-control" name="defaultCategoryType"
+                                            id="adminAddCategoryType" placeholder="Type">
                                     </div>
                                     <div class="mb-4">
-                                        <input type="text" class="form-control" id="adminAddCategoryName"
-                                            placeholder="Category">
+                                        <input type="text" class="form-control" name="defaultCategoryName"
+                                            id="adminAddCategoryName" placeholder="Category">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <div class="row g-3">
@@ -92,20 +94,23 @@ adminAuth();
                         </div>
                     </div>
 
-                    <!-- Success Modal -->
+                    <!-- Add Success Modal -->
                     <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content"
                                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                                 <div class="modal-body p-4">
                                     <h5 class="subheading text-uppercase">Category successfully added!</h5>
-                                    <button type="button" class="btn mt-3"
+                                    <button type="submit" class="btn mt-3" name="addCategory"
                                         style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                        data-bs-dismiss="modal">Close</button>
+                                        data-bs-dismiss="modal">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </form>
 
                 <!-- Subheading -->
                 <div class="col-12 mt-4 mt-lg-2 mb-2">
@@ -127,71 +132,8 @@ adminAuth();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Category Row -->
-                                        <tr class="text-center align-middle">
-                                            <td scope="row">1</td>
-                                            <td>Income</td>
-                                            <td>Salary</td>
-                                            <td class="text-end">
-                                                <!-- Options Dropdown -->
-                                                <div class="dropdown dropstart">
-                                                    <button class="btn options-btn p-1" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#adminEditCategory"
-                                                                style="text-decoration: none;">
-                                                                <i class="bi bi-pencil-square px-1"></i> Edit
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal" data-bs-target="#deleteAdminCategory"
-                                                                style="color: red; text-decoration: none;">
-                                                                <i class="bi bi-trash3 px-1"></i> Delete
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <!-- Category Row -->
-                                        <tr class="text-center align-middle">
-                                            <td scope="row">2</td>
-                                            <td>Expense</td>
-                                            <td>Rent</td>
-                                            <td class="text-end">
-                                                <!-- Options Dropdown -->
-                                                <div class="dropdown dropstart">
-                                                    <button class="btn options-btn p-1" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#adminEditCategory"
-                                                                style="text-decoration: none;">
-                                                                <i class="bi bi-pencil-square px-1"></i> Edit
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item option-dropdown"
-                                                                data-bs-toggle="modal" data-bs-target="#deleteAdminCategory"
-                                                                style="color: red; text-decoration: none;">
-                                                                <i class="bi bi-trash3 px-1"></i> Delete
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <!-- Default Categories Row -->
+                                        <?php echo $categoryManager->displayDefaultCategories(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -201,140 +143,15 @@ adminAuth();
             </div>
         </div>
 
-        <!-- Admin Edit Category Modal -->
-        <div class="modal fade" id="adminEditCategory" tabindex="-1" aria-labelledby="adminEditCategoryLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content py-4 px-2"
-                    style="border-radius: 15px; background-color: white; border: none;">
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <p class="heading" style="margin: 0;">EDIT CATEGORY
-                            </p>
-                            <!-- Close button -->
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="adminEditCategoryType" placeholder="Type">
-                        </div>
-                        <div class="mb-4">
-                            <input type="text" class="form-control" id="adminEditCategoryName" placeholder="Category">
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary me-2"
-                                        style="background-color: var(--borderColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1rem;"
-                                        data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close">
-                                        CANCEL
-                                    </button>
-                                    <button type="button" class="btn btn-primary"
-                                        style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                        data-bs-target="#editSuccessModal" data-bs-toggle="modal"
-                                        data-bs-dismiss="modal">
-                                        EDIT
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Success Modal -->
-        <div class="modal fade" id="editSuccessModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content"
-                    style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                    <div class="modal-body p-4">
-                        <h5 class="subheading text-uppercase">Category successfully edited!</h5>
-                        <button type="button" class="btn mt-3"
-                            style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                            data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-            <!-- Delete Admin Category Modal -->
-            <div class="modal fade" id="deleteAdminCategory" tabindex="-1" aria-labelledby="deleteAdminCategoryLabel"
-                aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content" style="border-radius: 15px; background-color: white;">
-                        <div style="position: relative; padding: 1rem;">
-                            <!-- Title -->
-                            <h4 class="modal-title heading text-black" id="deleteAdminCategoryLabel"
-                                style="margin: 0; font-size: 26px;">
-                                DELETE CATEGORY
-                            </h4>
-
-                            <!-- Close button -->
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                style="position: absolute; top: 26px; right: 40px; transform: translateX(26px);">
-                            </button>
-
-                            <!-- Card content -->
-                            <div class="card"
-                                style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
-                                <p class="paragraph" style="margin: 0;">Are you sure you want to delete this category?
-                                </p>
-                                <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
-                                    Once deleted, it cannot be retrieve anymore.
-                                </p>
-                            </div>
-
-                            <!-- Footer buttons -->
-                            <div class="modal-footer d-flex justify-content-end" style="border: none;">
-                                <button type="button" class="btn paragraph" data-bs-dismiss="modal"
-                                    style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
-                                    Cancel
-                                </button>
-                                <button type="button" class="btn btn-danger paragraph" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteAccountModal"
-                                    style="color: white; margin-left: 0.5rem;">
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Confirm Admin Category Deletion Modal -->
-            <div class="modal fade" id="confirmDeleteAccountModal" tabindex="-1"
-                aria-labelledby="confirmDeleteAccountLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content"
-                        style="border-radius: 15px; background-color:rgb(141, 26, 37); color: white; border: none;">
-                        <div class="modal-header" style="border: none;">
-                            <h4 class="modal-title heading text-center w-100" id="confirmDeleteModalLabel"
-                                style="margin: 0;"> Category Deleted
-                            </h4>
-                        </div>
-                        <div class="modal-body text-center">The category has been successfully
-                            deleted.
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center" style="border: none;">
-                            <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         <!-- User Categories -->
         <div class="container-fluid">
             <div class="row pt-5 pt-md-0 px-md-4">
                 <div class="col-12">
                     <div class="subheading">USER-SPECIFIC LIST OF CATEGORIES</div>
-                    <hr>
+                    <hr style="border: 1px solid white;">
                     <ul class="list-unstyled">
-                        <li>Grocery</li>
-                        <li>Transportation</li>
-                        <li>Food</li>
+                        <!-- User's Categories Row -->
+                        <?php echo $categoryManager->displayCategories(); ?>
                     </ul>
                 </div>
             </div>
