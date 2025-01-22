@@ -470,33 +470,6 @@ if (isset($_POST['close'])) {
                     </div>
                 </div>
 
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const categoryType = document.getElementById('categoryType');
-                        const categoryName = document.getElementById('categoryName');
-                        const saveButton = document.getElementById('saveButton');
-
-                        saveButton.disabled = true;
-
-                        function toggleButton() {
-                            if (categoryType.value && categoryName.value) {
-                                saveButton.disabled = false;
-                            } else {
-                                saveButton.disabled = true;
-                            }
-                        }
-
-                        categoryType.addEventListener('change', toggleButton);
-                        categoryName.addEventListener('input', toggleButton);
-
-                        if (<?php echo isset($_SESSION['category_added']) && $_SESSION['category_added'] ? 'true' : 'false'; ?>) {
-                            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                            successModal.show();
-                            <?php unset($_SESSION['category_added']); ?>
-                        }
-                    });
-                </script>
-
 
                 <!-- Success Modal -->
                 <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
@@ -1287,6 +1260,33 @@ if (isset($_POST['close'])) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryType = document.getElementById('categoryType');
+            const categoryName = document.getElementById('categoryName');
+            const saveButton = document.getElementById('saveButton');
+
+            saveButton.disabled = true;
+
+            function toggleButton() {
+                if (categoryType.value && categoryName.value) {
+                    saveButton.disabled = false;
+                } else {
+                    saveButton.disabled = true;
+                }
+            }
+
+            categoryType.addEventListener('change', toggleButton);
+            categoryName.addEventListener('input', toggleButton);
+
+            if (<?php echo isset($_SESSION['category_added']) && $_SESSION['category_added'] ? 'true' : 'false'; ?>) {
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+                <?php unset($_SESSION['category_added']); ?>
             }
         });
     </script>
