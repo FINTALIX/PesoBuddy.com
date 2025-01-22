@@ -19,8 +19,7 @@ $annualRemainingBalance = computeRemainingBalance($annualTotalIncome, $annualTot
 $userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
 $transaction = new BiggestTransaction($_SESSION['userID']);
 
-$userID = $_SESSION['userID'];
-// Query to get the list of cateories
+// Query to get the list of categories
 $customCategoryQuery = "SELECT * FROM categories WHERE userID = $userID AND isDeleted ='no'";
 $customCategoryResult = executeQuery($customCategoryQuery);
 
@@ -85,7 +84,7 @@ if (isset($_POST['btnAddTransaction'])) {
     //Inserting To Database
     $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
     executeQuery($insertTransactionQuery);
-        
+
     //To prevent resubmission
     $_SESSION['transaction_added'] = true;
     header("Location: " . $_SERVER['PHP_SELF'] . "#transaction-history");
@@ -373,12 +372,12 @@ if (isset($_POST['close'])) {
                                     while ($customCategoryRow = mysqli_fetch_assoc($customCategoryResult)) {
                                         $categoryID = $customCategoryRow['categoryID'];
                                         $categoryName = $customCategoryRow['categoryName'];
-                                ?>
+                                        ?>
                                         <button type="submit" name="categoryID" value="<?php echo $categoryID ?>"
                                             class="btn text-start w-100 my-1">
                                             <?php echo $categoryName ?>
                                         </button>
-                                <?php
+                                        <?php
                                     }
                                 }
                                 ?>
@@ -402,19 +401,23 @@ if (isset($_POST['close'])) {
                                 }
                                 ?>
 
+                                <!-- Category Type Dropdown -->
                                 <div class="form-group my-3">
                                     <label for="categoryType">Category Type</label>
                                     <select class="form-control" id="categoryType" name="categoryType">
-                                        <option value="Expense" <?php echo ($categoryType == 'expense') ? 'selected' : ''; ?>>Expense</option>
-                                        <option value="Income" <?php echo ($categoryType == 'income') ? 'selected' : ''; ?>>Income</option>
-                                        <option value="Savings" <?php echo ($categoryType == 'savings') ? 'selected' : ''; ?>>Savings</option>
+                                        <option value="Expense" <?php echo ($categoryType == 'Expense') ? 'selected' : ''; ?>>Expense</option>
+                                        <option value="Income" <?php echo ($categoryType == 'Income') ? 'selected' : ''; ?>>Income</option>
+                                        <option value="Savings" <?php echo ($categoryType == 'Savings') ? 'selected' : ''; ?>>Savings</option>
                                     </select>
                                 </div>
+
+                                <!-- Category Name Input Field -->
                                 <div class="form-group my-3">
                                     <label for="categoryName">Category Name</label>
                                     <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                        value="<?php echo $categoryName; ?>" placeholder="Enter name">
+                                        value="<?php echo htmlspecialchars($categoryName); ?>" placeholder="Enter name">
                                 </div>
+
                                 <input type="hidden" name="categoryID" value="<?php echo $categoryID ?? ''; ?>">
 
                                 <div class="button-container d-flex justify-content-end mt-3">
@@ -568,41 +571,52 @@ if (isset($_POST['close'])) {
                         <div class="mb-3">
                             <div class="row g-3">
                                 <div class="col-md-7">
-                                    <select class="form-select" name="categoryType" id="addtransactionType" onchange="filterCategoryOptions()">
+                                    <select class="form-select" name="categoryType" id="addtransactionType"
+                                        onchange="filterCategoryOptions()">
                                         <option selected disabled>Transaction Type</option>
-                                    <?php
-                                        if(mysqli_num_rows($transactionsTypeResults) > 0) {
-                                            while($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
-                                    ?> 
-                                        <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>"><?php echo ucfirst($transactionsTypeRows['defaultCategoryType']); ?></option>
-                                    <?php
+                                        <?php
+                                        if (mysqli_num_rows($transactionsTypeResults) > 0) {
+                                            while ($transactionsTypeRows = mysqli_fetch_assoc($transactionsTypeResults)) {
+                                                ?>
+                                                <option value="<?php echo $transactionsTypeRows['defaultCategoryType']; ?>">
+                                                    <?php echo ucfirst($transactionsTypeRows['defaultCategoryType']); ?>
+                                                </option>
+                                                <?php
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-5">
-                                    <select class="form-select" name="categoryName" id="addcategoryType" onchange="selectType()">
+                                    <select class="form-select" name="categoryName" id="addcategoryType"
+                                        onchange="selectType()">
                                         <option selected disabled>Category</option>
-                                    <?php
-                                        if(mysqli_num_rows($defaultCategoriesResults) > 0) {
-                                            while($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
-                                    ?> 
-                                        <option value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>" data-type="<?php echo ($defaultCategoriesRows['defaultCategoryType']); ?>"><?php echo ($defaultCategoriesRows['defaultCategoryName']); ?></option>
-                                    <?php
+                                        <?php
+                                        if (mysqli_num_rows($defaultCategoriesResults) > 0) {
+                                            while ($defaultCategoriesRows = mysqli_fetch_assoc($defaultCategoriesResults)) {
+                                                ?>
+                                                <option
+                                                    value="default_<?php echo ($defaultCategoriesRows['defaultCategoryID']); ?>"
+                                                    data-type="<?php echo ($defaultCategoriesRows['defaultCategoryType']); ?>">
+                                                    <?php echo ($defaultCategoriesRows['defaultCategoryName']); ?>
+                                                </option>
+                                                <?php
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <?php
-                                        if(mysqli_num_rows($categoriesResults) > 0) {
-                                            while($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
-                                    ?> 
-                                    <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>" data-type="<?php echo ($defaultCategoriesRows['categoryType']); ?>"><?php echo ($categoriesRows['categoryName']); ?></option>
-                                    <?php
+                                        ?>
+                                        <?php
+                                        if (mysqli_num_rows($categoriesResults) > 0) {
+                                            while ($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
+                                                ?>
+                                                <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"
+                                                    data-type="<?php echo ($defaultCategoriesRows['categoryType']); ?>">
+                                                    <?php echo ($categoriesRows['categoryName']); ?>
+                                                </option>
+                                                <?php
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -614,13 +628,15 @@ if (isset($_POST['close'])) {
                         </div>
 
                         <div class="mb-3">
-                            <textarea class="form-control" name="descriptionMesssage" id="descriptionMesssage" placeholder="Description"></textarea>
+                            <textarea class="form-control" name="descriptionMesssage" id="descriptionMesssage"
+                                placeholder="Description"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <div class="row g-3 align-items-center">
                                 <div class="col-12 col-md-9">
-                                    <input type="text" class="form-control" name="amount" id="Amount" placeholder="Amount">
+                                    <input type="text" class="form-control" name="amount" id="Amount"
+                                        placeholder="Amount">
                                 </div>
 
                                 <div class="col-12 col-md-3">
@@ -723,20 +739,20 @@ if (isset($_POST['close'])) {
                                 <!-- Data -->
                                 <tbody>
                                     <?php
-                                        $transactionNo = 1;
+                                    $transactionNo = 1;
 
-                                        if (mysqli_num_rows($transactionsResult) > 0) {
-                                            while ($transactionRow = mysqli_fetch_array($transactionsResult)) {
+                                    if (mysqli_num_rows($transactionsResult) > 0) {
+                                        while ($transactionRow = mysqli_fetch_array($transactionsResult)) {
 
-                                                echo $transactionHistory->createRow($transactionRow, $transactionNo);
-                                                
-                                                include("assets/php/modals/transaction_modals.php");
-                                                $transactionNo++;
-                                            }
-                                        } else { ?>
-                                            <tr>
-                                                <td colspan='100%' class='text-center py-3'>No data available.</td>
-                                            </tr>";
+                                            echo $transactionHistory->createRow($transactionRow, $transactionNo);
+
+                                            include("assets/php/modals/transaction_modals.php");
+                                            $transactionNo++;
+                                        }
+                                    } else { ?>
+                                        <tr>
+                                            <td colspan='100%' class='text-center py-3'>No data available.</td>
+                                        </tr>";
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -951,7 +967,7 @@ if (isset($_POST['close'])) {
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const categoryType = document.getElementById('categoryType');
             const categoryName = document.getElementById('categoryName');
             const saveButton = document.getElementById('saveButton');
