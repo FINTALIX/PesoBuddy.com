@@ -1,3 +1,12 @@
+<?php
+
+include ("assets/php/functions.php");
+
+session_start();
+userAuth();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
