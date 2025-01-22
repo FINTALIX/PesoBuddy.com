@@ -123,7 +123,7 @@ if(isset($_POST['btnAccountDelete'])){
 
             <div class="col-12 col-md-auto d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
                 <div class="col-auto text-md-end">
-                    <span class="subheading" style="color:#1A7431;"><?php echo strtoupper(date('l')); ?></span><br><?php echo date("F d"); ?>
+                    <span class="subheading" style="color:#1A7431;"><?php echo strtoupper(date('l')); ?></span><br><?php echo date("F d, Y"); ?>
                 </div>
 
                 <div class="col-auto px-3 d-none d-md-block">
@@ -162,8 +162,8 @@ if(isset($_POST['btnAccountDelete'])){
                                 <input type="text" class="form-control form-control-lg" name="lastName" value="<?php echo $personalInfoRows['lastName']?>">
                             </div>
                             <div class="mb-5">
-                                <label class="paragraph form-label">Birthday: <?php echo strtoupper(date("F d, Y", strtotime($personalInfoRows['birthday'])))?></label>
-                                <input type="date" class="form-control form-control-lg" name="birthday" value="<?php echo strtoupper(date("F d, Y", strtotime($personalInfoRows['birthday'])))?>">
+                                <label class="paragraph form-label">Birthday</label>
+                                <input type="date" class="form-control form-control-lg" name="birthday" value="<?php echo date("Y-m-d", strtotime($personalInfoRows['birthday']))?>">
                             </div>
                             <div class="text-end">
                                 <button class="btn btn-primary btn-lg rounded-pill" type="submit" name="btnProfile">SAVE</button>
@@ -203,7 +203,7 @@ if(isset($_POST['btnAccountDelete'])){
                             <form method="POST">
                                 <div class="mb-3">
                                     <label class="paragraph form-label">Current Password</label>
-                                    <input type="password" class="form-control" name="oldpassword" value="<?php echo $personalInfoRows['password'];?>">
+                                    <input type="password" class="form-control" name="oldpassword" value="">
                                 </div>
                                 <div class="mb-3">
                                     <label class="paragraph form-label">New Password</label>
