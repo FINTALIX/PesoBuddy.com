@@ -39,6 +39,10 @@ if (isset($_POST['btnLogin'])) {
       $_SESSION['profilePicture'] = $user['profilePicture'];
       $_SESSION['role'] = $user['role'];
 
+      $userID = $user['userID'];
+      $insertLoginQuery = "INSERT INTO logins (userID) VALUES ('$userID')";
+      executeQuery($insertLoginQuery);  
+
       if ($user['role'] == 'admin') {
         header("Location: admin/");
       } else {
