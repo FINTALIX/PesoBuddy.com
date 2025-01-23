@@ -12,6 +12,9 @@ switch ($method) {
     case 'POST':
         handlePost($pdo, $input);
         break;
+    case 'PUT':
+      handlePUT($pdo, $input);
+      break;
     case 'DELETE':
         handleDelete($pdo, $input);
         break;
@@ -50,7 +53,28 @@ function handlePost($pdo, $inputs)
   echo json_encode(['message' => 'User created successfully']);
 }
 
+function handlePUT($pdo)
+{
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!isset($data['ids']) || !is_array($data['ids'])) {
+        echo json_encode(['error' => 'Invalid input. Expected an array of IDs.']);
+        http_response_code(400); 
+        return;
+    }
 
+  
+    $inputs = $data['ids'];
+    $sql = "UPDATE users SET role='user' WHERE userID = :id";
+
+    
+    foreach ($inputs as $input) {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $input]); 
+    }
+
+    echo json_encode(['message' => 'Users deleted successfully']);
+}
 
 function handleDelete($pdo)
 {

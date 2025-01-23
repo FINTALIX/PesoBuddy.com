@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2025 at 09:05 AM
+-- Generation Time: Jan 23, 2025 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,19 +31,20 @@ CREATE TABLE `categories` (
   `categoryID` int(11) NOT NULL,
   `userID` int(10) NOT NULL,
   `categoryName` varchar(35) NOT NULL,
-  `categoryType` varchar(20) NOT NULL
+  `categoryType` varchar(20) NOT NULL,
+  `isDeleted` varchar(10) NOT NULL DEFAULT 'no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`categoryID`, `userID`, `categoryName`, `categoryType`) VALUES
-(1, 2, 'Vacation', 'Expense'),
-(2, 2, 'Investment', 'Savings'),
-(3, 2, 'Side Hustle', 'Income'),
-(4, 2, 'Fitness', 'Income'),
-(5, 2, 'Birthday', 'Expense');
+INSERT INTO `categories` (`categoryID`, `userID`, `categoryName`, `categoryType`, `isDeleted`) VALUES
+(1, 2, 'Vacation', 'Expense', 'no'),
+(2, 2, 'Investment', 'Savings', 'no'),
+(3, 2, 'Side Hustle', 'Income', 'no'),
+(4, 2, 'Fitness', 'Income', 'no'),
+(5, 2, 'Birthday', 'Expense', 'no');
 
 -- --------------------------------------------------------
 
