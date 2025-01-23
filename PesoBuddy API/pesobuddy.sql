@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2025 at 01:40 PM
+-- Generation Time: Jan 23, 2025 at 02:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -264,8 +264,16 @@ INSERT INTO `logins` (`loginID`, `userID`, `loginDate`) VALUES
 CREATE TABLE `settings` (
   `settingsID` int(10) NOT NULL,
   `settingName` varchar(20) NOT NULL,
-  `settingValue` varchar(10) NOT NULL
+  `settingValue` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`settingsID`, `settingName`, `settingValue`) VALUES
+(1, 'logo', 'websiteLogo.png'),
+(2, 'theme', 'NULL');
 
 -- --------------------------------------------------------
 
@@ -562,7 +570,7 @@ ALTER TABLE `logins`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `settingsID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `settingsID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`
