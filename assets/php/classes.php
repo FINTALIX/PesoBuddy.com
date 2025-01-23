@@ -364,7 +364,6 @@ class BiggestTransaction
     }
 }
 
-
 class CategoryManager
 {
     // Properties
@@ -630,5 +629,67 @@ if (isset($_POST['deleteCategory'])) {
     exit;
 }
 
+class User {
+    
+    public $userQuery;
+    public $userResult;
+    public $userID;
+    public $firstName;
+    public $lastName;
+    public $username;
+    public $birthday;
+    public $email;
+    public $recentLogin;
+    public $status;
+    public $profilePicture;
 
+    public function __construct() 
+    {
+        $this->userQuery = "SELECT users.*, logins.loginDate AS recentLogin FROM users
+        LEFT JOIN logins ON users.userID = logins.userID
+        WHERE users.role = 'user' AND logins.loginDate = (
+            SELECT MAX(loginDate) 
+            FROM logins 
+            WHERE logins.userID = users.userID)
+        ORDER BY users.userID";
+
+        $this->userResult = executeQuery($this->userQuery);
+    }
+
+    public function setAttributes($userRow) {
+        $this->userID = $userRow['userID'];
+        $this->firstName = $userRow['firstName'];
+        $this->lastName = $userRow['lastName'];
+        $this->username = $userRow['username'];
+        $this->recentLogin = $userRow['recentLogin'];
+    }
+
+    public function createRow($userRow) {
+        $this->setAttributes($userRow);
+
+        return '
+        <tr>
+            <td>'.$this->userID.'</td>
+            <td>'.$this->firstName.'</td>
+            <td>'.$this->lastName.'</td>
+            <td>'.$this->username.'</td>
+            <td>'.date('Y-m-d', strtotime($this->recentLogin)).'</td>
+
+            <!-- Action Buttons -->
+            <td class="text-center">
+                <!-- View -->
+                <a class="btn btn-primary my-1" href="view.php?id='.$this->userID.'">
+                    View
+                </a>
+
+                <!-- Delete -->
+                <a class="btn btn-danger my-1" data-bs-toggle="modal"
+                    data-bs-target="#deleteUser'.$this->userID.'">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        ';
+    }
+}
 ?>
