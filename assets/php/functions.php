@@ -292,4 +292,14 @@ function queryCategories() {
 
     return $categoriesResults;
 }
+
+function deleteTracker($userID){
+    if(isset($_POST['btnDeleteTracker'])){
+        $month = DateTime::createFromFormat('F', ucfirst(strtolower($_POST['month'])))->format('m');
+        $year = $_POST['year'];
+
+        $deleteTrackerQuery = "DELETE FROM transactions WHERE userID = $userID AND transactionDate LIKE '%$year-$month%';";
+        executeQuery($deleteTrackerQuery);
+    }
+}
 ?>

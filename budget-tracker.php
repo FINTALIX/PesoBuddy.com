@@ -10,6 +10,7 @@ $_SESSION['transactionType'] = isset($_POST['transactionType']) ? $_POST['transa
 $budgetTrackerYear = $_SESSION['budgetTrackerYear'];
 $budgetTrackerMonth = $_SESSION['budgetTrackerMonth'];
 $transactionType = $_SESSION['transactionType'];
+$_SESSION['isEmpty'] = true;
 
 function loadTransactionYears($userID)
 {
@@ -25,9 +26,12 @@ function loadTransactionYears($userID)
                     <button type="submit" class="dropdown-item" style="border: none; background: none;">' . $yearsRow['transactionYears'] . '</button>
                 </form>
             </li>';
+            $_SESSION['isEmpty'] = false;
+
         }
     }else{
         echo '<button class="dropdown-item" style="border: none; background: none;" disabled>NO BUDGET TRACKER YET</button>';
+        $_SESSION['isEmpty'] = true;
     }
 }
 
