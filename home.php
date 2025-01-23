@@ -11,6 +11,7 @@ $userID = $_SESSION['userID'];
 include("assets/php/imageProcess.php");
 $year = isset($_GET['year']) ? $_GET['year'] : '2025';
 
+deleteTracker($userID);
 $annualTotalIncome = computeAnnualIncome($userID, $year);
 $annualTotalSavings = computeAnnualSavings($userID, $year);
 $annualTotalExpense = computeAnnualExpense($userID, $year);
@@ -786,7 +787,9 @@ if (isset($_POST['close'])) {
 
                     <!-- Delete Button -->
                     <div class="col-12 col-md-2 text-start text-md-end">
-                        <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteData">
+                        <button
+                            class="btn btn-danger rounded-pill <?php echo $isEmpty = $_SESSION['isEmpty'] == true ? "disabled" : ""; ?>"
+                            data-bs-toggle="modal" data-bs-target="#deleteData">
                             DELETE
                         </button>
                     </div>
@@ -817,9 +820,9 @@ if (isset($_POST['close'])) {
                         style="border: 2px solid red; background-color: rgba(255, 0, 0, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem;">
                         <p class="paragraph" style="margin: 0;">LAST WARNING!</p>
                         <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
-                            If you decided to delete this month’s budget tracker, all data related to it will also
-                            be
-                            deleted.
+                            If you decided to delete this month’s
+                            <b>(<?php echo $budgetTrackerMonth . ' ' . $budgetTrackerYear; ?>)</b> budget tracker, all data
+                            related to it will also be deleted.
                         </p>
                     </div>
 
@@ -853,9 +856,14 @@ if (isset($_POST['close'])) {
                     The monthly tracker has been successfully deleted.
                 </div>
                 <div class="modal-footer d-flex justify-content-center" style="border: none;">
-                    <button type="button" class="btn btn-light paragraph" data-bs-dismiss="modal">
-                        Close
-                    </button>
+                    <form method="POST">
+                        <input type="hidden" value="<?php echo $budgetTrackerYear; ?>" name="year">
+                        <input type="hidden" value="<?php echo $budgetTrackerMonth; ?>" name="month">
+                        <button type="submit" class="btn btn-light paragraph" data-bs-dismiss="modal"
+                            name="btnDeleteTracker">
+                            Close
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
