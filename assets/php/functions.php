@@ -144,10 +144,13 @@ function getDefaultYear($userID)
 
     if (mysqli_num_rows($defaultYearResult) > 0) {
         while ($defaultYearRow = mysqli_fetch_assoc($defaultYearResult)) {
-            ;
-            return $defaultYearRow['defaultYear'];
+            if($defaultYearRow['defaultYear'] !=  NULL){
+                return $defaultYearRow['defaultYear'];
+            }
         }
     }
+
+    return date("Y");
 }
 
 function getDefaultMonth($userID, $defaultYear)
