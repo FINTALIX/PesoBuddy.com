@@ -7,6 +7,26 @@ include("../assets/php/classes.php");
 session_start();
 adminAuth();
 
+$userID = $_SESSION['userID'];
+include("../assets/php/imageProcess.php");
+
+if(isset($_GET['id'])) {
+    $userID = $_GET['id'];
+    
+    $userInfo = new User();
+    $userInfo->queryUserInfo($userID);
+
+    if(mysqli_num_rows($userInfo->userResult) > 0) {
+        $userRow = mysqli_fetch_assoc($userInfo->userResult);
+
+        $userInfo->setAttributes($userRow);
+    } else {
+        header("Location: users.php");
+    }
+
+} else {
+    header("Location: users.php");
+}
 ?>
 
 <!doctype html>
