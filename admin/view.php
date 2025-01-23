@@ -1,10 +1,29 @@
 <?php
 
+include("../connect.php");
 include("../assets/php/functions.php");
+include("../assets/php/classes.php");
 
 session_start();
 adminAuth();
 
+if(isset($_GET['id'])) {
+    $userID = $_GET['id'];
+    
+    $userInfo = new User();
+    $userInfo->queryUserInfo($userID);
+
+    if(mysqli_num_rows($userInfo->userResult) > 0) {
+        $userRow = mysqli_fetch_assoc($userInfo->userResult);
+
+        $userInfo->setAttributes($userRow);
+    } else {
+        header("Location: users.php");
+    }
+
+} else {
+    header("Location: users.php");
+}
 ?>
 
 <!doctype html>
@@ -49,66 +68,37 @@ adminAuth();
                 <!-- Heading -->
                 <div class="col-12 my-3">
                     <div class="heading text-center text-sm-start">
-                        USER ID: 001
+                        USER ID: <?php echo sprintf('%03d', $userInfo->userID); ?>
                     </div>
                 </div>
 
+                <!-- User Info -->
                 <div class="col-12 my-3">
                     <div class="row mb-4 px-2 d-flex justify-content-center align-items-center">
-                        <div class="card stat-card w-100">
-                            <div class="row py-2">
-                                <!-- Profile Picture -->
-                                <div class="col-12 col-md-2 p-2 d-flex justify-content-center align-items-center">
-                                    <img src="../assets/images/pesobuddy_icon.png" alt="Profile Picture"
-                                        class="rounded-circle img-fluid" width="150" height="140">
-                                </div>
-                                <!-- User's Information -->
-                                <div class="col-12 col-md-10 pt-3 d-flex justify-content-start align-items-center">
-                                    <ul class="list-unstyled">
-                                        <li><b>John Doe</b></li>
-                                        <li><i>john_doe</i></li>
-                                        <br>
-                                        <li><b>Birthday:</b> May 18, 2004</li>
-                                        <li><b>Email:</b> john_doe@gmail.com</li>
-                                        <li><b>Status:</b> Active</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <?php echo $userInfo->createCard(); ?>
                     </div>
                 </div>
 
                 <!-- Recent Login Table -->
                 <div class="col-12 mb-2">
-                    <div><b>Recent Login:</b></div>
+                    <div><b>Recent Logins:</b></div>
                 </div>
 
                 <div class="col-12">
                     <div class="card card-container p-4">
                         <div class="row">
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="max-height: 650px; overflow-y: auto;">
                                 <table class="table table-striped table-borderless m-0">
                                     <thead class="text-center align-middle">
                                         <tr>
-                                            <th scope="col">ID</th>
+                                            <th scope="col">NO.</th>
                                             <th scope="col">DATE</th>
                                             <th scope="col">TIME</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!-- Category Row -->
-                                        <tr class="text-center align-middle">
-                                            <td scope="row">1</td>
-                                            <td>September 26, 2024</td>
-                                            <td>10:45 AM</td>
-                                        </tr>
 
-                                        <!-- Category Row -->
-                                        <tr class="text-center align-middle">
-                                            <td scope="row">2</td>
-                                            <td>July 23, 2024</td>
-                                            <td>11:30 AM</td>
-                                        </tr>
+                                    <tbody>
+                                        <?php echo $userInfo->showRecentLogins($userID) ?>
                                     </tbody>
                                 </table>
                             </div>
