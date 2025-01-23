@@ -9,7 +9,7 @@ $userID = $_SESSION['userID'];
 include("../assets/php/imageProcess.php");
 
 // Counts the users
-$userCountQuery = "SELECT COUNT(userID) AS userCount FROM users";
+$userCountQuery = "SELECT COUNT(userID) AS userCount FROM users WHERE role = 'user'";
 $userCountResult = executeQuery($userCountQuery);
 $userCount = 0;
 while ($userCountRow = mysqli_fetch_assoc($userCountResult)) {
@@ -17,9 +17,9 @@ while ($userCountRow = mysqli_fetch_assoc($userCountResult)) {
 }
 
 // Counts the active users
-$activeUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS activeUsers FROM users INNER JOIN logins
-    ON users.userID = logins.userID
-    WHERE logins.loginDate >=  NOW() - INTERVAL 30 DAY";
+$activeUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS activeUsers FROM users 
+INNER JOIN logins ON users.userID = logins.userID
+WHERE users.role = 'user' AND logins.loginDate >= NOW() - INTERVAL 30 DAY";
 
 $activeUsersResult = executeQuery($activeUsersQuery);
 $activeUsers = 0;
@@ -29,7 +29,8 @@ while ($activeUsersRow = mysqli_fetch_assoc($activeUsersResult)) {
 
 // Counts the inactive users 
 $inactiveUsersQuery = "SELECT COUNT(DISTINCT userID) AS inactiveUsers
-FROM logins WHERE userID NOT IN (SELECT userID FROM logins WHERE loginDate >= NOW() - INTERVAL 30 DAY) ";
+FROM users WHERE role = 'user' AND userID NOT IN 
+(SELECT userID FROM logins WHERE loginDate >= NOW() - INTERVAL 30 DAY)";
 $inactiveUsersResult = executeQuery($inactiveUsersQuery);
 
 $inactiveUsers = 0;
@@ -38,7 +39,8 @@ while ($inactiveUsersRow = mysqli_fetch_assoc($inactiveUsersResult)) {
 }
 
 // Data for Monthly Signup Activity
-$signupQuery = "SELECT MONTHNAME(dateCreated) AS month, COUNT(userID) AS signupCount FROM users GROUP BY month ORDER BY dateCreated";
+$signupQuery = "SELECT MONTHNAME(dateCreated) AS month, COUNT(userID) AS signupCount 
+FROM users WHERE role = 'user' GROUP BY month ORDER BY dateCreated";
 $signupResult = executeQuery($signupQuery);
 
 $signupLabels = [];
@@ -50,7 +52,11 @@ while ($signupRow = mysqli_fetch_assoc($signupResult)) {
 }
 
 // Data for Monthly Login Activity
-$loginQuery = "SELECT MONTHNAME(loginDate) AS month, COUNT(userID) AS loginCount FROM logins GROUP BY month ORDER BY loginDate";
+$loginQuery = "SELECT MONTHNAME(loginDate) AS month, COUNT(logins.userID) AS loginCount 
+FROM logins 
+INNER JOIN users ON logins.userID = users.userID
+WHERE users.role = 'user' GROUP BY MONTH(loginDate), month ORDER BY MONTH(loginDate)";
+
 $loginResult = executeQuery($loginQuery);
 
 $loginLabels = [];
@@ -226,10 +232,10 @@ while ($loginRow = mysqli_fetch_assoc($loginResult)) {
             };
 
             const signupData = {
-                labels:  [<?php echo '"' . implode('","', $signupLabels) . '"' ?>],
+                labels: [<?php echo '"' . implode('","', $signupLabels) . '"' ?>],
                 datasets: [{
                     label: 'Signups',
-                    data:  [<?php echo implode(',', $signupData) ?>],
+                    data: [<?php echo implode(',', $signupData) ?>],
                     backgroundColor: '#ffc09f',
                     borderColor: '#39914f',
                     borderWidth: 1,
