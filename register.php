@@ -45,6 +45,9 @@ if (isset($_POST['btnRegister'])) {
     $_SESSION['birthday'] = $birthday;
     $_SESSION['role'] = "user";
 
+    $lastInsertedId = mysqli_insert_id($conn);
+    $insertLoginQuery = "INSERT INTO logins (userID) VALUES ('$lastInsertedId')";
+    executeQuery($insertLoginQuery);  
 
     header("Location: home.php");
   } else {

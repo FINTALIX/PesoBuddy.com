@@ -1,9 +1,62 @@
 <?php
-
+include("../connect.php");
 include("../assets/php/functions.php");
 
 session_start();
 adminAuth();
+
+// Counts the users
+$userCountQuery = "SELECT COUNT(userID) AS userCount FROM users";
+$userCountResult = executeQuery($userCountQuery);
+$userCount = 0;
+while ($userCountRow = mysqli_fetch_assoc($userCountResult)) {
+    $userCount = $userCountRow['userCount'];
+}
+
+// Counts the active users
+$activeUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS activeUsers FROM users INNER JOIN logins
+    ON users.userID = logins.userID
+    WHERE logins.loginDate >=  NOW() - INTERVAL 30 DAY";
+
+$activeUsersResult = executeQuery($activeUsersQuery);
+$activeUsers = 0;
+while ($activeUsersRow = mysqli_fetch_assoc($activeUsersResult)) {
+    $activeUsers = $activeUsersRow['activeUsers'];
+}
+
+// Counts the inactive users 
+$inactiveUsersQuery = "SELECT COUNT(DISTINCT userID) AS inactiveUsers
+FROM logins WHERE userID NOT IN (SELECT userID FROM logins WHERE loginDate >= NOW() - INTERVAL 30 DAY) ";
+$inactiveUsersResult = executeQuery($inactiveUsersQuery);
+
+$inactiveUsers = 0;
+while ($inactiveUsersRow = mysqli_fetch_assoc($inactiveUsersResult)) {
+    $inactiveUsers = $inactiveUsersRow['inactiveUsers'];
+}
+
+// Data for Monthly Signup Activity
+$signupQuery = "SELECT MONTHNAME(dateCreated) AS month, COUNT(userID) AS signupCount FROM users GROUP BY month ORDER BY dateCreated";
+$signupResult = executeQuery($signupQuery);
+
+$signupLabels = [];
+$signupData = [];
+
+while ($signupRow = mysqli_fetch_assoc($signupResult)) {
+    array_push($signupLabels, $signupRow['month']);
+    array_push($signupData, $signupRow['signupCount']);
+}
+
+// Data for Monthly Login Activity
+$loginQuery = "SELECT MONTHNAME(loginDate) AS month, COUNT(userID) AS loginCount FROM logins GROUP BY month ORDER BY loginDate";
+$loginResult = executeQuery($loginQuery);
+
+$loginLabels = [];
+$loginData = [];
+
+while ($loginRow = mysqli_fetch_assoc($loginResult)) {
+    array_push($loginLabels, $loginRow['month']);
+    array_push($loginData, $loginRow['loginCount']);
+}
 
 ?>
 
@@ -37,7 +90,7 @@ adminAuth();
             <!-- Admin Greeting -->
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
-                    Hello, <span style="color: var(--darkColor)">Admin!</span>
+                    Hello, <span style="color: var(--darkColor)"><?php echo $_SESSION['firstName'] ?></span>
                 </div>
             </div>
 
@@ -54,17 +107,17 @@ adminAuth();
                     <div class="row text-center m-3">
                         <!-- Total Users -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">100</p>
+                            <p class="heading"> <?php echo $userCount ?></p>
                             <h6 class="pb-2">TOTAL USERS</h6>
                         </div>
                         <!-- Active Users -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">80</p>
+                            <p class="heading"><?php echo $activeUsers ?></p>
                             <h6 class="pb-2">ACTIVE USERS</h6>
                         </div>
                         <!-- Inactive Users -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
-                            <p class="heading">20</p>
+                            <p class="heading"><?php echo $inactiveUsers ?></p>
                             <h6 class="pb-2">INACTIVE USERS</h6>
                         </div>
                     </div>
@@ -114,7 +167,6 @@ adminAuth();
             crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-
             // Chart.js
             const chartOptions = {
                 responsive: true,
@@ -171,10 +223,10 @@ adminAuth();
             };
 
             const signupData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels:  [<?php echo '"' . implode('","', $signupLabels) . '"' ?>],
                 datasets: [{
                     label: 'Signups',
-                    data: [65, 9, 89, 81, 56, 55, 70],
+                    data:  [<?php echo implode(',', $signupData) ?>],
                     backgroundColor: '#ffc09f',
                     borderColor: '#39914f',
                     borderWidth: 1,
@@ -182,10 +234,10 @@ adminAuth();
             };
 
             const loginData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: [<?php echo '"' . implode('","', $loginLabels) . '"' ?>],
                 datasets: [{
                     label: 'Logins',
-                    data: [45, 52, 60, 89, 40, 55, 80],
+                    data: [<?php echo implode(',', $loginData) ?>],
                     backgroundColor: '#ffee93',
                     borderColor: '#39914f',
                     borderWidth: 1
