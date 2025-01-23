@@ -767,7 +767,7 @@ class User
 
     public function showRecentLogins($userID)
     {
-        $loginsQuery = "SELECT * FROM `logins` WHERE userID = '$userID' ORDER BY loginDate DESC";
+        $loginsQuery = "SELECT * FROM logins WHERE userID = '$userID' AND loginDate >= NOW() - INTERVAL 30 DAY ORDER BY loginDate DESC";
         $loginsResult = executeQuery($loginsQuery);
 
         $loginRows = '';
