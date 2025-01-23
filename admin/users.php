@@ -3,6 +3,7 @@
 include("../connect.php");
 include("../assets/php/functions.php");
 include("../assets/php/classes.php");
+include('../assets/php/modals/admin-delete-user.php');
 
 session_start();
 adminAuth();
@@ -12,6 +13,17 @@ $userTable->queryAllUsers();
 $userID = $_SESSION['userID'];
 include("../assets/php/imageProcess.php");
 
+$searchUser = isset($_GET['searchUser']) ? $_GET['searchUser'] : "";
+$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : "";
+$orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : "";
+
+if(isset($_POST['btnDeleteUser'])){
+    $deletedUserID = $_POST['deletedUserID'];
+    $deleteUserQuery="DELETE FROM users WHERE userID = $deletedUserID";
+    executeQuery($deleteUserQuery);
+    header("Location: users.php");
+    exit();
+}
 ?>
 
 
@@ -55,7 +67,7 @@ include("../assets/php/imageProcess.php");
                         <form class="col-12 col-lg my-2" method="GET">
                             <div class="input-group">
                                 <!-- Textbox -->
-                                <input type="text" class="form-control" placeholder="Search User" name="" value="">
+                                <input type="text" class="form-control" placeholder="Search User (e.g. Name or Username) or Enter 'Clear' to Reset" name="searchUser" value="<?php echo $searchUser; ?>" required>
                                 <!-- Search Button -->
                                 <button class="btn btn-primary" type="submit">
                                     <i class="bi bi-search"></i>
@@ -76,18 +88,18 @@ include("../assets/php/imageProcess.php");
                                 <!-- Sort Form -->
                                 <div class="col-12 col-lg-auto d-flex flex-column flex-md-row p-0 my-1">
                                     <!-- Sort -->
-                                    <select class="form-select ms-lg-1 me-md-1 my-1" name="">
-                                        <option value="" selected>Default</option>
-                                        <option value="">First Name</option>
-                                        <option value="">Last Name</option>
-                                        <option value="">Username</option>
-                                        <option value="">Recent Login</option>
+                                    <select class="form-select ms-lg-1 me-md-1 my-1" name="sortBy">
+                                        <option value="" disabled selected>Default</option>
+                                        <option value="firstName" <?php echo $sortBy == 'firstName' ? "selected" : "" ?>>First Name</option>
+                                        <option value="lastName" <?php echo $sortBy == 'lastName' ? "selected" : "" ?>>Last Name</option>
+                                        <option value="username" <?php echo $sortBy == 'username' ? "selected" : "" ?>>Username</option>
+                                        <option value="recentLogin" <?php echo $sortBy == 'recentLogin' ? "selected" : "" ?>>Recent Login</option>
                                     </select>
 
                                     <!-- Order -->
-                                    <select class="form-select me-lg-1 my-1" name="">
-                                        <option value="" selected>Ascending</option>
-                                        <option value="">Descending</option>
+                                    <select class="form-select me-lg-1 my-1" name="orderBy">
+                                        <option value="ASC">Ascending</option>
+                                        <option value="DESC" <?php echo $orderBy == 'DESC' ? "selected" : "" ?>>Descending</option>
                                     </select>
                                 </div>
 
