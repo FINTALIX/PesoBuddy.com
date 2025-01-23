@@ -1,9 +1,13 @@
 <?php
 
+include("../connect.php");
 include("../assets/php/functions.php");
+include("../assets/php/classes.php");
 
 session_start();
 adminAuth();
+
+$userTable = new User();
 
 ?>
 
@@ -116,32 +120,19 @@ adminAuth();
                                         <!-- Data -->
                                         <tbody class="align-middle">
                                             <!-- Row -->
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John</td>
-                                                <td>Doe</td>
-                                                <td>johndoe</td>
-                                                <td>2025-01-01</td>
-
-                                                <!-- Action Buttons -->
-                                                <td class="text-center">
-                                                    <!-- View -->
-                                                    <a class="btn btn-primary my-1" href="view.php?id=">
-                                                        View
-                                                    </a>
-
-                                                    <!-- Delete -->
-                                                    <a class="btn btn-danger my-1" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteUser">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <!-- If No Data -->
-                                            <tr>
-                                                <td colspan="100%" class="text-center py-3">No data available.</td>
-                                            </tr>
+                                            <?php
+                                                if (mysqli_num_rows($userTable->userResult) > 0) {
+                                                    while ($userRow = mysqli_fetch_array($userTable->userResult)) {
+                                                        echo $userTable->createRow($userRow);
+                                                    }
+                                                } else { ?>
+                                                    <!-- If No Data -->
+                                                    <tr>
+                                                        <td colspan="100%" class="text-center py-3">No data available.</td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
