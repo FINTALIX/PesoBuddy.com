@@ -631,7 +631,6 @@ if (isset($_POST['deleteCategory'])) {
 
 class User {
     
-    public $userQuery;
     public $userResult;
     public $userID;
     public $firstName;
@@ -643,9 +642,8 @@ class User {
     public $status;
     public $profilePicture;
 
-    public function __construct() 
-    {
-        $this->userQuery = "SELECT users.*, logins.loginDate AS recentLogin FROM users
+    public function queryAllUsers() {
+        $userQuery = "SELECT users.*, logins.loginDate AS recentLogin FROM users
         LEFT JOIN logins ON users.userID = logins.userID
         WHERE users.role = 'user' AND logins.loginDate = (
             SELECT MAX(loginDate) 
@@ -653,7 +651,19 @@ class User {
             WHERE logins.userID = users.userID)
         ORDER BY users.userID";
 
-        $this->userResult = executeQuery($this->userQuery);
+        $this->userResult = executeQuery($userQuery);
+    }
+
+    public function queryUserInfo($userID) {
+        $userQuery = "SELECT users.*, logins.loginDate AS recentLogin FROM users
+        LEFT JOIN logins ON users.userID = logins.userID
+        WHERE users.userID = '$userID' AND users.role = 'user' AND logins.loginDate = (
+            SELECT MAX(loginDate) 
+            FROM logins 
+            WHERE logins.userID = users.userID)
+        ORDER BY users.userID";
+
+        $this->userResult = executeQuery($userQuery);
     }
 
     public function setAttributes($userRow) {
@@ -662,6 +672,10 @@ class User {
         $this->lastName = $userRow['lastName'];
         $this->username = $userRow['username'];
         $this->recentLogin = $userRow['recentLogin'];
+        $this->birthday = $userRow['birthday'];
+        $this->email = $userRow['email'];
+        $this->profilePicture = $userRow['profilePicture'];
+        $this->status = (strtotime($this->recentLogin) > strtotime('-30 days')) ? "Active" : "Inactive";
     }
 
     public function createRow($userRow) {
@@ -690,6 +704,63 @@ class User {
             </td>
         </tr>
         ';
+    }
+
+    public function createCard() {
+        return '
+        <div class="card stat-card w-100">
+            <div class="row py-2">
+                <!-- Profile Picture -->
+                <div class="col-12 col-md-2 p-2 d-flex justify-content-center align-items-center">
+                    <img src="../assets/images/userProfile/'.$this->profilePicture.'" alt="Profile Picture"
+                        class="rounded-circle img-fluid" width="150" height="140">
+                </div>
+
+                <!-- User Information -->
+                <div class="col-12 col-md-10 pt-3 d-flex justify-content-start align-items-center">
+                    <ul class="list-unstyled">
+                        <li><b>'.$this->firstName." " .$this->lastName.'</b></li>
+                        <li><i>'.$this->username.'</i></li>
+                        <br>
+                        <li><b>Birthday:</b> '.$this->birthday.'</li>
+                        <li><b>Email:</b> '.$this->email.'</li>
+                        <li><b>Status:</b> '.$this->status.'</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        ';
+    }
+
+    public function showRecentLogins($userID) {
+        $loginsQuery = "SELECT * FROM `logins` WHERE userID = '$userID' ORDER BY loginDate DESC";
+        $loginsResult = executeQuery($loginsQuery);
+
+        $loginRows = '';
+        $loginNo = 1;
+
+        if (mysqli_num_rows($loginsResult) > 0) {
+            while ($loginRow = mysqli_fetch_assoc($loginsResult)) {
+                $loginDate = date('F j, Y', strtotime($loginRow['loginDate']));
+                $loginTime = date('h:i A', strtotime($loginRow['loginDate']));
+                
+                $loginRows .= '
+                <tr class="text-center align-middle">
+                    <td scope="row">'.$loginNo.'</td>
+                    <td>'.$loginDate.'</td>
+                    <td>'.$loginTime.'</td>
+                </tr>
+                ';
+                $loginNo++;
+            }
+            return $loginRows;
+        } else {
+            return '
+            <tr class="text-center align-middle">
+                <td colspan="100%">No recent logins found.</td>
+            </tr>
+            ';
+        }
     }
 }
 ?>

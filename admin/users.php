@@ -8,6 +8,7 @@ session_start();
 adminAuth();
 
 $userTable = new User();
+$userTable->queryAllUsers();
 
 ?>
 
@@ -102,7 +103,7 @@ $userTable = new User();
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="card card-container p-4">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                                     <table class="table table-striped table-borderless text-center">
 
                                         <!-- Column Heading -->
