@@ -31,7 +31,7 @@ function loadTransactionYears($userID)
         }
     }else{
         echo '<button class="dropdown-item" style="border: none; background: none;" disabled>NO BUDGET TRACKER YET</button>';
-        $_SESSION['isEmpty'] = false;
+        $_SESSION['isEmpty'] = true;
     }
 }
 
