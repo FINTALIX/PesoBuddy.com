@@ -42,7 +42,7 @@
                     <!-- Profile Image -->
                     <a class="d-none d-lg-block" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"
                         style="cursor: pointer;">
-                        <img src="assets/images/pesobuddy_icon.png" alt="Profile" width="32" height="32"
+                        <img src="./assets/images/userProfile/<?php echo $profilePicture?>" alt="Profile" width="32" height="32"
                             class="rounded-circle">
                     </a>
                     <a class="nav-link d-block d-lg-none" id="profileDropdown" data-bs-toggle="dropdown"

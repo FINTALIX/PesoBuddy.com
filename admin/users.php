@@ -9,6 +9,8 @@ adminAuth();
 
 $userTable = new User();
 $userTable->queryAllUsers();
+$userID = $_SESSION['userID'];
+include("../assets/php/imageProcess.php");
 
 ?>
 

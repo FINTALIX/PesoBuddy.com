@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
-            <img src="../assets/images/pesobuddy_icon.png" alt="Logo" style="height: 40px;">
+            <img src="../assets/images/websiteLogo/<?php echo $websiteLogo?>" alt="Logo" style="height: 40px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
             aria-controls="sidebarOffcanvas">
@@ -15,7 +15,7 @@
 <div class="wrapper">
     <aside id="sidebar">
         <div class="d-flex align-items-center">
-            <img src="../assets/images/pesobuddy_icon.png" id="toggleSidebar" alt="Toggle Sidebar" class="toggle-logo">
+            <img src="../assets/images/websiteLogo/<?php echo $websiteLogo?>" id="toggleSidebar" alt="Toggle Sidebar" class="toggle-logo">
             <div class="sidebar-logo">
                 <a href="#">PESOBUDDY</a>
             </div>
