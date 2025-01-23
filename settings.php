@@ -12,27 +12,7 @@ $userID = $_SESSION['userID'];
 $personalInfoQuery="SELECT * FROM userS WHERE userID=$userID";
 $personalInfoResults= executeQuery($personalInfoQuery);
 
-//Handle file uploads for profile picture
-if (isset($_POST['btnUploadProfile'])) {
-    $profilePicture = $_FILES['profilePic']['name'];
-    $profilePictureTmp = $_FILES['profilePic']['tmp_name'];
-    $uploadDir = __DIR__ . '/assets/images/userProfile/';
-    
-    if (!empty($profilePicture)) {
-        move_uploaded_file($profilePictureTmp, $uploadDir . $profilePicture);
-        
-        $updateProfileQuery = "UPDATE users SET profilePicture = '$profilePicture' WHERE userID = $userID";
-        executeQuery($updateProfileQuery);
-    }
-}
-// Display user Profile Picture
-$displayProfileQuery = "SELECT profilePicture FROM users WHERE userID = $userID;";
-$uploadResult = executeQuery($displayProfileQuery);
-
-$profilePicture = "defaultProfile.png"; 
-while($row = mysqli_fetch_assoc($uploadResult)){
-    $profilePicture = !empty($row['profilePicture']) ? $row['profilePicture'] : "defaultProfile.png";
-}
+include("assets/php/imageProcess.php");
 
 //Deletion of Profile Picture
 if(isset($_POST['btnDeleteProfilePic'])){
@@ -70,18 +50,39 @@ if(isset($_POST['btnAccountInfo'])){
 }
 
 //updating password
-if(isset($_POST['btnChangePassword'])){
-    $oldpassword=$_POST['oldpassword'];
-    $newpassword=$_POST['newpassword'];
-    $confirmpassword=$_POST['confirmpassword'];
+if (isset($_POST['btnChangePassword'])) {
+    $oldpassword = $_POST['oldpassword'];
+    $newpassword = $_POST['newpassword'];
+    $confirmpassword = $_POST['confirmpassword'];
 
- if($newpassword == $confirmpassword && $newpassword != $oldpassword && strlen($newpassword) >= 8) {
-    $updatePersonalInfoQuery="UPDATE users SET `password`='$newpassword' WHERE userID = $userID";
-    executeQuery($updatePersonalInfoQuery);
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-    } else{
-        $error = "Password Error";
+    // Fetch the current password from the database
+    $currentpassword = ""; 
+    while ($row = mysqli_fetch_assoc($personalInfoResults)) {
+        $currentpassword = $row['password'];
+    }
+
+    // Validation
+    if ($oldpassword != $currentpassword) {
+        $error = "Old Password";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+        exit();
+
+    } elseif ($newpassword != $confirmpassword) {
+        $error = "Passwords do not match";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+        exit();
+    } elseif (strlen($newpassword) < 8) {
+        $error = "Passwords do not match";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+        exit();
+    }
+     else {
+        // Update password in the database
+        $error = "success";
+        $updatePersonalInfoQuery = "UPDATE users SET `password`='$newpassword' WHERE userID = $userID";
+        executeQuery($updatePersonalInfoQuery);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+        exit();
     }
 }
 
@@ -142,7 +143,7 @@ if(isset($_POST['btnAccountDelete'])){
                     <div class="card-body px-3 px-md-4 d-flex flex-column">
                         <div class="text-center mb-5">
                             <img id="profilePreview" src="./assets/images/userProfile/<?php echo $profilePicture?>"
-                                alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px;">
+                                alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px; object-fit: cover;">
                             <div class="d-flex flex-column flex-md-row flex-sm-row justify-content-center gap-4 mb-4">
                                 <button class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#uploadProfilePic">Upload Profile Picture</button>
@@ -218,15 +219,11 @@ if(isset($_POST['btnAccountDelete'])){
                                 </div>
                                 
                                 <!-- Alert for incorrect password change -->
-                                <?php if ($error == "Password Error") { ?>
-                                    <div class="row justify-content-center mt-2">
-                                        <div class="col-12">
-                                            <div class="alert alert-warning" role="alert">
-                                            Password does not match or it is not 8 characters long.
-                                            </div>
-                                        </div>
+                                <div id="alert-container" class="row justify-content-center mt-2">
+                                    <div class="col-12">
+                                        <div id="alert" class="alert" role="alert"></div>
                                     </div>
-                                <?php }?>
+                                </div>
                             </form>
                         </div>
 
@@ -467,6 +464,28 @@ if(isset($_POST['btnAccountDelete'])){
                 reader.readAsDataURL(this.files[0]); 
             }
         });
+
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const alert = document.getElementById('alert');
+
+        if (error) {
+            alert.textContent = 
+                error === 'Old Password'
+                    ? 'Old password does not match.'
+                    : error === 'Passwords do not match'
+                    ? 'Passwords do not match and it is not 8 characters long.'
+                    : 'Password updated successfully.';
+            alert.className = 
+                error === 'success'
+                    ? 'alert alert-success'
+                    : 'alert alert-warning';
+        } else {
+            alert.classList.add('d-none'); 
+        }
+
+        history.replaceState(null, document.title, window.location.pathname);
     </script>
 </body>
 

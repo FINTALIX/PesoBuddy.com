@@ -5,6 +5,9 @@ include("../assets/php/functions.php");
 session_start();
 adminAuth();
 
+$userID = $_SESSION['userID'];
+include("../assets/php/imageProcess.php");
+
 // Counts the users
 $userCountQuery = "SELECT COUNT(userID) AS userCount FROM users";
 $userCountResult = executeQuery($userCountQuery);

@@ -10,6 +10,8 @@ adminAuth();
 
 $userTable = new User();
 $userTable->queryAllUsers();
+$userID = $_SESSION['userID'];
+include("../assets/php/imageProcess.php");
 
 $searchUser = isset($_GET['searchUser']) ? $_GET['searchUser'] : "";
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : "";
