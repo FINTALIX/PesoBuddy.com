@@ -67,16 +67,16 @@ if (isset($_POST['btnLogin'])) {
   <link href="assets/css/login.css" rel="stylesheet">
 </head>
 
-<body>
-  <div class="container p-5">
-    <div class="row">
+<body class="d-flex justify-content-center align-items-center">
+  <div class="container p-5 d-flex align-items-center" style="height: 100%;">
+    <div class="row justify-content-center">
       <!-- BACKGROUND -->
       <div>
         <img src="assets/images/background.png" class="bg-image">
       </div>
 
       <!-- LOGIN CARD -->
-      <div class="col-12 col-lg-6 order-2 order-lg-1">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-5 order-2 order-xl-1">
         <div class="card shadow-sm py-3">
           <div class="h3 text-center fw-bold my-4">
             LOGIN
@@ -101,15 +101,6 @@ if (isset($_POST['btnLogin'])) {
             <!-- Password -->
             <input class="form-control text-center my-4" type="password" name="password" placeholder="Password"
               required>
-            <!-- Remember Me -->
-            <div class="d-flex justify-content-center">
-              <div class="form-check my-4">
-                <input class="form-check-input" type="checkbox" name="" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Remember Me
-                </label>
-              </div>
-            </div>
             <!-- Login Button -->
             <button class="btn btn-primary rounded-pill w-100 my-3" name="btnLogin">LOGIN</button>
           </form>
@@ -124,8 +115,8 @@ if (isset($_POST['btnLogin'])) {
       </div>
 
       <!-- WEBSITE BRAND -->
-      <div class="col-12 col-lg-6 order-1 order-lg-2">
-        <img src="assets/images/pesobuddy_logo.png" class="img-fluid text-center pb-3" alt="PesoBuddy">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-7 order-1 order-xl-2">
+        <img src="assets/images/pesobuddy_logo.png" class="img-fluid text-center pb-xl-3" alt="PesoBuddy">
       </div>
     </div>
   </div>

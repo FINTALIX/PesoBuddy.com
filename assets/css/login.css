@@ -1,5 +1,7 @@
 body {
   font-family: var(--primaryFont);
+  height: 100vh;
+  margin: 0;
 }
 
 .card {
