@@ -754,7 +754,7 @@ if (isset($_POST['close'])) {
                                     } else { ?>
                                         <tr>
                                             <td colspan='100%' class='text-center py-3'>No data available.</td>
-                                        </tr>";
+                                        </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
