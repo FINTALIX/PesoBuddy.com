@@ -192,8 +192,6 @@ include("../assets/php/imageProcess.php");
                     class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end gap-3 pe-lg-5">
                     <button class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#changeLogoModal">Change</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadLogoModal">Upload
-                        New</button>
                 </div>
             </div>
         </div>
@@ -234,52 +232,6 @@ include("../assets/php/imageProcess.php");
                 </div>
             </div>
         </div>
-
-        <!-- Upload Logo Modal
-        <div class="modal fade" id="uploadLogoModal" tabindex="-1" aria-labelledby="uploadLogoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content bg-white rounded-4">
-                    <div class="modal-header border-0 d-flex flex-column align-items-center">
-                        <h5 class="modal-title text-black text-uppercase" id="uploadLogoModalLabel">Upload Logo</h5>
-                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 bg-transparent"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="uploadForm" enctype="multipart/form-data" method="POST">
-                            <div class="d-flex gap-3">
-                                <div class="text-center">
-                                    <div class="rounded-circle overflow-hidden bg-black"
-                                        style="width: 120px; height: 120px;">
-                                        <img id="previewImage" src="/images/websiteLogo/<?php echo $websiteLogo?>"
-                                            alt="Current Photo" class="w-100 h-100" style="object-fit: cover;">
-                                    </div>
-                                    <p class="text-black mt-2 mb-0 small text-nowrap">Current Photo</p>
-                                </div>
-
-                                <div class="flex-grow-1 mt-5">
-                                    <div class="d-flex flex-column flex-md-row gap-1 gap-md-0">
-                                        <input type="text" id="fileNameDisplay"
-                                            class="form-control text-black bg-transparent rounded-2" value=""
-                                            readonly>
-                                        <label
-                                            class="btn btn-primary rounded-2 d-inline-flex align-items-center justify-content-center"
-                                            for="fileInput">
-                                            Browse<i class="bi-upload ms-2"></i>
-                                        </label>
-                                        <input type="file" class="d-none" id="fileInput" accept="image/*" name="websiteLogo">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer border-0 justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" form="uploadForm" class="btn btn-primary" name="btnUploadLogo">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <?php
              }
             }
