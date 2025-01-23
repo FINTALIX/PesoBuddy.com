@@ -143,7 +143,7 @@ if(isset($_POST['btnAccountDelete'])){
                     <div class="card-body px-3 px-md-4 d-flex flex-column">
                         <div class="text-center mb-5">
                             <img id="profilePreview" src="./assets/images/userProfile/<?php echo $profilePicture?>"
-                                alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px;">
+                                alt="Profile Picture" class="rounded-circle mb-3" style="width: 250px; height: 250px; object-fit: cover;">
                             <div class="d-flex flex-column flex-md-row flex-sm-row justify-content-center gap-4 mb-4">
                                 <button class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#uploadProfilePic">Upload Profile Picture</button>
