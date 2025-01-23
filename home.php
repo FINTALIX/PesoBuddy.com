@@ -8,6 +8,7 @@ session_start();
 userAuth();
 
 $userID = $_SESSION['userID'];
+include("assets/php/imageProcess.php");
 $year = isset($_GET['year']) ? $_GET['year'] : '2025';
 
 $annualTotalIncome = computeAnnualIncome($userID, $year);

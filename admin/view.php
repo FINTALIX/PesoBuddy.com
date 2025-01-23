@@ -7,6 +7,9 @@ include("../assets/php/classes.php");
 session_start();
 adminAuth();
 
+$userID = $_SESSION['userID'];
+include("../assets/php/imageProcess.php");
+
 if(isset($_GET['id'])) {
     $userID = $_GET['id'];
     
