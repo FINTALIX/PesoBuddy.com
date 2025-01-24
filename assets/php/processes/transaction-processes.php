@@ -12,13 +12,13 @@ $transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery)
 $transactionsQuery .= "ORDER BY transactions.transactionDate";
 
 // Queries for add transaction dropdowns
-$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
+$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM defaultCategories ORDER BY defaultCategoryType ASC";
 $transactionsTypeResults = executeQuery($transactionTypeQuery);
 
 $defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
 $defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
 
-$categoriesQuery = "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
+$categoriesQuery = "SELECT * FROM categories WHERE userID = '$userID' && isDeleted = 'no' ORDER BY categoryName ASC";
 $categoriesResults = executeQuery($categoriesQuery);
 
 // Add Transactions
