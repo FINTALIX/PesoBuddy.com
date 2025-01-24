@@ -36,7 +36,7 @@ if(isset($_GET['id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PesoBuddy | Admin | View User</title>
+    <title>PesoBuddy | View User</title>
     <link rel="icon" href="../assets/images/websiteLogo/<?php echo $websiteLogo?>" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

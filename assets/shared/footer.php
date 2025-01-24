@@ -10,13 +10,15 @@
 
     footer {
         background-color: var(--darkColor);
-        padding: 20px;
+        padding: 5px;
+        padding-inline: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         font-family: var(--primaryFont);
         flex-wrap: wrap;
+        max-height: 40px;
     }
 
     .footer-left {
@@ -67,7 +69,8 @@
 
     @media (max-width: 768px) {
         footer {
-            padding: 15px;
+            padding: 10px;
+            padding-inline: 5px !important;
             flex-direction: column;
             align-items: center;
         }
@@ -81,6 +84,7 @@
         .social-icons {
             justify-content: center;
             margin-bottom: 10px;
+            gap: 20px;
         }
 
         .social-icons img {
@@ -92,6 +96,10 @@
         .footer-right p {
             font-size: 12px;
         }
+
+        footer a{
+            font-size: 16px;
+        }
     }
 
     @media (max-width: 480px) {
@@ -100,14 +108,24 @@
             height: 18px;
         }
 
+        .social-icons {
+            justify-content: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+
         .footer-left p,
         .footer-right p {
             font-size: 11px;
         }
+
+        footer a{
+            font-size: 12px;
+        }
     }
 </style>
 
-<footer>
+<footer class="fixed-bottom">
     <div class="footer-left">
         <p class="text-white">CONTACT US</p>
     </div>

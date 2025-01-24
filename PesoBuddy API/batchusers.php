@@ -65,7 +65,7 @@ function handlePUT($pdo)
 
   
     $inputs = $data['ids'];
-    $sql = "UPDATE users SET role='user' WHERE userID = :id";
+    $sql = "UPDATE users SET role='admin' WHERE userID = :id";
 
     
     foreach ($inputs as $input) {
@@ -73,7 +73,7 @@ function handlePUT($pdo)
         $stmt->execute(['id' => $input]); 
     }
 
-    echo json_encode(['message' => 'Users deleted successfully']);
+    echo json_encode(['message' => 'Users updated successfully']);
 }
 
 function handleDelete($pdo)
