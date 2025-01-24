@@ -12,15 +12,9 @@ $userID = $_SESSION['userID'];
 $personalInfoQuery="SELECT * FROM userS WHERE userID=$userID";
 $personalInfoResults= executeQuery($personalInfoQuery);
 
-include("assets/php/imageProcess.php");
-
-//Deletion of Profile Picture
-if(isset($_POST['btnDeleteProfilePic'])){
-    $updateProfileQuery = "UPDATE users SET profilePicture = NULL WHERE userID = $userID";
-        executeQuery($updateProfileQuery);
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+include("assets/php/imageProcessProfile.php");
+include("assets/php/imageProcessLogo.php");
+include("assets/php/deleteProfileProcess.php");
 
 //updating Fullname and birthday
 if(isset($_POST['btnProfile'])){ 
@@ -101,7 +95,7 @@ if(isset($_POST['btnAccountDelete'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Page</title>
-    <link rel="icon" href="assets/images/pesobuddy_icon.png" />
+    <link rel="icon" href="assets/images/websiteLogo/<?php echo $websiteLogo?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
