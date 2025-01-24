@@ -43,8 +43,7 @@
                     </div>
                 </div>
             </div>
-        </div>;
-
+        </div>
 
         <script>
             const fileInput = document.getElementById(\'fileInput\');
