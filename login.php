@@ -43,8 +43,8 @@ include("assets/php/imageProcessLogo.php");
           <?php if ($error == "INVALID USER") { ?>
             <div class="row justify-content-center mt-2">
               <div class="col-12">
-                <div class="alert alert-warning" role="alert">
-                  Invalid Email or Password.
+                <div class="alert alert-warning m-0" role="alert">
+                  <p class="paragraph text-center m-0">Invalid Email or Password.</p>
                 </div>
               </div>
             </div>

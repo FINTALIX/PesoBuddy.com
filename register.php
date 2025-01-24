@@ -24,21 +24,24 @@ include("assets/php/imageProcessLogo.php");
 <body>
   <div class="container p-5">
     <div class="row justify-content-center">
+      <!-- Alert for not matching passwords -->
       <?php if ($error == "passwordUnmatched") { ?>
-        <div class="alert alert-danger mb-3" role="alert">
-          Passwords does not match
+        <div class="row justify-content-center mt-2 p-0">
+          <div class="col-12 col-lg-7">
+            <div class="alert alert-warning" role="alert">
+              <p class="paragraph m-0">Passwords do not match.</p>
+            </div>
+          </div>
         </div>
       <?php } ?>
 
-
       <!-- Alert for same user credentials -->
       <?php if ($error == "userExist") { ?>
-        <div class="row justify-content-center mt-2">
-          <div class="col-12">
-            <div class="alert alert-warning d-flex flex-wrap align-items-center justify-content-center justify-content-md-between"
-             role="alert">
-              Username or Email already exists.
-              <a href="login.php" class="btn btn-primary rounded-pill">LOGIN</a>
+        <div class="row justify-content-center mt-2 p-0">
+          <div class="col-12 col-lg-7">
+            <div class="alert alert-warning d-flex flex-column flex-md-row align-items-center justify-content-start justify-content-md-between" role="alert">
+                <p class="paragraph my-1">Username or Email already exists.</p>
+                <a href="login.php" class="btn btn-primary rounded-pill my-1">LOGIN</a>
             </div>
           </div>
         </div>
@@ -46,10 +49,10 @@ include("assets/php/imageProcessLogo.php");
 
       <!-- Alert for short password -->
       <?php if ($error == "passwordTooShort") { ?>
-        <div class="row justify-content-center mt-2">
-          <div class="col-12">
+        <div class="row justify-content-center mt-2 p-0">
+          <div class="col-12 col-lg-7">
             <div class="alert alert-warning" role="alert">
-              Password is too short! It must be at least 8 characters.
+              <p class="paragraph m-0">Password is too short! It must be at least 8 characters.</p>
             </div>
           </div>
         </div>
