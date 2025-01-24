@@ -29,8 +29,12 @@ if (isset($_POST['btnRegister'])) {
   $checkResult = executeQuery($checkQuery);
 
   if (mysqli_num_rows($checkResult) > 0) {
-    $error = "USER_EXISTS";
-  } elseif ($password == $cpassword) {
+    $error = "userExist";
+  } elseif (strlen($password) <= 8) {
+    $error = "passwordTooShort";
+  } elseif ($password != $cpassword) {
+    $error = "passwordUnmatched";
+  } else {
     $lastInsertedId = mysqli_insert_id($conn);
 
     $userQuery = "INSERT INTO users(username, email, password, firstName, lastName, birthday)  VALUES ('$username', '$email', '$password', '$firstName', '$lastName', '$birthday')";
@@ -47,11 +51,9 @@ if (isset($_POST['btnRegister'])) {
 
     $lastInsertedId = mysqli_insert_id($conn);
     $insertLoginQuery = "INSERT INTO logins (userID) VALUES ('$lastInsertedId')";
-    executeQuery($insertLoginQuery);  
+    executeQuery($insertLoginQuery);
 
     header("Location: home.php");
-  } else {
-    $error = "PASSWORD UNMATCHED";
   }
 }
 ?>
@@ -73,19 +75,30 @@ if (isset($_POST['btnRegister'])) {
 <body>
   <div class="container p-5">
     <div class="row justify-content-center">
-
-      <?php if ($error == "PASSWORD UNMATCHED") { ?>
+      <?php if ($error == "passwordUnmatched") { ?>
         <div class="alert alert-danger mb-3" role="alert">
           Passwords does not match
         </div>
       <?php } ?>
 
+
       <!-- Alert for same user credentials -->
-      <?php if ($error == "USER_EXISTS") { ?>
+      <?php if ($error == "userExist") { ?>
         <div class="row justify-content-center mt-2">
           <div class="col-12">
             <div class="alert alert-warning" role="alert">
               Username or Email already exists.
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+
+            <!-- Alert for short password -->
+            <?php if ($error == "passwordTooShort") { ?>
+        <div class="row justify-content-center mt-2">
+          <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+            Password is too short! It must be at least 8 characters.
             </div>
           </div>
         </div>
@@ -120,6 +133,7 @@ if (isset($_POST['btnRegister'])) {
               <div class="col-12">
                 <input class="form-control mb-4" type="text" name="birthday" placeholder="Birthday"
                   onfocus="(this.type='date')" required>
+                </input>
               </div>
             </div>
 
