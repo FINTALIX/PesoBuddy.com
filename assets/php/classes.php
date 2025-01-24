@@ -703,7 +703,7 @@ class User
         $this->recentLogin = $userRow['recentLogin'];
         $this->birthday = $userRow['birthday'];
         $this->email = $userRow['email'];
-        $this->profilePicture = $userRow['profilePicture'];
+        $this->profilePicture = ($userRow['profilePicture']) ? $userRow['profilePicture'] : "defaultProfile.png";
         $this->status = (strtotime($this->recentLogin) > strtotime('-30 days')) ? "Active" : "Inactive";
     }
 

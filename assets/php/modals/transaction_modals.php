@@ -21,8 +21,8 @@
 
                             <!-- Transaction Type -->
                             <div class="col-md-7">
-                                <select class="form-select" id="editTransactionType" name="transactionType"
-                                    onchange="filterEditCategory()">
+                                <select class="form-select" id="editTransactionType<?php echo $transactionHistory->transactionID ?>" name="transactionType"
+                                    onchange="filterEditCategory(<?php echo $transactionHistory->transactionID ?>)">
                                     <?php
                                     $transactionsTypeResults = queryTransactionTypes();
 
@@ -42,8 +42,8 @@
 
                             <!-- Category -->
                             <div class="col-md-5">
-                                <select class="form-select" id="editCategoryType" name="transactionCategory"
-                                    onchange="selectEditType()">
+                                <select class="form-select" id="editCategoryType<?php echo $transactionHistory->transactionID ?>" name="transactionCategory"
+                                    onchange="selectEditType(<?php echo $transactionHistory->transactionID ?>)">
                                     <?php
                                     // Default Categories
                                     $defaultCategoriesResults = queryDefaultCategories();

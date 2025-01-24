@@ -40,70 +40,6 @@ if (isset($_POST['btnEditCategory'])) {
     executeQuery($editCategoryQuery);
 }
 
-// Query for getting transaction history
-$transactionsQuery = "SELECT * FROM transactions 
-LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
-LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
-WHERE transactions.userID = '$userID'";
-
-$transactionHistory = new TransactionsHistory($transactionsQuery);
-
-// Filter transactions
-$transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
-$transactionsQuery .= "ORDER BY transactions.transactionDate";
-
-// Transaction form-select Queries
-$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
-$transactionsTypeResults = executeQuery($transactionTypeQuery);
-
-$defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
-$defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
-
-$categoriesQuery = "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
-$categoriesResults = executeQuery($categoriesQuery);
-
-// Transaction Add Button
-if (isset($_POST['btnAddTransaction'])) {
-    $userID = $_SESSION['userID'];
-    $amount = $_POST['amount'];
-    $transactionDate = $_POST['date'];
-    $description = $_POST['descriptionMesssage'];
-
-    $categoryInput = explode("_", $_POST['categoryName']);
-
-    $categoryKind = $categoryInput[0];
-    $categoryID = $categoryInput[1];
-
-    // Getting ID's From Category and Default Category
-    if ($categoryKind == 'default') {
-        $defaultCategoryID = $categoryID;
-        $categoryID = null;
-    } elseif ($categoryKind == 'custom') {
-        $customCategoryID = $categoryID;
-        $defaultCategoryID = null;
-    }
-
-    //Inserting To Database
-    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) VALUES ('$userID', '$categoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
-    executeQuery($insertTransactionQuery);
-
-    //To prevent resubmission
-    $_SESSION['transaction_added'] = true;
-    header("Location: " . $_SERVER['PHP_SELF'] . "#transaction-history");
-    exit();
-}
-unset($_SESSION['transaction_added']);
-
-// Delete Transaction
-$transactionHistory->deleteTransaction();
-
-// Edit Transaction
-$transactionHistory->editTransaction();
-
-// Display Transactions
-$transactionsResult = executeQuery($transactionsQuery);
-
-
 // Add new categories
 include ("assets\php\addCategories.php");
 
@@ -129,6 +65,69 @@ if (isset($_POST['close'])) {
     header("Location:home.php");
     exit();
 }
+
+// Query for getting transaction history
+$transactionsQuery = "SELECT * FROM transactions 
+LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
+LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
+WHERE transactions.userID = '$userID'";
+
+$transactionHistory = new TransactionsHistory($transactionsQuery);
+
+// Filter transactions
+$transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
+$transactionsQuery .= "ORDER BY transactions.transactionDate";
+
+// Queries for add transaction dropdowns
+$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
+$transactionsTypeResults = executeQuery($transactionTypeQuery);
+
+$defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
+$defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
+
+$categoriesQuery = "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
+$categoriesResults = executeQuery($categoriesQuery);
+
+// Add Transactions
+if (isset($_POST['btnAddTransaction'])) {
+    $userID = $_SESSION['userID'];
+    $amount = $_POST['amount'];
+    $transactionDate = $_POST['date'];
+    $description = htmlspecialchars($_POST['descriptionMesssage']);
+
+    $categoryInput = explode("_", $_POST['categoryName']);
+
+    $categoryKind = $categoryInput[0];
+    $categoryID = $categoryInput[1];
+
+    // Getting ID's From Category and Default Category
+    if ($categoryKind == 'default') {
+        $defaultCategoryID = $categoryID;
+        $categoryID = null;
+    } elseif ($categoryKind == 'custom') {
+        $customCategoryID = $categoryID;
+        $defaultCategoryID = null;
+    }
+
+    //Inserting To Database
+    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) VALUES ('$userID', '$customCategoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
+    executeQuery($insertTransactionQuery);
+
+    //To prevent resubmission
+    $_SESSION['transaction_added'] = true;
+    header("Location: " . $_SERVER['PHP_SELF'] . "#transaction-history");
+    exit();
+}
+unset($_SESSION['transaction_added']);
+
+// Delete Transaction
+$transactionHistory->deleteTransaction();
+
+// Edit Transaction
+$transactionHistory->editTransaction();
+
+// Display Transactions
+$transactionsResult = executeQuery($transactionsQuery);
 
 ?>
 
@@ -268,6 +267,7 @@ if (isset($_POST['close'])) {
     <!-- User Budget Tracker Section -->
     <?php include('budget-tracker.php'); ?>
 
+    <!-- Manage Categories Section -->
     <div class="container mt-5" id="manage-categories">
         <div class="row category-section mt-5">
             <div class="col-12">
@@ -333,7 +333,7 @@ if (isset($_POST['close'])) {
                             style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                             <div class="modal-body p-4">
                                 <h5>Category successfully added!</h5>
-                                <form method="POST">
+                                <form method="POST" action="#manage-categories">
                                     <button type="submit" name="btnSuccessModal" class="btn mt-3"
                                         style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
                                         data-bs-dismiss="modal">Close</button>
@@ -343,7 +343,7 @@ if (isset($_POST['close'])) {
                     </div>
                 </div>
 
-                <!-- category-list -->
+                <!-- Categories List -->
                 <div class="row mt-4 my-5">
                     <div class="col-md-6">
                         <h6 class="mt-4">Category List</h6>
@@ -362,15 +362,20 @@ if (isset($_POST['close'])) {
                                         </button>
                                         <?php
                                     }
+                                } else { ?>
+                                    <p class="paragraph my-1">You have not added any categories yet.</p>
+                                <?php
                                 }
                                 ?>
                             </form>
                         </div>
                     </div>
+
+                    <!-- Edit Category Card -->
                     <div class="col-md-6">
                         <div class="card card-container">
                             <h6>Edit Category</h6>
-                            <form id="edit-category-form" method="POST" target="editFrame">
+                            <form id="edit-category-form" method="POST" target="editFrame" action="#manage-categories">
                                 <?php
                                 $categoryType = $categoryName = '';
                                 if (isset($_POST['categoryID'])) {
@@ -546,13 +551,16 @@ if (isset($_POST['close'])) {
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-4" style="border-radius: 15px; background-color: white; border: none;">
                     <div class="modal-body">
+
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="heading" style="margin: 0; font-size: 1.8rem;">Add New Transaction
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        
                         <div class="mb-3">
                             <div class="row g-3">
+                                <!-- Transaction Type Dropdown -->
                                 <div class="col-md-7">
                                     <select class="form-select" name="categoryType" id="addtransactionType"
                                         onchange="filterCategoryOptions()">
@@ -570,7 +578,8 @@ if (isset($_POST['close'])) {
                                         ?>
                                     </select>
                                 </div>
-
+                                
+                                <!-- Category Dropdown -->
                                 <div class="col-md-5">
                                     <select class="form-select" name="categoryName" id="addcategoryType"
                                         onchange="selectType()">
@@ -593,7 +602,7 @@ if (isset($_POST['close'])) {
                                             while ($categoriesRows = mysqli_fetch_assoc($categoriesResults)) {
                                                 ?>
                                                 <option value="custom_<?php echo ($categoriesRows['categoryID']); ?>"
-                                                    data-type="<?php echo ($defaultCategoriesRows['categoryType']); ?>">
+                                                    data-type="<?php echo ($categoriesRows['categoryType']); ?>">
                                                     <?php echo ($categoriesRows['categoryName']); ?>
                                                 </option>
                                                 <?php
@@ -604,12 +613,14 @@ if (isset($_POST['close'])) {
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <!-- Date -->
                         <div class="mb-3">
                             <input class="form-control" type="text" name="date" placeholder="Date"
                                 onfocus="(this.type='date')" required>
                         </div>
 
+                        <!-- Description -->
                         <div class="mb-3">
                             <textarea class="form-control" name="descriptionMesssage" id="descriptionMesssage"
                                 placeholder="Description"></textarea>
@@ -617,11 +628,13 @@ if (isset($_POST['close'])) {
 
                         <div class="mb-3">
                             <div class="row g-3 align-items-center">
+                                <!-- Amount -->
                                 <div class="col-12 col-md-9">
-                                    <input type="text" class="form-control" name="amount" id="Amount"
+                                    <input type="number" min="1" class="form-control" name="amount" id="amount"
                                         placeholder="Amount">
                                 </div>
-
+                                
+                                <!-- Add Button -->
                                 <div class="col-12 col-md-3">
                                     <button type="button" class="btn btn-primary"
                                         style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.9rem;"
@@ -999,6 +1012,22 @@ if (isset($_POST['close'])) {
             }
         }
 
+        function filterEditCategory(transactionID) {
+            var typeForm = document.getElementById("editTransactionType" + transactionID);
+            var typeOptions = typeForm.options;
+            var selectedType = typeForm.value;
+
+            var categoryForm = document.getElementById("editCategoryType" + transactionID);
+            var categoryOptions = categoryForm.options;
+
+            for (var i = 0; i < categoryOptions.length; i++) {
+                var categoryOption = categoryOptions[i];
+                var categoryOptionType = categoryOption.getAttribute("data-type");
+
+                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
+            }
+        }
+
         // Function for selecting type based on selected category
         function selectType() {
             var typeForm = document.getElementById("addtransactionType");
@@ -1012,26 +1041,10 @@ if (isset($_POST['close'])) {
             }
         }
 
-        function filterEditCategory() {
-            var typeForm = document.getElementById("editTransactionType");
-            var typeOptions = typeForm.options;
-            var selectedType = typeForm.value;
+        function selectEditType(transactionID) {
+            var typeForm = document.getElementById("editTransactionType" + transactionID);
 
-            var categoryForm = document.getElementById("editCategoryType");
-            var categoryOptions = categoryForm.options;
-
-            for (var i = 0; i < categoryOptions.length; i++) {
-                var categoryOption = categoryOptions[i];
-                var categoryOptionType = categoryOption.getAttribute("data-type");
-
-                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
-            }
-        }
-
-        function selectEditType() {
-            var typeForm = document.getElementById("editTransactionType");
-
-            var categoryForm = document.getElementById("editCategoryType");
+            var categoryForm = document.getElementById("editCategoryType" + transactionID);
             var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
             var categoryOptionType = selectedCategory.getAttribute("data-type");
 
@@ -1040,10 +1053,20 @@ if (isset($_POST['close'])) {
             }
         }
 
-        // Prevent edit success modal from showing if amount is invalid
+        // Prevent success modals from showing if amount is invalid
         var editSuccessModal = document.getElementById('transactionEditSuccessModal');
         editSuccessModal.addEventListener('show.bs.modal', function (event) {
             var amount = document.getElementById("editAmount").value;
+
+            if (amount <= 0) {
+                alert("Please enter a valid amount.");
+                return event.preventDefault();
+            }
+        })
+
+        var transactionSuccessModal = document.getElementById('transactionSuccessModal');
+        transactionSuccessModal.addEventListener('show.bs.modal', function (event) {
+            var amount = document.getElementById("amount").value;
 
             if (amount <= 0) {
                 alert("Please enter a valid amount.");
