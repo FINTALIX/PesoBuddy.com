@@ -40,7 +40,7 @@ include("assets/php/imageProcessLogo.php");
           </div>
 
           <!-- Alert for incorrect login -->
-          <?php  ?>
+          <?php if ($error == "INVALID USER") { ?>
             <div class="row justify-content-center mt-2">
               <div class="col-12">
                 <div class="alert alert-warning m-0" role="alert">
@@ -48,7 +48,7 @@ include("assets/php/imageProcessLogo.php");
                 </div>
               </div>
             </div>
-          <?php  ?>
+          <?php } ?>
 
           <!-- LOGIN FORM -->
           <form method="POST">
