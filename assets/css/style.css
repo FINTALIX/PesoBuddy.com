@@ -14,6 +14,22 @@ body {
   font-family: var(--primaryFont);
 }
 
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+::-webkit-scrollbar-track {
+  background: var(--linkHoverColor);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--darkColor);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primaryColor);
+}
+
 .heading {
   font-size: 2rem;
   font-weight: bolder;
