@@ -2,7 +2,7 @@
 
 include("../connect.php");
 include("../assets/php/functions.php");
-include("../assets/php/classes.php");
+include("../assets/php/classes/category-manager.php");
 
 session_start();
 adminAuth();
