@@ -1031,12 +1031,12 @@ $transactionsResult = executeQuery($transactionsQuery);
             }
         }
 
-        function filterEditCategory() {
-            var typeForm = document.getElementById("editTransactionType");
+        function filterEditCategory(transactionID) {
+            var typeForm = document.getElementById("editTransactionType" + transactionID);
             var typeOptions = typeForm.options;
             var selectedType = typeForm.value;
 
-            var categoryForm = document.getElementById("editCategoryType");
+            var categoryForm = document.getElementById("editCategoryType" + transactionID);
             var categoryOptions = categoryForm.options;
 
             for (var i = 0; i < categoryOptions.length; i++) {
@@ -1060,10 +1060,10 @@ $transactionsResult = executeQuery($transactionsQuery);
             }
         }
 
-        function selectEditType() {
-            var typeForm = document.getElementById("editTransactionType");
+        function selectEditType(transactionID) {
+            var typeForm = document.getElementById("editTransactionType" + transactionID);
 
-            var categoryForm = document.getElementById("editCategoryType");
+            var categoryForm = document.getElementById("editCategoryType" + transactionID);
             var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
             var categoryOptionType = selectedCategory.getAttribute("data-type");
 
