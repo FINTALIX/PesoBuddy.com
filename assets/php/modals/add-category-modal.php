@@ -30,7 +30,7 @@
                     <div class="d-flex justify-content-end">
                         <button type="button" id="saveButton" class="btn btn-primary"
                             style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                            data-bs-toggle="modal" data-bs-target="#successModal">
+                            data-bs-toggle="modal" data-bs-target="#addCategorySuccessModal">
                             SAVE
                         </button>
                     </div>
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Success Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="addCategorySuccessModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content"
                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
