@@ -2,7 +2,7 @@
 
 include("../connect.php");
 include("../assets/php/functions.php");
-include("../assets/php/classes.php");
+include("../assets/php/classes/user.php");
 include('../assets/php/modals/admin-delete-user.php');
 
 session_start();
