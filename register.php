@@ -36,7 +36,7 @@ include("assets//php/registerProcess.php");
           <div class="col-12">
             <div class="alert alert-warning" role="alert">
               Username or Email already exists.
-              <button class="btn btn-primary rounded-pill">LOGIN</button>
+              <a href="login.php" class="btn btn-primary rounded-pill">LOGIN</a>
             </div>
           </div>
         </div>
