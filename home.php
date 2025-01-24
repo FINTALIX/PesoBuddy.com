@@ -3,6 +3,7 @@
 include("connect.php");
 include("assets/php/functions.php");
 include("assets/php/classes.php");
+include("assets/php/classes/transactions-history.php");
 
 session_start();
 userAuth();
@@ -42,70 +43,6 @@ if (isset($_POST['btnEditCategory'])) {
     executeQuery($editCategoryQuery);
 }
 
-// Query for getting transaction history
-$transactionsQuery = "SELECT * FROM transactions 
-LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
-LEFT JOIN defaultcategories ON transactions.defaultCategoryID = defaultcategories.defaultCategoryID 
-WHERE transactions.userID = '$userID'";
-
-$transactionHistory = new TransactionsHistory($transactionsQuery);
-
-// Filter transactions
-$transactionsQuery = $transactionHistory->filterTransactions($transactionsQuery);
-$transactionsQuery .= "ORDER BY transactions.transactionDate";
-
-// Queries for add transaction dropdowns
-$transactionTypeQuery = "SELECT DISTINCT(defaultCategoryType) FROM `defaultCategories` ORDER BY defaultCategoryType ASC";
-$transactionsTypeResults = executeQuery($transactionTypeQuery);
-
-$defaultCategoriesQuery = "SELECT * FROM defaultCategories ORDER BY defaultCategoryName ASC";
-$defaultCategoriesResults = executeQuery($defaultCategoriesQuery);
-
-$categoriesQuery = "SELECT * FROM categories WHERE userID = $userID ORDER BY categoryName ASC";
-$categoriesResults = executeQuery($categoriesQuery);
-
-// Add Transactions
-if (isset($_POST['btnAddTransaction'])) {
-    $userID = $_SESSION['userID'];
-    $amount = $_POST['amount'];
-    $transactionDate = $_POST['date'];
-    $description = htmlspecialchars($_POST['descriptionMesssage']);
-
-    $categoryInput = explode("_", $_POST['categoryName']);
-
-    $categoryKind = $categoryInput[0];
-    $categoryID = $categoryInput[1];
-
-    // Getting ID's From Category and Default Category
-    if ($categoryKind == 'default') {
-        $defaultCategoryID = $categoryID;
-        $categoryID = null;
-    } elseif ($categoryKind == 'custom') {
-        $customCategoryID = $categoryID;
-        $defaultCategoryID = null;
-    }
-
-    //Inserting To Database
-    $insertTransactionQuery = "INSERT INTO transactions (userID, categoryID, amount, transactionDate, description, defaultCategoryID) VALUES ('$userID', '$customCategoryID', '$amount', '$transactionDate', '$description', '$defaultCategoryID') ";
-    executeQuery($insertTransactionQuery);
-
-    //To prevent resubmission
-    $_SESSION['transaction_added'] = true;
-    header("Location: " . $_SERVER['PHP_SELF'] . "#transaction-history");
-    exit();
-}
-unset($_SESSION['transaction_added']);
-
-// Delete Transaction
-$transactionHistory->deleteTransaction();
-
-// Edit Transaction
-$transactionHistory->editTransaction();
-
-// Display Transactions
-$transactionsResult = executeQuery($transactionsQuery);
-
-
 // Add new categories
 $categoryType = "";
 $categoryName = "";
@@ -144,6 +81,8 @@ if (isset($_POST['close'])) {
     header("Location:home.php");
     exit();
 }
+
+include("assets/php/processes/transaction-processes.php");
 
 ?>
 
@@ -624,7 +563,7 @@ if (isset($_POST['close'])) {
 
                                             echo $transactionHistory->createRow($transactionRow, $transactionNo);
 
-                                            include("assets/php/modals/transaction_modals.php");
+                                            include("assets/php/modals/transaction-table-modals.php");
                                             $transactionNo++;
                                         }
                                     } else { ?>
@@ -851,87 +790,7 @@ if (isset($_POST['close'])) {
         <?php echo loadChart($userID, $budgetTrackerYear, $budgetTrackerMonth, $transactionType); ?>
     </script>
 
-    <script>
-        // Function for filtering categories based on selected transaction type
-        function filterCategoryOptions() {
-            var typeForm = document.getElementById("addtransactionType");
-            var typeOptions = typeForm.options;
-            var selectedType = typeForm.value;
-
-            var categoryForm = document.getElementById("editCategoryType" + transactionID);
-            var categoryOptions = categoryForm.options;
-
-            for (var i = 0; i < categoryOptions.length; i++) {
-                var categoryOption = categoryOptions[i];
-                var categoryOptionType = categoryOption.getAttribute("data-type");
-
-                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
-            }
-        }
-
-        // Function for selecting type based on selected category
-        function selectType() {
-            var typeForm = document.getElementById("addtransactionType");
-
-            var categoryForm = document.getElementById("addcategoryType");
-            var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
-            var categoryOptionType = selectedCategory.getAttribute("data-type");
-
-            if (categoryOptionType) {
-                typeForm.value = categoryOptionType;
-            }
-        }
-
-        function filterEditCategory() {
-            var typeForm = document.getElementById("editTransactionType");
-            var typeOptions = typeForm.options;
-            var selectedType = typeForm.value;
-
-            var categoryForm = document.getElementById("editCategoryType" + transactionID);
-            var categoryOptions = categoryForm.options;
-
-            for (var i = 0; i < categoryOptions.length; i++) {
-                var categoryOption = categoryOptions[i];
-                var categoryOptionType = categoryOption.getAttribute("data-type");
-
-                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
-            }
-        }
-
-        function selectEditType() {
-            var typeForm = document.getElementById("editTransactionType");
-
-            var categoryForm = document.getElementById("editCategoryType");
-            var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
-            var categoryOptionType = selectedCategory.getAttribute("data-type");
-
-            if (categoryOptionType) {
-                typeForm.value = categoryOptionType;
-            }
-        }
-
-        // Prevent edit success modal from showing if amount is invalid
-        var editSuccessModal = document.getElementById('transactionEditSuccessModal');
-        editSuccessModal.addEventListener('show.bs.modal', function (event) {
-            var amount = document.getElementById("editAmount").value;
-
-            if (amount <= 0) {
-                alert("Please enter a valid amount.");
-                return event.preventDefault();
-            }
-        })
-
-        var transactionSuccessModal = document.getElementById('transactionSuccessModal');
-        transactionSuccessModal.addEventListener('show.bs.modal', function (event) {
-            var amount = document.getElementById("amount").value;
-
-            if (amount <= 0) {
-                alert("Please enter a valid amount.");
-                return event.preventDefault();
-            }
-        })
-
-    </script>
+    <script src="assets/js/transaction-functions.js"></script>
 </body>
 
 </html>
