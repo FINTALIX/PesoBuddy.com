@@ -281,7 +281,7 @@ if(isset($_POST['btnAccountDelete'])){
             <div class="col-12">
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
+                    <a href="https://github.com/FINTALIX" target="_blank" class="text-decoration-none paragraph" style="color: var(--primaryColor)">CONTACT
                         US</a>
                     <span class="paragraph">FINTALIX ©2025</span>
                 </div>
