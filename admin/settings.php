@@ -1,5 +1,5 @@
 <?php
-include ("../assets/php/functions.php");
+include ("../assets/php/processes/functions.php");
 include("../connect.php");
 
 session_start();
@@ -59,7 +59,7 @@ if (isset($_POST['btnChangePassword'])) {
     }
 }
 
-include("../assets/php/imageProcessLogo.php");
+include("../assets/php/processes/imageProcessLogo.php");
 
 ?>
 

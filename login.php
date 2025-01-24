@@ -5,8 +5,8 @@ session_start();
 session_destroy();
 session_start();
 
-include("assets/php/loginProcess.php");
-include("assets/php/imageProcessLogo.php");
+include("assets/php/processes/loginProcess.php");
+include("assets/php/processes/imageProcessLogo.php");
 ?>
 
 

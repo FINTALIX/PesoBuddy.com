@@ -3,8 +3,8 @@ include("connect.php");
 
 session_start();
 
-include("assets/php/registerProcess.php");
-include("assets/php/imageProcessLogo.php");
+include("assets/php/processes/registerProcess.php");
+include("assets/php/processes/imageProcessLogo.php");
 ?>
 
 <!doctype html>
