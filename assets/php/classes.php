@@ -346,7 +346,7 @@ class BiggestTransaction
     public function displayTransactionCard()
     {
         return '
-        <div class="col-12 col-lg-4 px-lg-5 py-4">
+        <div class="col-12 col-lg-4 py-4">
                 <div class="card stat-card rounded-5">
                     <div class="d-flex flex-column align-items-end">
                         <div class="subheading pt-4 pb-4 pe-3 text-end">
