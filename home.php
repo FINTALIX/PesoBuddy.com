@@ -52,10 +52,16 @@ if (isset($_POST['btnSaveCategory'])) {
     $categoryName = $_POST['categoryName'];
 
     if (!empty($categoryType) && !empty($categoryName)) {
-        $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
-        executeQuery($categoryQuery);
-        header("Location: home.php");
-        exit();
+        $checkQuery = "SELECT * FROM categories WHERE userID = '$userID' AND categoryType = '$categoryType' AND categoryName = '$categoryName' AND isDeleted ='no'";
+        $result = executeQuery($checkQuery);
+
+        if (mysqli_num_rows($result) > 0) {
+        } else {
+            $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
+            executeQuery($categoryQuery);
+            header("Location: home.php");
+            exit();
+        }
     } else {
         echo '<script>alert("Please fill both category type and category name.")</script>';
     }
@@ -77,10 +83,10 @@ if (isset($_POST['btnDeleteCategory'])) {
 }
 
 //Redirect to home page after deleting data
-if (isset($_POST['close'])) {
-    header("Location:home.php");
-    exit();
-}
+// if (isset($_POST['close'])) {
+//     header("Location:home.php");
+//     exit();
+// }
 
 include("assets/php/processes/transaction-processes.php");
 
