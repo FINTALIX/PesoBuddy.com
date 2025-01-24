@@ -42,51 +42,6 @@ if (isset($_POST['btnEditCategory'])) {
     executeQuery($editCategoryQuery);
 }
 
-// Add new categories
-$_SESSION['userID'] = $userID;
-if (isset($_POST['btnSaveCategory'])) {
-    $categoryType = $_POST['categoryType'];
-    $categoryName = $_POST['categoryName'];
-
-    if (!empty($categoryType) && !empty($categoryName)) {
-        $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
-        executeQuery($categoryQuery);
-        // header("Location:home.php");
-        $_SESSION['category_added'] = true;
-    } else {
-        echo '<script>alert("Please fill both category type and category name.")</script>';
-    }
-}
-
-if (isset($_POST['btnSuccessModal'])) {
-    unset($_SESSION['category_added']);
-    header("Location:home.php");
-
-    exit();
-}
-
-
-// Delete Categories
-if (isset($_GET['categoryID'])) {
-    $categoryID = $_GET['categoryID'];
-}
-
-$_SESSION['userID'] = $userID;
-if (isset($_POST['btnDeleteCategory'])) {
-    $categoryID = $_POST['categoryID'];
-    $userID = $_SESSION['userID'];
-    $deleteCategoryQuery = "UPDATE categories SET isDeleted = 'yes' WHERE  categoryID = $categoryID AND userID = $userID";
-    executeQuery($deleteCategoryQuery);
-    header("Location:home.php");
-    exit();
-}
-
-//Redirect to home page after deleting data
-if (isset($_POST['close'])) {
-    header("Location:home.php");
-    exit();
-}
-
 // Query for getting transaction history
 $transactionsQuery = "SELECT * FROM transactions 
 LEFT JOIN categories ON transactions.categoryID = categories.categoryID 
@@ -149,6 +104,46 @@ $transactionHistory->editTransaction();
 
 // Display Transactions
 $transactionsResult = executeQuery($transactionsQuery);
+
+
+// Add new categories
+$categoryType = "";
+$categoryName = "";
+
+if (isset($_POST['btnSaveCategory'])) {
+    $categoryType = $_POST['categoryType'];
+    $categoryName = $_POST['categoryName'];
+
+    if (!empty($categoryType) && !empty($categoryName)) {
+        $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
+        executeQuery($categoryQuery);
+        header("Location: home.php");
+        exit();
+    } else {
+        echo '<script>alert("Please fill both category type and category name.")</script>';
+    }
+}
+
+// Delete Categories
+if (isset($_GET['categoryID'])) {
+    $categoryID = $_GET['categoryID'];
+}
+
+$_SESSION['userID'] = $userID;
+if (isset($_POST['btnDeleteCategory'])) {
+    $categoryID = $_POST['categoryID'];
+    $userID = $_SESSION['userID'];
+    $deleteCategoryQuery = "UPDATE categories SET isDeleted = 'yes' WHERE  categoryID = $categoryID AND userID = $userID";
+    executeQuery($deleteCategoryQuery);
+    header("Location:home.php");
+    exit();
+}
+
+//Redirect to home page after deleting data
+if (isset($_POST['close'])) {
+    header("Location:home.php");
+    exit();
+}
 
 ?>
 
@@ -305,66 +300,10 @@ $transactionsResult = executeQuery($transactionsQuery);
                 </div>
 
                 <!-- Add Category Modal -->
-                <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content p-4"
-                            style="border-radius: 15px; background-color: white; border: none;">
-                            <form method="POST">
-                                <div class="modal-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h1 class="heading" style="margin: 0;">Add New Category</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="categoryType">Category Type</label>
-                                        <?php $categoryType = $category['categoryType'] ?? ''; ?>
-                                        <select class="form-control" id="categoryType" name="categoryType">
-                                            <option value="" disabled selected>Select a category</option>
-                                            <option value="Expense" <?php echo ($categoryType == 'expense') ? 'selected' : ''; ?>>Expense</option>
-                                            <option value="Income" <?php echo ($categoryType == 'income') ? 'selected' : ''; ?>>Income</option>
-                                            <option value="Savings" <?php echo ($categoryType == 'savings') ? 'selected' : ''; ?>>Savings</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="categoryName" class="form-label paragraph">Category Name</label>
-                                        <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                            placeholder="Enter Category Name" required>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <button type="submit" name="btnSaveCategory" id="saveButton"
-                                            class="btn btn-primary"
-                                            style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                            data-bs-toggle="modal" data-bs-target="#successModal">
-                                            SAVE
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                 <?php include ("assets/php/modals/add-category-modal.php"); ?>
+               
 
-
-                <!-- Success Modal -->
-                <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content"
-                            style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
-                            <div class="modal-body p-4">
-                                <h5>Category successfully added!</h5>
-                                <form method="POST" action="#manage-categories">
-                                    <button type="submit" name="btnSuccessModal" class="btn mt-3"
-                                        style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;"
-                                        data-bs-dismiss="modal">Close</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Categories List -->
+                <!-- category-list -->
                 <div class="row mt-4 my-5">
                     <div class="col-md-6">
                         <h6 class="mt-4">Category List</h6>
@@ -991,50 +930,9 @@ $transactionsResult = executeQuery($transactionsQuery);
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const categoryType = document.getElementById('categoryType');
-            const categoryName = document.getElementById('categoryName');
-            const saveButton = document.getElementById('saveButton');
-
-            saveButton.disabled = true;
-
-            function toggleButton() {
-                if (categoryType.value && categoryName.value) {
-                    saveButton.disabled = false;
-                } else {
-                    saveButton.disabled = true;
-                }
-            }
-
-            categoryType.addEventListener('change', toggleButton);
-            categoryName.addEventListener('input', toggleButton);
-
-            if (<?php echo isset($_SESSION['category_added']) && $_SESSION['category_added'] ? 'true' : 'false'; ?>) {
-                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                successModal.show();
-                <?php unset($_SESSION['category_added']); ?>
-            }
-        });
-
         // Function for filtering categories based on selected transaction type
         function filterCategoryOptions() {
             var typeForm = document.getElementById("addtransactionType");
-            var typeOptions = typeForm.options;
-            var selectedType = typeForm.value;
-
-            var categoryForm = document.getElementById("addcategoryType");
-            var categoryOptions = categoryForm.options;
-
-            for (var i = 0; i < categoryOptions.length; i++) {
-                var categoryOption = categoryOptions[i];
-                var categoryOptionType = categoryOption.getAttribute("data-type");
-
-                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
-            }
-        }
-
-        function filterEditCategory(transactionID) {
-            var typeForm = document.getElementById("editTransactionType" + transactionID);
             var typeOptions = typeForm.options;
             var selectedType = typeForm.value;
 
@@ -1062,10 +960,26 @@ $transactionsResult = executeQuery($transactionsQuery);
             }
         }
 
-        function selectEditType(transactionID) {
-            var typeForm = document.getElementById("editTransactionType" + transactionID);
+        function filterEditCategory() {
+            var typeForm = document.getElementById("editTransactionType");
+            var typeOptions = typeForm.options;
+            var selectedType = typeForm.value;
 
             var categoryForm = document.getElementById("editCategoryType" + transactionID);
+            var categoryOptions = categoryForm.options;
+
+            for (var i = 0; i < categoryOptions.length; i++) {
+                var categoryOption = categoryOptions[i];
+                var categoryOptionType = categoryOption.getAttribute("data-type");
+
+                categoryOption.style.display = (selectedType == categoryOptionType) ? "block" : "none";
+            }
+        }
+
+        function selectEditType() {
+            var typeForm = document.getElementById("editTransactionType");
+
+            var categoryForm = document.getElementById("editCategoryType");
             var selectedCategory = categoryForm.options[categoryForm.selectedIndex];
             var categoryOptionType = selectedCategory.getAttribute("data-type");
 
@@ -1074,7 +988,7 @@ $transactionsResult = executeQuery($transactionsQuery);
             }
         }
 
-        // Prevent success modals from showing if amount is invalid
+        // Prevent edit success modal from showing if amount is invalid
         var editSuccessModal = document.getElementById('transactionEditSuccessModal');
         editSuccessModal.addEventListener('show.bs.modal', function (event) {
             var amount = document.getElementById("editAmount").value;
