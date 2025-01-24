@@ -12,15 +12,9 @@ $userID = $_SESSION['userID'];
 $personalInfoQuery="SELECT * FROM userS WHERE userID=$userID";
 $personalInfoResults= executeQuery($personalInfoQuery);
 
-include("assets/php/imageProcess.php");
-
-//Deletion of Profile Picture
-if(isset($_POST['btnDeleteProfilePic'])){
-    $updateProfileQuery = "UPDATE users SET profilePicture = NULL WHERE userID = $userID";
-        executeQuery($updateProfileQuery);
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+include("assets/php/imageProcessProfile.php");
+include("assets/php/imageProcessLogo.php");
+include("assets/php/deleteProfileProcess.php");
 
 //updating Fullname and birthday
 if(isset($_POST['btnProfile'])){ 
@@ -66,13 +60,12 @@ if (isset($_POST['btnChangePassword'])) {
         $error = "Old Password";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
-
     } elseif ($newpassword != $confirmpassword) {
         $error = "Passwords do not match";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     } elseif (strlen($newpassword) < 8) {
-        $error = "Passwords do not match";
+        $error = "Passwords 8";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     }
@@ -102,7 +95,7 @@ if(isset($_POST['btnAccountDelete'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Page</title>
-    <link rel="icon" href="assets/images/pesobuddy_icon.png" />
+    <link rel="icon" href="assets/images/websiteLogo/<?php echo $websiteLogo?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
@@ -450,9 +443,11 @@ if(isset($_POST['btnAccountDelete'])){
     <script>
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const profilePreview = document.getElementById('profilePreview');
+        const profilePreview = document.getElementById('profilePreview'); 
         const profilePreview2 = document.getElementById('profilePreview2');
+        const uploadProfilePicModal = document.getElementById('uploadProfilePic');
 
+        // Handle file input changes
         fileInput.addEventListener('change', function () {
             if (this.files && this.files.length > 0) {
                 fileNameDisplay.value = this.files[0].name;
@@ -462,11 +457,18 @@ if(isset($_POST['btnAccountDelete'])){
                     profilePreview.src = e.target.result; 
                     profilePreview2.src = e.target.result; 
                 };
-                reader.readAsDataURL(this.files[0]); 
+                reader.readAsDataURL(this.files[0]);
             }
         });
 
-        
+        // Reset file input when the modal is closed
+        uploadProfilePicModal.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "./assets/images/userProfile/<?php echo $profilePicture?>"; 
+            profilePreview2.src = "assets/images/userProfile/<?php echo $profilePicture?>"; 
+        });
+     
         const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
         const alert = document.getElementById('alert');
@@ -476,7 +478,9 @@ if(isset($_POST['btnAccountDelete'])){
                 error === 'Old Password'
                     ? 'Old password does not match.'
                     : error === 'Passwords do not match'
-                    ? 'Passwords do not match and it is not 8 characters long.'
+                    ? 'Passwords do not match.'
+                    : error === 'Passwords 8'
+                    ? 'Passwords is not 8 characters long.'
                     : 'Password updated successfully.';
             alert.className = 
                 error === 'success'

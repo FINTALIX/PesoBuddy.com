@@ -11,7 +11,7 @@ adminAuth();
 $userTable = new User();
 $userTable->queryAllUsers();
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcess.php");
+include("../assets/php/imageProcessLogo.php");
 
 $searchUser = isset($_GET['searchUser']) ? $_GET['searchUser'] : "";
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : "";
@@ -34,7 +34,7 @@ if(isset($_POST['btnDeleteUser'])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PesoBuddy | Manage Users</title>
-    <link rel="icon" href="../assets/images/pesobuddy_icon.png">
+    <link rel="icon" href="../assets/images/websiteLogo/<?php echo $websiteLogo?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
