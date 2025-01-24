@@ -1,7 +1,7 @@
 <?php
 
 include("../connect.php");
-include("../assets/php/functions.php");
+include("../assets/php/processes/functions.php");
 include("../assets/php/classes/user.php");
 
 
@@ -9,7 +9,7 @@ session_start();
 adminAuth();
 
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcessLogo.php");
+include("../assets/php/processes/imageProcessLogo.php");
 
 if(isset($_GET['id'])) {
     $userID = $_GET['id'];

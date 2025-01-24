@@ -1,6 +1,6 @@
 <?php
 include("connect.php");
-include("assets/php/imageProcessLogo.php");
+include("assets/php/processes/imageProcessLogo.php");
 ?>
 
 <!doctype html>

@@ -1,7 +1,7 @@
 <?php
 
 include("../connect.php");
-include("../assets/php/functions.php");
+include("../assets/php/processes/functions.php");
 include("../assets/php/classes/user.php");
 include('../assets/php/modals/admin-delete-user.php');
 
@@ -11,7 +11,7 @@ adminAuth();
 $userTable = new User();
 $userTable->queryAllUsers();
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcessLogo.php");
+include("../assets/php/processes/imageProcessLogo.php");
 
 $searchUser = isset($_GET['searchUser']) ? $_GET['searchUser'] : "";
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : "";

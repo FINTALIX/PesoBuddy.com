@@ -1,12 +1,12 @@
 <?php
 include("../connect.php");
-include("../assets/php/functions.php");
+include("../assets/php/processes/functions.php");
 
 session_start();
 adminAuth();
 
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcessLogo.php");
+include("../assets/php/processes/imageProcessLogo.php");
 
 // Counts the users
 $userCountQuery = "SELECT COUNT(userID) AS userCount FROM users WHERE role = 'user'";

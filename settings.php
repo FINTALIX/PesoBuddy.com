@@ -1,6 +1,6 @@
 <?php
 
-include("assets/php/functions.php");
+include("assets/php/processes/functions.php");
 include("connect.php");
 
 session_start();
@@ -12,9 +12,9 @@ $userID = $_SESSION['userID'];
 $personalInfoQuery="SELECT * FROM userS WHERE userID=$userID";
 $personalInfoResults= executeQuery($personalInfoQuery);
 
-include("assets/php/imageProcessProfile.php");
-include("assets/php/imageProcessLogo.php");
-include("assets/php/deleteProfileProcess.php");
+include("assets/php/processes/imageProcessProfile.php");
+include("assets/php/processes/imageProcessLogo.php");
+include("assets/php/processes/deleteProfileProcess.php");
 
 //updating Fullname and birthday
 if(isset($_POST['btnProfile'])){ 

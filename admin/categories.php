@@ -1,14 +1,14 @@
 <?php
 
 include("../connect.php");
-include("../assets/php/functions.php");
+include("../assets/php/processes/functions.php");
 include("../assets/php/classes/category-manager.php");
 
 session_start();
 adminAuth();
 
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcessLogo.php");
+include("../assets/php/processes/imageProcessLogo.php");
 ?>
 
 <!doctype html>

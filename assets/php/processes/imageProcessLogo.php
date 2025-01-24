@@ -5,7 +5,7 @@ if (isset($_POST['btnUploadLogo'])) {
     if (!empty($_FILES['websiteLogo']['name'])) {
         $websiteLogo = $_FILES['websiteLogo']['name'];
         $websiteLogoTmp = $_FILES['websiteLogo']['tmp_name'];
-        $uploadDirLogo = __DIR__ . '/../images/websiteLogo/';
+        $uploadDirLogo = __DIR__ . '/../../images/websiteLogo/';
         
         // Validate the uploaded file type
         $allowedMimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];

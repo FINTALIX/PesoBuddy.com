@@ -1,7 +1,7 @@
 <?php
 
 include("connect.php");
-include("assets/php/functions.php");
+include("assets/php/processes/functions.php");
 include("assets/php/classes/transactions-history.php");
 include("assets/php/classes/finance-dashboard.php");
 include("assets/php/classes/biggest-transaction.php");
@@ -10,8 +10,8 @@ session_start();
 userAuth();
 
 $userID = $_SESSION['userID'];
-include("assets/php/imageProcessLogo.php");
-include("assets/php/imageProcessProfile.php");
+include("assets/php/processes/imageProcessLogo.php");
+include("assets/php/processes/imageProcessProfile.php");
 
 $year = isset($_GET['year']) ? $_GET['year'] : '2025';
 
