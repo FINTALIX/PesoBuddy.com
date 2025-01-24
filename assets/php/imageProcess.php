@@ -32,7 +32,7 @@ if (isset($_POST['btnUploadProfile'])) {
     // Display user Profile Picture
     $profilePicture = "defaultProfile.png"; 
     while($row = mysqli_fetch_assoc($uploadResult)){
-    $profilePicture = !empty($row[$profilePicture]) ? $row['profilePicture'] : "defaultProfile.png";
+    $profilePicture = !empty($row['profilePicture']) ? $row['profilePicture'] : "defaultProfile.png";
     }
 
 // Handle Profile Picture Upload
@@ -61,6 +61,6 @@ $logoResult = executeQuery($websiteLogoQuery);
 // Display Website Logo
 $websiteLogo = "websiteLogo.png"; 
 if ($row = mysqli_fetch_assoc($logoResult)) {
-    $websiteLogo = !empty($row[$websiteLogo]) ? $row['settingValue'] : "websiteLogo.png";
+    $websiteLogo = !empty($row['settingValue']) ? $row['settingValue'] : "websiteLogo.png";
 }
 ?>

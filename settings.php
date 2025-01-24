@@ -66,13 +66,12 @@ if (isset($_POST['btnChangePassword'])) {
         $error = "Old Password";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
-
     } elseif ($newpassword != $confirmpassword) {
         $error = "Passwords do not match";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     } elseif (strlen($newpassword) < 8) {
-        $error = "Passwords do not match";
+        $error = "Passwords 8";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     }
@@ -475,7 +474,9 @@ if(isset($_POST['btnAccountDelete'])){
                 error === 'Old Password'
                     ? 'Old password does not match.'
                     : error === 'Passwords do not match'
-                    ? 'Passwords do not match and it is not 8 characters long.'
+                    ? 'Passwords do not match.'
+                    : error === 'Passwords 8'
+                    ? 'Passwords is not 8 characters long.'
                     : 'Password updated successfully.';
             alert.className = 
                 error === 'success'
