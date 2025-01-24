@@ -34,7 +34,8 @@ include("assets//php/registerProcess.php");
       <?php if ($error == "userExist") { ?>
         <div class="row justify-content-center mt-2">
           <div class="col-12">
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-warning d-flex flex-wrap align-items-center justify-content-center justify-content-md-between"
+             role="alert">
               Username or Email already exists.
               <a href="login.php" class="btn btn-primary rounded-pill">LOGIN</a>
             </div>
