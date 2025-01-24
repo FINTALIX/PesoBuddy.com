@@ -335,7 +335,7 @@ if (isset($_POST['close'])) {
                     <div class="col-md-6">
                         <div class="card card-container">
                             <h6>Edit Category</h6>
-                            <form id="edit-category-form" method="POST" target="editFrame" action="#manage-categories">
+                            <form id="edit-category-form" method="POST" action="#manage-categories">
                                 <?php
                                 $categoryType = $categoryName = '';
                                 if (isset($_POST['categoryID'])) {
@@ -395,8 +395,6 @@ if (isset($_POST['close'])) {
                                     </div>
                                 </div>
                             </form>
-                            <!-- Invisible iframe for form submission -->
-                            <iframe name="editFrame" style="display: none;"></iframe>
                         </div>
                     </div>
                 </div>
