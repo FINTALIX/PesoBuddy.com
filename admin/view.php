@@ -8,7 +8,7 @@ session_start();
 adminAuth();
 
 $userID = $_SESSION['userID'];
-include("../assets/php/imageProcess.php");
+include("../assets/php/imageProcessLogo.php");
 
 if(isset($_GET['id'])) {
     $userID = $_GET['id'];
@@ -36,7 +36,7 @@ if(isset($_GET['id'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PesoBuddy | Admin | View User</title>
-    <link rel="icon" href="../assets/images/pesobuddy_icon.png" />
+    <link rel="icon" href="../assets/images/websiteLogo/<?php echo $websiteLogo?>" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"

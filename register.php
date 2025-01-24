@@ -4,6 +4,7 @@ include("connect.php");
 session_start();
 
 include("assets//php/registerProcess.php");
+include("assets/php/imageProcessLogo.php");
 ?>
 
 <!doctype html>
@@ -13,7 +14,7 @@ include("assets//php/registerProcess.php");
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PesoBuddy | Registration</title>
-  <link rel="icon" href="assets/images/pesobuddy_icon.png" />
+  <link rel="icon" href="assets/images/websiteLogo/<?php echo $websiteLogo?>" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="assets/css/style.css" rel="stylesheet">

@@ -40,13 +40,12 @@ if (isset($_POST['btnChangePassword'])) {
         $error = "Old Password";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
-
     } elseif ($newpassword != $confirmpassword) {
         $error = "Passwords do not match";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     } elseif (strlen($newpassword) < 8) {
-        $error = "Passwords do not match";
+        $error = "Passwords 8";
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
         exit();
     }
@@ -60,7 +59,7 @@ if (isset($_POST['btnChangePassword'])) {
     }
 }
 
-include("../assets/php/imageProcess.php");
+include("../assets/php/imageProcessLogo.php");
 
 ?>
 
@@ -71,7 +70,7 @@ include("../assets/php/imageProcess.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PesoBuddy | Admin Dashboard</title>
-    <link rel="icon" href="../assets/images/pesobuddy_icon.png" />
+    <link rel="icon" href="../assets/images/websiteLogo/<?php echo $websiteLogo?>" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -226,7 +225,7 @@ include("../assets/php/imageProcess.php");
                         </form>
                     </div>
                     <div class="modal-footer border-0 justify-content-center mb-2">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" id="btnCancel" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" name="btnUploadLogo" form="uploadForm" class="btn btn-primary">Save</button>
                     </div>
                 </div>
@@ -244,12 +243,16 @@ include("../assets/php/imageProcess.php");
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 
-            <script>
+        <script>
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const profilePreview = document.getElementById('profilePreview');
+        const profilePreview = document.getElementById('profilePreview'); 
         const previewImage = document.getElementById('previewImage');
+        const changeLogoModalModal = document.getElementById('changeLogoModal');
+        const btnCancel = document.getElementById('btnCancel');
 
+
+        // Handle file input changes
         fileInput.addEventListener('change', function () {
             if (this.files && this.files.length > 0) {
                 fileNameDisplay.value = this.files[0].name;
@@ -259,8 +262,23 @@ include("../assets/php/imageProcess.php");
                     profilePreview.src = e.target.result; 
                     previewImage.src = e.target.result; 
                 };
-                reader.readAsDataURL(this.files[0]); 
+                reader.readAsDataURL(this.files[0]);
             }
+        });
+
+        // Reset file input when the modal is closed
+        changeLogoModalModal.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+            previewImage.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+        });
+
+        btnCancel.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+            previewImage.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
         });
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -272,7 +290,9 @@ include("../assets/php/imageProcess.php");
                 error === 'Old Password'
                     ? 'Old password does not match.'
                     : error === 'Passwords do not match'
-                    ? 'Passwords do not match and it is not 8 characters long.'
+                    ? 'Passwords do not match.'
+                    : error === 'Passwords 8'
+                    ? 'Passwords is not 8 characters long.'
                     : 'Password updated successfully.';
             alert.className = 
                 error === 'success'
