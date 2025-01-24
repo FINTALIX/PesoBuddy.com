@@ -287,7 +287,7 @@ function queryDefaultCategories() {
 }
 
 function queryCategories() {
-    $categoriesQuery = "SELECT * FROM categories WHERE userID = {$_SESSION['userID']} ORDER BY categoryName ASC";
+    $categoriesQuery = "SELECT * FROM categories WHERE userID = {$_SESSION['userID']} && isDeleted = 'no' ORDER BY categoryName ASC";
     $categoriesResults = executeQuery($categoriesQuery);
 
     return $categoriesResults;

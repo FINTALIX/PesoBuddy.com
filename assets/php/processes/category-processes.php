@@ -25,6 +25,7 @@ if (isset($_POST['btnEditCategory'])) {
 // Add new categories
 $categoryType = "";
 $categoryName = "";
+$addCategoryError = false;
 
 if (isset($_POST['btnSaveCategory'])) {
     $categoryType = $_POST['categoryType'];
@@ -35,6 +36,18 @@ if (isset($_POST['btnSaveCategory'])) {
         $result = executeQuery($checkQuery);
 
         if (mysqli_num_rows($result) > 0) {
+            echo '
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var addCategorySuccessModal = document.getElementById("addCategorySuccessModal");
+
+                    addCategorySuccessModal.addEventListener("show.bs.modal", function (event) {
+                        alert("Category already exists.");
+                        return event.preventDefault();
+                    });
+                });
+            </script>
+            ';
         } else {
             $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
             executeQuery($categoryQuery);
@@ -62,3 +75,19 @@ if (isset($_POST['btnDeleteCategory'])) {
 }
 
 ?>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var addCategorySuccessModal = document.getElementById('addCategorySuccessModal');
+
+    addCategorySuccessModal.addEventListener('show.bs.modal', function (event) {
+        var error = ""; 
+
+        if (error == true) {
+            alert("Category already exists.");
+            return event.preventDefault();
+            error = false;
+        }
+        });
+    });
+</script> -->

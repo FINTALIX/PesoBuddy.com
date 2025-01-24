@@ -57,7 +57,7 @@ function selectEditType(transactionID) {
 }
 
 // Prevent success modals from showing if amount is invalid
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     var editSuccessModal = document.getElementById('transactionEditSuccessModal');
     if (editSuccessModal) {
         editSuccessModal.addEventListener('show.bs.modal', function (event) {
