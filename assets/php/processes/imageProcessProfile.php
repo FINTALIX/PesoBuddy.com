@@ -5,7 +5,7 @@ if (isset($_POST['btnUploadProfile'])) {
     if (!empty($_FILES['profilePic']['name'])) {
         $profilePicture = $_FILES['profilePic']['name'];
         $profilePictureTmp = $_FILES['profilePic']['tmp_name'];
-        $uploadDirProfile = __DIR__ . '/../images/userProfile/';
+        $uploadDirProfile = __DIR__ . '/../../images/userProfile/';
 
         // Validate the uploaded file type
         $allowedMimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
