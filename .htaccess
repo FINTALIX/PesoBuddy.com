@@ -1,0 +1,2 @@
+# Define a custom 404 error page for this folder
+ErrorDocument 404 /FINTALIX/PesoBuddy.com/404.php
