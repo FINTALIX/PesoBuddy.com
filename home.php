@@ -5,7 +5,6 @@ include("assets/php/functions.php");
 include("assets/php/classes/transactions-history.php");
 include("assets/php/classes/finance-dashboard.php");
 include("assets/php/classes/biggest-transaction.php");
-include("assets/php/classes/category-manager.php");
 
 session_start();
 userAuth();
