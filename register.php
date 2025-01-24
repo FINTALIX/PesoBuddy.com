@@ -3,57 +3,7 @@ include("connect.php");
 
 session_start();
 
-$_SESSION['userID'] = "";
-$_SESSION['userName'] = "";
-$_SESSION['email'] = "";
-$_SESSION['firstName'] = "";
-$_SESSION['lastName'] = "";
-$_SESSION['email'] = "";
-$_SESSION['birthday'] = "";
-$_SESSION['profilePicture'] = "";
-$_SESSION['role'] = "";
-
-$error = "";
-
-if (isset($_POST['btnRegister'])) {
-  $username = $_POST['userName'];
-  $email = $_POST['email'];
-  $firstName = $_POST['firstName'];
-  $lastName = $_POST['lastName'];
-  $birthday = $_POST['birthday'];
-  $password = $_POST['password'];
-  $cpassword = $_POST['cpassword'];
-
-
-  $checkQuery = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
-  $checkResult = executeQuery($checkQuery);
-
-  if (mysqli_num_rows($checkResult) > 0) {
-    $error = "USER_EXISTS";
-  } elseif ($password == $cpassword) {
-    $lastInsertedId = mysqli_insert_id($conn);
-
-    $userQuery = "INSERT INTO users(username, email, password, firstName, lastName, birthday)  VALUES ('$username', '$email', '$password', '$firstName', '$lastName', '$birthday')";
-    executeQuery($userQuery);
-
-    $lastInsertedId = mysqli_insert_id($conn);
-
-    $_SESSION['userID'] = $lastInsertedId;
-    $_SESSION['userName'] = $username;
-    $_SESSION['firstName'] = $firstName;
-    $_SESSION['lastName'] = $lastName;
-    $_SESSION['birthday'] = $birthday;
-    $_SESSION['role'] = "user";
-
-    $lastInsertedId = mysqli_insert_id($conn);
-    $insertLoginQuery = "INSERT INTO logins (userID) VALUES ('$lastInsertedId')";
-    executeQuery($insertLoginQuery);  
-
-    header("Location: home.php");
-  } else {
-    $error = "PASSWORD UNMATCHED";
-  }
-}
+include("assets//php/registerProcess.php");
 ?>
 
 <!doctype html>
@@ -73,19 +23,32 @@ if (isset($_POST['btnRegister'])) {
 <body>
   <div class="container p-5">
     <div class="row justify-content-center">
-
-      <?php if ($error == "PASSWORD UNMATCHED") { ?>
+      <?php if ($error == "passwordUnmatched") { ?>
         <div class="alert alert-danger mb-3" role="alert">
           Passwords does not match
         </div>
       <?php } ?>
 
+
       <!-- Alert for same user credentials -->
-      <?php if ($error == "USER_EXISTS") { ?>
+      <?php if ($error == "userExist") { ?>
+        <div class="row justify-content-center mt-2">
+          <div class="col-12">
+            <div class="alert alert-warning d-flex flex-wrap align-items-center justify-content-center justify-content-md-between"
+             role="alert">
+              Username or Email already exists.
+              <a href="login.php" class="btn btn-primary rounded-pill">LOGIN</a>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+
+      <!-- Alert for short password -->
+      <?php if ($error == "passwordTooShort") { ?>
         <div class="row justify-content-center mt-2">
           <div class="col-12">
             <div class="alert alert-warning" role="alert">
-              Username or Email already exists.
+              Password is too short! It must be at least 8 characters.
             </div>
           </div>
         </div>
@@ -108,10 +71,10 @@ if (isset($_POST['btnRegister'])) {
             <!-- Name -->
             <div class="row">
               <div class="col-6">
-                <input class="form-control mt-2 mb-4" type="text" name="firstName" placeholder="First Name" required>
+                <input class="form-control mt-2 mb-4" type="text" name="firstName" placeholder="First Name" value="<?php echo isset($_POST['btnRegister']) ? $firstName : ''; ?>" required>
               </div>
               <div class="col-6">
-                <input class="form-control mt-2 mb-4" type="text" name="lastName" placeholder="Last Name" required>
+                <input class="form-control mt-2 mb-4" type="text" name="lastName" placeholder="Last Name" value="<?php echo isset($_POST['btnRegister']) ? $lastName : ''; ?>" required>
               </div>
             </div>
 
@@ -119,14 +82,15 @@ if (isset($_POST['btnRegister'])) {
             <div class="row">
               <div class="col-12">
                 <input class="form-control mb-4" type="text" name="birthday" placeholder="Birthday"
-                  onfocus="(this.type='date')" required>
+                  onfocus="(this.type='date')" value="<?php echo isset($_POST['btnRegister']) ? $birthday : ''; ?>" required>
+                </input>
               </div>
             </div>
 
             <!-- Email -->
             <div class="row">
               <div class="col-12">
-                <input class="form-control mb-3" type="email" name="email" placeholder="Email" required>
+                <input class="form-control mb-3" type="email" name="email" placeholder="Email" value="<?php echo isset($_POST['btnRegister']) ? $email : ''; ?>" required>
               </div>
             </div>
 
@@ -136,7 +100,7 @@ if (isset($_POST['btnRegister'])) {
             <div class="row">
               <div class="col-12">
                 <input class="form-control mt-3 mb-4" type="text" name="userName" placeholder="Create Username"
-                  required>
+                value="<?php echo isset($_POST['btnRegister']) ? $username : ''; ?>" required>
               </div>
             </div>
 
@@ -144,13 +108,13 @@ if (isset($_POST['btnRegister'])) {
             <div class="row">
               <div class="col-12">
                 <input class="form-control mb-4" type="password" name="password" placeholder="Create a Password"
-                  required>
+                value="<?php echo isset($_POST['btnRegister']) ? $password : ''; ?>" required>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
                 <input class="form-control mb-2" type="password" name="cpassword" placeholder="Confirm Password"
-                  required>
+                value="<?php echo isset($_POST['btnRegister']) ? $cpassword : ''; ?>" required>
               </div>
             </div>
 
