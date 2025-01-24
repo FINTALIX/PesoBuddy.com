@@ -99,7 +99,7 @@ while ($loginRow = mysqli_fetch_assoc($loginResult)) {
             <!-- Admin Greeting -->
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-md-6 pt-3 pt-md-4 heading" style="padding-left: 35px">
-                    Hello, <span style="color: var(--darkColor)"><?php echo $_SESSION['firstName'] ?></span>
+                    Hello, <span style="color: var(--secondaryColor)"><?php echo $_SESSION['firstName'] ?></span>!
                 </div>
             </div>
 

@@ -2,8 +2,10 @@
 
 include("connect.php");
 include("assets/php/functions.php");
-include("assets/php/classes.php");
 include("assets/php/classes/transactions-history.php");
+include("assets/php/classes/finance-dashboard.php");
+include("assets/php/classes/biggest-transaction.php");
+include("assets/php/classes/category-manager.php");
 
 session_start();
 userAuth();
@@ -20,68 +22,10 @@ $annualTotalSavings = computeAnnualSavings($userID, $year);
 $annualTotalExpense = computeAnnualExpense($userID, $year);
 $annualRemainingBalance = computeRemainingBalance($annualTotalIncome, $annualTotalSavings, $annualTotalExpense);
 
-// Instantiate the class
 $userTransactionCategory = new FinanceDashboard($_SESSION['userID']);
 $transaction = new BiggestTransaction($_SESSION['userID']);
 
-// Query to get the list of categories
-$customCategoryQuery = "SELECT * FROM categories WHERE userID = $userID AND isDeleted ='no'";
-$customCategoryResult = executeQuery($customCategoryQuery);
-
-// Check if form is submitted and process it
-if (isset($_POST['btnEditCategory'])) {
-    // Get the submitted values
-    $categoryID = $_POST['categoryID'];
-    $categoryName = $_POST['categoryName'];
-    $categoryType = $_POST['categoryType'];
-
-    // Update category
-    $editCategoryQuery = "
-    UPDATE categories 
-    SET categoryName = '$categoryName', categoryType = '$categoryType' 
-    WHERE categoryID = $categoryID";
-    executeQuery($editCategoryQuery);
-}
-
-// Add new categories
-$categoryType = "";
-$categoryName = "";
-
-if (isset($_POST['btnSaveCategory'])) {
-    $categoryType = $_POST['categoryType'];
-    $categoryName = $_POST['categoryName'];
-
-    if (!empty($categoryType) && !empty($categoryName)) {
-        $categoryQuery = "INSERT INTO categories (userID, categoryType, categoryName) VALUES ('$userID', '$categoryType', '$categoryName')";
-        executeQuery($categoryQuery);
-        header("Location: home.php");
-        exit();
-    } else {
-        echo '<script>alert("Please fill both category type and category name.")</script>';
-    }
-}
-
-// Delete Categories
-if (isset($_GET['categoryID'])) {
-    $categoryID = $_GET['categoryID'];
-}
-
-$_SESSION['userID'] = $userID;
-if (isset($_POST['btnDeleteCategory'])) {
-    $categoryID = $_POST['categoryID'];
-    $userID = $_SESSION['userID'];
-    $deleteCategoryQuery = "UPDATE categories SET isDeleted = 'yes' WHERE  categoryID = $categoryID AND userID = $userID";
-    executeQuery($deleteCategoryQuery);
-    header("Location:home.php");
-    exit();
-}
-
-//Redirect to home page after deleting data
-if (isset($_POST['close'])) {
-    header("Location:home.php");
-    exit();
-}
-
+include("assets/php/processes/category-processes.php");
 include("assets/php/processes/transaction-processes.php");
 
 ?>
@@ -93,7 +37,7 @@ include("assets/php/processes/transaction-processes.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PesoBuddy</title>
-    <link rel="icon" href="assets/images/websiteLogo/<?php echo $websiteLogo?>" />
+    <link rel="icon" href="assets/images/websiteLogo/<?php echo $websiteLogo ?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -110,7 +54,7 @@ include("assets/php/processes/transaction-processes.php");
     <div class="container" style="padding-top: 5rem;">
         <div class="row align-items-center justify-content-between px-2">
             <div class="col-12 col-md-6 pt-3 pt-md-4 heading order-2 order-md-1">
-                Hello, <span style="color:#1A7431"><?php echo $_SESSION['firstName'] ?></span>
+                Hello, <span style="color:#1A7431"><?php echo $_SESSION['firstName'] ?></span>!
             </div>
             <div
                 class="col-12 col-md-auto paragraph d-flex flex-row align-items-center pt-3 pt-md-4 order-1 order-md-2">
@@ -138,8 +82,7 @@ include("assets/php/processes/transaction-processes.php");
                         </div>
                     </div>
                     <div class="row text-center align-items-center m-2">
-                        <?php
-                        ?>
+                        
                         <!-- Total Income -->
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
                             <div class="subheading"><b>TOTAL INCOME</b></div>
@@ -239,16 +182,15 @@ include("assets/php/processes/transaction-processes.php");
                 </div>
 
                 <!-- Add Category Modal -->
-                 <?php include ("assets/php/modals/add-category-modal.php"); ?>
-               
+                <?php include("assets/php/modals/add-category-modal.php"); ?>
 
-                <!-- category-list -->
+                <!-- Category-List -->
                 <div class="row mt-4 my-5">
                     <div class="col-md-6">
                         <h6 class="mt-4">Category List</h6>
                         <div class="header-divider"></div>
                         <div id="category-list">
-                            <form method="POST">
+                            <form method="POST" action="#manage-categories">
                                 <?php
                                 if (mysqli_num_rows($customCategoryResult) > 0) {
                                     while ($customCategoryRow = mysqli_fetch_assoc($customCategoryResult)) {
@@ -263,7 +205,7 @@ include("assets/php/processes/transaction-processes.php");
                                     }
                                 } else { ?>
                                     <p class="paragraph my-1">You have not added any categories yet.</p>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </form>
@@ -312,9 +254,9 @@ include("assets/php/processes/transaction-processes.php");
                                         data-bs-target="#deleteCategoryModal">DELETE</button>
 
                                     <!-- Delete Category Modal -->
-                                  <?php include("assets/php/modals/delete-category-modal.php");?>
+                                    <?php include("assets/php/modals/delete-category-modal.php"); ?>
 
-                                    <button type="submit" name="btnEditCategory" class="btn btn-primary"
+                                    <button type="button" name="btnEditCategory" class="btn btn-primary"
                                         data-bs-toggle="modal" data-bs-target="#saveModal">SAVE</button>
 
                                     <!-- Save Modal -->
@@ -324,10 +266,10 @@ include("assets/php/processes/transaction-processes.php");
                                                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
                                                 <div class="modal-body p-4">
                                                     <h5>The edited category has been successfully saved!</h5>
-                                                    <a href="home.php" class="btn mt-3"
+                                                    <button type="submit" class="btn mt-3" name="btnEditCategory"
                                                         style="background-color: white; color: var(--primaryColor); font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 5px; border: none;">
                                                         Close
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,7 +320,7 @@ include("assets/php/processes/transaction-processes.php");
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        
+
                         <div class="mb-3">
                             <div class="row g-3">
                                 <!-- Transaction Type Dropdown -->
@@ -399,7 +341,7 @@ include("assets/php/processes/transaction-processes.php");
                                         ?>
                                     </select>
                                 </div>
-                                
+
                                 <!-- Category Dropdown -->
                                 <div class="col-md-5">
                                     <select class="form-select" name="categoryName" id="addcategoryType"
@@ -434,7 +376,7 @@ include("assets/php/processes/transaction-processes.php");
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Date -->
                         <div class="mb-3">
                             <input class="form-control" type="text" name="date" placeholder="Date"
@@ -454,7 +396,7 @@ include("assets/php/processes/transaction-processes.php");
                                     <input type="number" min="1" class="form-control" name="amount" id="amount"
                                         placeholder="Amount">
                                 </div>
-                                
+
                                 <!-- Add Button -->
                                 <div class="col-12 col-md-3">
                                     <button type="button" class="btn btn-primary"
@@ -636,7 +578,8 @@ include("assets/php/processes/transaction-processes.php");
                         <p class="paragraph" style="margin: 0;">LAST WARNING!</p>
                         <p class="paragraph" style="color: red; margin: 0.5rem 0 0 0;">
                             If you decided to delete this month’s
-                            <b>(<?php echo $budgetTrackerMonth . ' ' . $budgetTrackerYear; ?>)</b> budget tracker, all data
+                            <b>(<?php echo $budgetTrackerMonth . ' ' . $budgetTrackerYear; ?>)</b> budget tracker, all
+                            data
                             related to it will also be deleted.
                         </p>
                     </div>
