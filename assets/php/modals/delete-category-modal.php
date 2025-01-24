@@ -35,14 +35,14 @@
                         style="background-color: var(--linkHoverColor); color: var(--primaryColor);">
                         Cancel
                     </button>
-                    <form Method="post">
-                        <button type="submit" name="btnDeleteCategory"
+                    
+                        <button type="button"
                             class="btn btn-danger paragraph" data-bs-toggle="modal"
                             data-bs-target="#confirmDeleteModal"
                             style="color: white; margin-left: 0.5rem;">
                             Delete
                         </button>
-                    </form>
+                   
                 </div>
             </div>
         </div>
@@ -65,8 +65,8 @@
             </div>
             <div class="modal-footer d-flex justify-content-center"
                 style="border: none;">
-                <form method="POST">
-                    <button type="submit" name="close"
+                <form method="POST" action="#manage-categories">
+                    <button type="submit" name="btnDeleteCategory"
                         class="btn btn-light paragraph" data-bs-dismiss="modal">
                         Close
                     </button>
