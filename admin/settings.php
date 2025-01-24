@@ -225,7 +225,7 @@ include("../assets/php/imageProcessLogo.php");
                         </form>
                     </div>
                     <div class="modal-footer border-0 justify-content-center mb-2">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" id="btnCancel" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" name="btnUploadLogo" form="uploadForm" class="btn btn-primary">Save</button>
                     </div>
                 </div>
@@ -243,12 +243,16 @@ include("../assets/php/imageProcessLogo.php");
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 
-            <script>
+        <script>
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const profilePreview = document.getElementById('profilePreview');
+        const profilePreview = document.getElementById('profilePreview'); 
         const previewImage = document.getElementById('previewImage');
+        const changeLogoModalModal = document.getElementById('changeLogoModal');
+        const btnCancel = document.getElementById('btnCancel');
 
+
+        // Handle file input changes
         fileInput.addEventListener('change', function () {
             if (this.files && this.files.length > 0) {
                 fileNameDisplay.value = this.files[0].name;
@@ -258,8 +262,23 @@ include("../assets/php/imageProcessLogo.php");
                     profilePreview.src = e.target.result; 
                     previewImage.src = e.target.result; 
                 };
-                reader.readAsDataURL(this.files[0]); 
+                reader.readAsDataURL(this.files[0]);
             }
+        });
+
+        // Reset file input when the modal is closed
+        changeLogoModalModal.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+            previewImage.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+        });
+
+        btnCancel.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
+            previewImage.src = "../assets/images/websiteLogo/<?php echo $websiteLogo?>"; 
         });
 
         const urlParams = new URLSearchParams(window.location.search);

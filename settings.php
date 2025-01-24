@@ -443,9 +443,11 @@ if(isset($_POST['btnAccountDelete'])){
     <script>
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const profilePreview = document.getElementById('profilePreview');
+        const profilePreview = document.getElementById('profilePreview'); 
         const profilePreview2 = document.getElementById('profilePreview2');
+        const uploadProfilePicModal = document.getElementById('uploadProfilePic');
 
+        // Handle file input changes
         fileInput.addEventListener('change', function () {
             if (this.files && this.files.length > 0) {
                 fileNameDisplay.value = this.files[0].name;
@@ -455,11 +457,18 @@ if(isset($_POST['btnAccountDelete'])){
                     profilePreview.src = e.target.result; 
                     profilePreview2.src = e.target.result; 
                 };
-                reader.readAsDataURL(this.files[0]); 
+                reader.readAsDataURL(this.files[0]);
             }
         });
 
-        
+        // Reset file input when the modal is closed
+        uploadProfilePicModal.addEventListener('hidden.bs.modal', function () {
+            fileInput.value = ''; 
+            fileNameDisplay.value = ''; 
+            profilePreview.src = "./assets/images/userProfile/<?php echo $profilePicture?>"; 
+            profilePreview2.src = "assets/images/userProfile/<?php echo $profilePicture?>"; 
+        });
+     
         const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
         const alert = document.getElementById('alert');
