@@ -40,15 +40,15 @@ include("assets/php/imageProcessLogo.php");
           </div>
 
           <!-- Alert for incorrect login -->
-          <?php if ($error == "INVALID USER") { ?>
+          <?php  ?>
             <div class="row justify-content-center mt-2">
               <div class="col-12">
-                <div class="alert alert-warning" role="alert">
-                  Invalid Email or Password.
+                <div class="alert alert-warning m-0" role="alert">
+                  <p class="paragraph text-center m-0">Invalid Email or Password.</p>
                 </div>
               </div>
             </div>
-          <?php } ?>
+          <?php  ?>
 
           <!-- LOGIN FORM -->
           <form method="POST">
