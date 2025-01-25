@@ -105,7 +105,7 @@
                             <div class="col-12 col-md-3">
                                 <button type="button" class="btn btn-primary"
                                     style="background-color: var(--primaryColor); color: white; font-weight: bold; border: none; padding: 0.5rem 1.5rem;"
-                                    data-bs-target="#transactionEditSuccessModal" data-bs-toggle="modal"
+                                    data-bs-target="#transactionEditSuccessModal<?php echo $transactionHistory->transactionID ?>" data-bs-toggle="modal"
                                     data-bs-dismiss="modal" aria-label="Save changes and open success modal">
                                     SAVE
                                 </button>
@@ -118,7 +118,7 @@
     </div>
 
     <!-- Edit Transaction Success Modal -->
-    <div class="modal fade" id="transactionEditSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="transactionEditSuccessModal<?php echo $transactionHistory->transactionID ?>" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content"
                 style="border-radius: 15px; background-color: var(--primaryColor); color: white; text-align: center; border: none;">
