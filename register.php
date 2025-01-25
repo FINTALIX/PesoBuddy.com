@@ -22,7 +22,7 @@ include("assets/php/processes/imageProcessLogo.php");
 </head>
 
 <body>
-  <div class="container p-5">
+  <div class="container py-5 p-sm-5">
     <div class="row justify-content-center">
       <!-- Alert for not matching passwords -->
       <?php if ($error == "passwordUnmatched") { ?>
@@ -74,10 +74,10 @@ include("assets/php/processes/imageProcessLogo.php");
           <form method="POST">
             <!-- Name -->
             <div class="row">
-              <div class="col-6">
+              <div class="col-12 col-6">
                 <input class="form-control mt-2 mb-4" type="text" name="firstName" placeholder="First Name" value="<?php echo isset($_POST['btnRegister']) ? $firstName : ''; ?>" required>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-6">
                 <input class="form-control mt-2 mb-4" type="text" name="lastName" placeholder="Last Name" value="<?php echo isset($_POST['btnRegister']) ? $lastName : ''; ?>" required>
               </div>
             </div>
