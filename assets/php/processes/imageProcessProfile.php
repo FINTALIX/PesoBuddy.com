@@ -5,6 +5,12 @@ if (isset($_POST['btnUploadProfile'])) {
     if (!empty($_FILES['profilePic']['name'])) {
         $profilePicture = $_FILES['profilePic']['name'];
         $profilePictureTmp = $_FILES['profilePic']['tmp_name'];
+
+
+    $htmlfileExt = substr($profilePicture, strripos($profilePicture, '.'));
+	$htmlnewname = date("YMdHisu");
+
+	$htmlnewfilename = $htmlnewname . $htmlfileExt;
         $uploadDirProfile = __DIR__ . '/../../images/userProfile/';
 
         // Validate the uploaded file type
@@ -19,9 +25,9 @@ if (isset($_POST['btnUploadProfile'])) {
         }
         
         // Move the uploaded file
-        if (move_uploaded_file($profilePictureTmp, $uploadDirProfile . $profilePicture)) {
+        if (move_uploaded_file($profilePictureTmp, $uploadDirProfile . $htmlnewfilename)) {
             // Update the database with the new profile picture
-            $updateProfileQuery = "UPDATE users SET profilePicture = '$profilePicture' WHERE userID = $userID";
+            $updateProfileQuery = "UPDATE users SET profilePicture = '$htmlnewfilename' WHERE userID = $userID";
             executeQuery($updateProfileQuery);
         }
     }
