@@ -130,12 +130,12 @@ include("assets/php/processes/transaction-processes.php");
             <!-- Year Dropdown Button -->
             <form method="get">
                 <div class="row py-4">
-                    <div class="col-auto">
+                    <div class="col-auto pb-2">
                         <div class="subheading">
                             <?= $userTransactionCategory->displayYearDropdown(); ?>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto pb-2">
                         <div class="subheading">
                             <?= $userTransactionCategory->displayCategoryTypeDropdown(); ?>
                         </div>

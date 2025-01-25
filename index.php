@@ -34,7 +34,7 @@ include("assets/php/processes/imageProcessLogo.php");
                                 <h1 class="brand-title">
                                     <img src="assets/images/pesoBuddy.png" alt="PesoBuddy Logo">
                                 </h1>
-                                <h2 class="brand-tagline">Your Trusted Financial Companion</h2>
+                                <h2 class="brand-tagline text-wrap">Your Trusted Financial Companion</h2>
                                 <p class="description">
                                     Transform your financial journey with PesoBuddy. Our innovative platform helps you
                                     manage your money smarter, save better, and achieve your financial goals faster.

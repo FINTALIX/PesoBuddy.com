@@ -25,7 +25,7 @@ include("assets/php/processes/imageProcessLogo.php");
 </head>
 
 <body class="d-flex justify-content-center align-items-center">
-  <div class="container p-5 d-flex align-items-center" style="height: 100%;">
+  <div class="container py-5 p-sm-5 d-flex align-items-center" style="height: 100%;">
     <div class="row justify-content-center">
       <!-- BACKGROUND -->
       <div>
