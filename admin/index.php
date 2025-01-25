@@ -17,20 +17,22 @@ while ($userCountRow = mysqli_fetch_assoc($userCountResult)) {
 }
 
 // Counts the active users
-$activeUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS activeUsers FROM users 
-INNER JOIN logins ON users.userID = logins.userID
-WHERE users.role = 'user' AND logins.loginDate >= NOW() - INTERVAL 30 DAY";
-
+$activeUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS activeUsers FROM users
+INNER JOIN (SELECT userID, MAX(loginDate) AS mostRecentLoginDate FROM logins GROUP BY userID) AS logins ON users.userID = logins.userID
+WHERE users.role = 'user' 
+AND logins.mostRecentLoginDate >= NOW() - INTERVAL 30 DAY";
 $activeUsersResult = executeQuery($activeUsersQuery);
+
 $activeUsers = 0;
 while ($activeUsersRow = mysqli_fetch_assoc($activeUsersResult)) {
     $activeUsers = $activeUsersRow['activeUsers'];
 }
 
 // Counts the inactive users 
-$inactiveUsersQuery = "SELECT COUNT(DISTINCT userID) AS inactiveUsers
-FROM users WHERE role = 'user' AND userID NOT IN 
-(SELECT userID FROM logins WHERE loginDate >= NOW() - INTERVAL 30 DAY)";
+$inactiveUsersQuery = "SELECT COUNT(DISTINCT users.userID) AS inactiveUsers
+FROM users WHERE users.role = 'user'
+AND users.userID NOT IN (SELECT userLogins.userID FROM (SELECT userID, MAX(loginDate) AS lastLoginDate FROM logins
+GROUP BY userID ) AS userLogins WHERE userLogins.lastLoginDate >= NOW() - INTERVAL 30 DAY)";
 $inactiveUsersResult = executeQuery($inactiveUsersQuery);
 
 $inactiveUsers = 0;
