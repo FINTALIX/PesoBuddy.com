@@ -115,7 +115,7 @@ class User
                 <!-- Profile Picture -->
                 <div class="col-12 col-md-2 p-2 d-flex justify-content-center align-items-center">
                     <img src="../assets/images/userProfile/' . $this->profilePicture . '" alt="Profile Picture"
-                        class="rounded-circle img-fluid" width="150" height="140">
+                        class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
 
                 <!-- User Information -->
