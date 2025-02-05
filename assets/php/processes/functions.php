@@ -173,8 +173,8 @@ function listMonthlyBreakdown($userID, $year, $month, $type)
     $transactionMonth = DateTime::createFromFormat('F', ucfirst(strtolower($month)))->format('m');
     $listCategoryBreakdown = array();
 
-    $categoryTotalQuery = "SELECT c.categoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN categories AS c ON c.userID = t.userID AND c.categoryID = t.categoryID WHERE t.userID = $userID AND c.categoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY c.categoryName;";
-    $defaultCategoryTotalQuery = "SELECT d.defaultCategoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN defaultcategories AS d ON d.defaultCategoryID = t.defaultCategoryID WHERE t.userID = $userID AND d.defaultCategoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY d.defaultCategoryName;";
+    $categoryTotalQuery = "SELECT c.categoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN categories AS c ON c.userID = t.userID AND c.categoryID = t.categoryID WHERE t.userID = $userID AND c.categoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY c.categoryName ORDER BY totalAmount DESC;";
+    $defaultCategoryTotalQuery = "SELECT d.defaultCategoryName, SUM(t.amount) AS totalAmount FROM transactions AS t LEFT JOIN defaultcategories AS d ON d.defaultCategoryID = t.defaultCategoryID WHERE t.userID = $userID AND d.defaultCategoryType = '$type' AND t.transactionDate LIKE '$year-$transactionMonth%' GROUP BY d.defaultCategoryName ORDER BY totalAmount DESC;";
 
     $categoryTotal = executeQuery($categoryTotalQuery);
     $defaultCategoryTotal = executeQuery($defaultCategoryTotalQuery);
